@@ -1,0 +1,3 @@
+namespace IdentityProvider.Infrastructure.Persistence;
+
+public interface IIdentityProviderContext;

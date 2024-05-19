@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  identity_provider:
+    build:
+      context: "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect"
+      dockerfile: "IdentityProvider/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/IdentityProvider.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/IdentityProvider.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "identity_provider:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\An\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect\\IdentityProvider:/app:rw"
+    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect:/src:rw"
+    working_dir: "/app"

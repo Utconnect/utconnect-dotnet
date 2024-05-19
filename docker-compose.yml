@@ -1,0 +1,17 @@
+services:
+  identity_provider:
+    image: identity_provider
+    build:
+      context: .
+      dockerfile: IdentityProvider/Dockerfile
+    ports:
+      - "5000:80"
+  identity_provider_db:
+    container_name: identity_provider_db
+    image: postgres:16.3
+    restart: always
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: Identity
