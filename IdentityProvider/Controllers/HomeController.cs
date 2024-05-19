@@ -1,22 +1,13 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using IdentityProvider.Models;
-using Shared.UtconnectIdentity.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityProvider.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IIdentityService _identityService;
-
-    public HomeController(IIdentityService identityService)
-    {
-        _identityService = identityService;
-    }
-
     public IActionResult Index()
     {
-        var x = _identityService.GetCurrent();
         return View();
     }
 

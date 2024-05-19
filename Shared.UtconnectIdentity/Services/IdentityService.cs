@@ -83,6 +83,7 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
 
         List<Claim> claims =
         [
+            new Claim(ClaimTypes.NameIdentifier, user.Identifier.ToString()),
             new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
             new Claim(ClaimTypes.GivenName, user.Name),
             new Claim(ClaimTypes.Role, "sysadmin"),
