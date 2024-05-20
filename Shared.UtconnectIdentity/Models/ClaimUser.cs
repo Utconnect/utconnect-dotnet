@@ -1,6 +1,6 @@
 namespace Shared.UtconnectIdentity.Models;
 
-public class ClaimUser(
+internal class ClaimUser(
     Guid identifier,
     string userName,
     string name,

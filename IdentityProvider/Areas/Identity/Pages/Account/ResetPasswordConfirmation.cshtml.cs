@@ -8,5 +8,6 @@ public class ResetPasswordConfirmationModel : PageModel
 {
     public void OnGet()
     {
+        // Ignore
     }
 }

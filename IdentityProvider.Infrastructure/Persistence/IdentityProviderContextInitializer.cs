@@ -32,44 +32,27 @@ public class IdentityProviderContextInitializer(
         catch (Exception ex)
         {
             logger.LogError(ex, "An error occurred while seeding the database");
-            throw;
         }
     }
 
     private async Task TrySeedAsync()
     {
-        if (!userManager.Users.Any())
+        if (await userManager.Users.AnyAsync())
         {
-            var systemAdminRole = new Role("SystemAdmin");
-            if (!roleManager.Roles.Any())
-            {
-                var createRoleResult = await roleManager.CreateAsync(systemAdminRole);
-                if (!createRoleResult.Succeeded)
-                {
-                    var errorIdx = 0;
-                    foreach (var error in createRoleResult.Errors)
-                    {
-                        logger.LogError(
-                            "Seeding role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
-                            errorIdx,
-                            error.Code,
-                            error.Description);
-                        errorIdx++;
-                    }
+            return;
+        }
 
-                    return;
-                }
-            }
-
-            var systemAdminUser = new User("sysadmin", "System Admin");
-            var createUserResult = await userManager.CreateAsync(systemAdminUser, "sysadmin");
-            if (!createUserResult.Succeeded)
+        var systemAdminRole = new Role("SystemAdmin");
+        if (!await roleManager.Roles.AnyAsync())
+        {
+            var createRoleResult = await roleManager.CreateAsync(systemAdminRole);
+            if (!createRoleResult.Succeeded)
             {
                 var errorIdx = 0;
-                foreach (var error in createUserResult.Errors)
+                foreach (var error in createRoleResult.Errors)
                 {
                     logger.LogError(
-                        "Seeding user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                        "Seeding role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
                         errorIdx,
                         error.Code,
                         error.Description);
@@ -78,11 +61,24 @@ public class IdentityProviderContextInitializer(
 
                 return;
             }
+        }
 
-            if (createUserResult == IdentityResult.Success)
+        var systemAdminUser = new User("sysadmin", "System Admin");
+        var createUserResult = await userManager.CreateAsync(systemAdminUser, "sysadmin");
+        if (!createUserResult.Succeeded)
+        {
+            var errorIdx = 0;
+            foreach (var error in createUserResult.Errors)
             {
-                await userManager.AddToRoleAsync(systemAdminUser, systemAdminRole.Name!);
+                logger.LogError(
+                    "Seeding user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                    errorIdx,
+                    error.Code,
+                    error.Description);
+                errorIdx++;
             }
         }
+
+        await userManager.AddToRoleAsync(systemAdminUser, systemAdminRole.Name!);
     }
 }

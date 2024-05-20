@@ -1,6 +1,6 @@
 namespace Shared.UtconnectIdentity.Models;
 
-public class ClaimTenant(Guid identifier, string code, string name, int key)
+internal class ClaimTenant(Guid identifier, string code, string name, int key)
     : ITenant
 {
     public Guid Identifier { get; } = identifier;

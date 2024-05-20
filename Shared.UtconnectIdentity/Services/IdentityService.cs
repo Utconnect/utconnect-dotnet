@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Shared.Application.Extensions;
 using Shared.Logging;
+using Shared.UtconnectIdentity.Exceptions;
 using Shared.UtconnectIdentity.Models;
 
 namespace Shared.UtconnectIdentity.Services;
@@ -48,25 +49,26 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
         List<Claim> claimsList = claims.ToList();
         if (claims == null || claimsList.Count == 0)
         {
-            throw new Exception("No user claims, user cannot be identified.");
+            throw new NoClaimException();
         }
 
-        var identifier = claimsList.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ??
+        var identifier = claimsList.Find(x => x.Type == ClaimTypes.NameIdentifier)?.Value ??
                          Guid.Empty.ToString();
-        var userName = claimsList.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
-        var name = claimsList.FirstOrDefault(x => x.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
+        var userName = claimsList.Find(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
+        var name = claimsList.Find(x => x.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
 
-        var permission = claimsList.FirstOrDefault(x => x.Type == "permissions");
+        var permission = claimsList.Find(x => x.Type == "permissions");
         List<int> permissions = permission == null
             ? []
             : JsonConvert.DeserializeObject<List<int>>(permission.Value) ?? [];
 
-        var loginDate =
-            (claimsList.FirstOrDefault(x => x.Type == "nbf")?.Value ?? string.Empty).ToUnixDateTime();
+        var loginDate = (claimsList.Find(x => x.Type == "nbf")?.Value ?? string.Empty).ToUnixDateTime()
+                        ?? throw new InvalidClaimUnixDateTimeException();
         var expirationDate =
-            (claimsList.FirstOrDefault(x => x.Type == ClaimTypes.Expiration)?.Value ?? string.Empty).ToUnixDateTime();
+            (claimsList.Find(x => x.Type == ClaimTypes.Expiration)?.Value ?? string.Empty).ToUnixDateTime()
+            ?? throw new InvalidClaimUnixDateTimeException();
 
-        var roleIdClaims = claimsList.FirstOrDefault(x => x.Type == "role_ids");
+        var roleIdClaims = claimsList.Find(x => x.Type == "role_ids");
         List<int> roles = roleIdClaims == null
             ? []
             : JsonConvert.DeserializeObject<List<int>>(roleIdClaims.Value) ?? [];

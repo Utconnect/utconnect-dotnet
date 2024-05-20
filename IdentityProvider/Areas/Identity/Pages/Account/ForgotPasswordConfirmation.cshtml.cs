@@ -8,5 +8,6 @@ public class ForgotPasswordConfirmation : PageModel
 {
     public void OnGet()
     {
+        // Ignore
     }
 }
