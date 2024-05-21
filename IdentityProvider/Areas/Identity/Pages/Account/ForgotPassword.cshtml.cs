@@ -10,14 +10,11 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
 
-public class ForgotPasswordModel(
-    UserManager<User> userManager,
-    IEmailSender emailSender,
-    ForgotPasswordModel.InputModel input)
+public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
     : PageModel
 {
     [BindProperty]
-    public InputModel Input { get; set; } = input;
+    public InputModel? Input { get; set; }
 
     public class InputModel
     {
@@ -28,7 +25,7 @@ public class ForgotPasswordModel(
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid || Input.Email == null)
+        if (!ModelState.IsValid || Input?.Email == null)
         {
             return Page();
         }

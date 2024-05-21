@@ -41,7 +41,8 @@ public static class ConfigureServices
             })
             .AddRoles<Role>()
             .AddEntityFrameworkStores<IdentityProviderContext>()
-            .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
+            .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
+            .AddDefaultUI();
 
         services.TryAddScoped<SignInManager<User>>();
 
