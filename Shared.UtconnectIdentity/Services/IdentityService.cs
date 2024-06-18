@@ -44,48 +44,15 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
         return new ClaimIdentity(DefaultTenant, user);
     }
 
-    private static ClaimUser MapCurrentUser(IEnumerable<Claim> claims)
-    {
-        List<Claim> claimsList = claims.ToList();
-        if (claims == null || claimsList.Count == 0)
-        {
-            throw new NoClaimException();
-        }
-
-        var identifier = claimsList.Find(x => x.Type == ClaimTypes.NameIdentifier)?.Value ??
-                         Guid.Empty.ToString();
-        var userName = claimsList.Find(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
-        var name = claimsList.Find(x => x.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
-
-        var permission = claimsList.Find(x => x.Type == "permissions");
-        List<int> permissions = permission == null
-            ? []
-            : JsonConvert.DeserializeObject<List<int>>(permission.Value) ?? [];
-
-        var loginDate = (claimsList.Find(x => x.Type == "nbf")?.Value ?? string.Empty).ToUnixDateTime()
-                        ?? throw new InvalidClaimUnixDateTimeException();
-        var expirationDate =
-            (claimsList.Find(x => x.Type == ClaimTypes.Expiration)?.Value ?? string.Empty).ToUnixDateTime()
-            ?? throw new InvalidClaimUnixDateTimeException();
-
-        var roleIdClaims = claimsList.Find(x => x.Type == "role_ids");
-        List<int> roles = roleIdClaims == null
-            ? []
-            : JsonConvert.DeserializeObject<List<int>>(roleIdClaims.Value) ?? [];
-
-        return new ClaimUser(Guid.Parse(identifier), userName, name, IsAuthenticated(loginDate, expirationDate),
-            permissions, roles);
-    }
-
     public (string AuthenticationScheme, ClaimsPrincipal, AuthenticationProperties authProperties) GetNewClaims(
         IUser user)
     {
-        var now = DateTimeOffset.UtcNow;
-        var expiration = now.AddHours(6);
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+        DateTimeOffset expiration = now.AddHours(6);
 
         List<Claim> claims =
         [
-            new Claim(ClaimTypes.NameIdentifier, user.Identifier.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
             new Claim(ClaimTypes.GivenName, user.Name),
             new Claim(ClaimTypes.Role, "sysadmin"),
@@ -93,10 +60,8 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
             new Claim(ClaimTypes.Expiration, expiration.ToUnixTimeSeconds().ToString())
         ];
 
-        var claimsIdentity = new ClaimsIdentity(
-            claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-        var authProperties = new AuthenticationProperties
+        ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        AuthenticationProperties authProperties = new()
         {
             ExpiresUtc = expiration,
             IssuedUtc = now
@@ -108,9 +73,42 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
             authProperties);
     }
 
+    private static ClaimUser MapCurrentUser(IEnumerable<Claim> claims)
+    {
+        List<Claim> claimsList = claims.ToList();
+        if (claims == null || claimsList.Count == 0)
+        {
+            throw new NoClaimException();
+        }
+
+        string identifier = claimsList.Find(x => x.Type == ClaimTypes.NameIdentifier)?.Value
+                            ?? Guid.Empty.ToString();
+        string userName = claimsList.Find(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
+        string name = claimsList.Find(x => x.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
+
+        Claim? permission = claimsList.Find(x => x.Type == "permissions");
+        List<int> permissions = permission == null
+            ? []
+            : JsonConvert.DeserializeObject<List<int>>(permission.Value) ?? [];
+
+        DateTime loginDate = (claimsList.Find(x => x.Type == "nbf")?.Value ?? string.Empty).ToUnixDateTime()
+                             ?? throw new InvalidClaimUnixDateTimeException();
+        DateTime expirationDate =
+            (claimsList.Find(x => x.Type == ClaimTypes.Expiration)?.Value ?? string.Empty).ToUnixDateTime()
+            ?? throw new InvalidClaimUnixDateTimeException();
+
+        Claim? roleIdClaims = claimsList.Find(x => x.Type == "role_ids");
+        List<int> roles = roleIdClaims == null
+            ? []
+            : JsonConvert.DeserializeObject<List<int>>(roleIdClaims.Value) ?? [];
+
+        return new ClaimUser(Guid.Parse(identifier), userName, name, IsAuthenticated(loginDate, expirationDate),
+            permissions, roles);
+    }
+
     private static bool IsAuthenticated(DateTime loginTime, DateTime expirationDate)
     {
-        var currentTime = DateTime.Now;
+        DateTime currentTime = DateTime.Now;
         return loginTime < currentTime && currentTime < expirationDate;
     }
 }

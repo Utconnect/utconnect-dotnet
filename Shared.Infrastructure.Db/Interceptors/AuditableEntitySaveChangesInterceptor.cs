@@ -34,7 +34,7 @@ public class AuditableEntitySaveChangesInterceptor(IIdentityService identityServ
 
         foreach (EntityEntry<BaseAuditableEntity> entry in context.ChangeTracker.Entries<BaseAuditableEntity>())
         {
-            var userId = identityService.GetCurrent()?.User.Identifier ?? Guid.Empty;
+            Guid userId = identityService.GetCurrent()?.User.Id ?? Guid.Empty;
 
             if (entry.State != EntityState.Added &&
                 entry.State != EntityState.Modified &&

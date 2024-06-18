@@ -42,43 +42,89 @@ public class IdentityProviderContextInitializer(
             return;
         }
 
-        var systemAdminRole = new Role("SystemAdmin");
-        if (!await roleManager.Roles.AnyAsync())
+        Role systemAdminRole = new("SystemAdmin");
+        bool addRoleSuccess = await TryAddRole(systemAdminRole);
+        if (!addRoleSuccess)
         {
-            var createRoleResult = await roleManager.CreateAsync(systemAdminRole);
-            if (!createRoleResult.Succeeded)
-            {
-                var errorIdx = 0;
-                foreach (var error in createRoleResult.Errors)
-                {
-                    logger.LogError(
-                        "Seeding role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
-                        errorIdx,
-                        error.Code,
-                        error.Description);
-                    errorIdx++;
-                }
-
-                return;
-            }
+            return;
         }
 
-        var systemAdminUser = new User("sysadmin", "System Admin");
-        var createUserResult = await userManager.CreateAsync(systemAdminUser, "sysadmin");
-        if (!createUserResult.Succeeded)
+        User systemAdminUser = new("sysadmin", "System Admin");
+        bool addUserSuccess = await TryAddUser(systemAdminUser);
+        if (!addUserSuccess)
         {
-            var errorIdx = 0;
-            foreach (var error in createUserResult.Errors)
-            {
-                logger.LogError(
-                    "Seeding user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
-                    errorIdx,
-                    error.Code,
-                    error.Description);
-                errorIdx++;
-            }
+            return;
         }
 
-        await userManager.AddToRoleAsync(systemAdminUser, systemAdminRole.Name!);
+        await TryAddUserToRole(systemAdminUser, systemAdminRole);
+    }
+
+    private async Task<bool> TryAddRole(Role role)
+    {
+        if (await roleManager.Roles.AnyAsync())
+        {
+            return true;
+        }
+
+        IdentityResult result = await roleManager.CreateAsync(role);
+        if (result.Succeeded)
+        {
+            return true;
+        }
+
+        int errorIdx = 0;
+        foreach (IdentityError error in result.Errors)
+        {
+            logger.LogError(
+                "Seeding role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                errorIdx,
+                error.Code,
+                error.Description);
+            errorIdx++;
+        }
+
+        return false;
+    }
+
+    private async Task<bool> TryAddUser(User systemAdminUser)
+    {
+        IdentityResult result = await userManager.CreateAsync(systemAdminUser, "sysadmin");
+        if (result.Succeeded)
+        {
+            return true;
+        }
+
+        int errorIdx = 0;
+        foreach (IdentityError error in result.Errors)
+        {
+            logger.LogError(
+                "Seeding user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                errorIdx,
+                error.Code,
+                error.Description);
+            errorIdx++;
+        }
+
+        return false;
+    }
+
+    private async Task TryAddUserToRole(User systemAdminUser, Role systemAdminRole)
+    {
+        IdentityResult result = await userManager.AddToRoleAsync(systemAdminUser, systemAdminRole.Name!);
+        if (result.Succeeded)
+        {
+            return;
+        }
+
+        int errorIdx = 0;
+        foreach (IdentityError error in result.Errors)
+        {
+            logger.LogError(
+                "Adding user to role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                errorIdx,
+                error.Code,
+                error.Description);
+            errorIdx++;
+        }
     }
 }

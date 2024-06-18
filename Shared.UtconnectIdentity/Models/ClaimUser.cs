@@ -9,7 +9,7 @@ internal class ClaimUser(
     List<int> roles)
     : IUser
 {
-    public Guid Identifier { get; set; } = identifier;
+    public Guid Id { get; set; } = identifier;
     public string? UserName { get; set; } = userName;
     public string? Email { get; set; }
     public string Name { get; set; } = name;

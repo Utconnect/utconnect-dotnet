@@ -28,8 +28,8 @@ public class IndexModel(
 
     private async Task LoadAsync(User user)
     {
-        var userName = await userManager.GetUserNameAsync(user);
-        var phoneNumber = await userManager.GetPhoneNumberAsync(user);
+        string? userName = await userManager.GetUserNameAsync(user);
+        string? phoneNumber = await userManager.GetPhoneNumberAsync(user);
 
         Username = userName;
 
@@ -41,7 +41,7 @@ public class IndexModel(
 
     public async Task<IActionResult> OnGetAsync()
     {
-        var user = await userManager.GetUserAsync(User);
+        User? user = await userManager.GetUserAsync(User);
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
@@ -53,7 +53,7 @@ public class IndexModel(
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var user = await userManager.GetUserAsync(User);
+        User? user = await userManager.GetUserAsync(User);
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
@@ -65,7 +65,7 @@ public class IndexModel(
             return Page();
         }
 
-        var phoneNumber = await userManager.GetPhoneNumberAsync(user);
+        string? phoneNumber = await userManager.GetPhoneNumberAsync(user);
         if (Input.PhoneNumber != phoneNumber)
         {
             var setPhoneResult = await userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);

@@ -20,7 +20,7 @@ public static class ConfigureServices
 
         services.AddDbContext<IdentityProviderContext>(options =>
         {
-            var connectionString = configuration.GetConnectionString("IdentityProviderContextConnection");
+            string? connectionString = configuration.GetConnectionString("IdentityProviderContextConnection");
             options.UseNpgsql(connectionString);
         });
 
@@ -67,7 +67,7 @@ public static class ConfigureServices
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(6);
-
+            
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;

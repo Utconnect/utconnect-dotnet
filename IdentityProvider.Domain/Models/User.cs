@@ -4,7 +4,7 @@ using Shared.UtconnectIdentity.Models;
 namespace IdentityProvider.Domain.Models;
 
 // Add profile data for application users by adding properties to the IdentityProviderUser class
-public class User : IdentityUser<Guid>, IUser
+public sealed class User : IdentityUser<Guid>, IUser
 {
     public User()
     {
@@ -13,9 +13,9 @@ public class User : IdentityUser<Guid>, IUser
     public User(string userName, string name) : base(userName)
     {
         Name = name;
+        Id = new Guid();
     }
 
-    public Guid Identifier { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = default!;
     public bool IsAuthenticated { get; set; }
     public List<int> Permissions { get; } = [];

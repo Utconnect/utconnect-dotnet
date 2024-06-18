@@ -2,7 +2,7 @@ namespace Shared.UtconnectIdentity.Models;
 
 public interface IUser
 {
-    Guid Identifier { get; set; }
+    Guid Id { get; set; }
     string? UserName { get; set; }
     string? Email { get; set; }
     string Name { get; set; }

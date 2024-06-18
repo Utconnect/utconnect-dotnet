@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using IdentityProvider.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Shared.UtconnectIdentity.Services;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
 
@@ -38,14 +40,19 @@ public class LoginModel(
         public bool RememberMe { get; init; }
     }
 
-    public async Task OnGetAsync(string? returnUrl = null)
+    public async Task<IActionResult> OnGetAsync(string? returnUrl = null)
     {
+        returnUrl ??= Url.Content("~/");
+
+        if (User.Identity is { IsAuthenticated: true })
+        {
+            return Redirect(returnUrl);
+        }
+
         if (!string.IsNullOrEmpty(ErrorMessage))
         {
             ModelState.AddModelError(string.Empty, ErrorMessage);
         }
-
-        returnUrl ??= Url.Content("~/");
 
         // Clear the existing external cookie to ensure a clean login process
         // await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -53,6 +60,8 @@ public class LoginModel(
         ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
         ReturnUrl = returnUrl;
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
@@ -68,23 +77,22 @@ public class LoginModel(
 
         // This doesn't count login failures towards account lockout
         // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-        var result =
-            await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,
-                lockoutOnFailure: false);
+        SignInResult result = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,
+            lockoutOnFailure: false);
         if (result.Succeeded)
         {
-            var user = await userManager.FindByNameAsync(Input.Email);
+            User? user = await userManager.FindByNameAsync(Input.Email);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt");
                 return Page();
             }
 
-            var (scheme, principal, properties) = identityService.GetNewClaims(user);
+            (string scheme, ClaimsPrincipal principal, AuthenticationProperties properties) = identityService.GetNewClaims(user);
             await HttpContext.SignInAsync(scheme, principal, properties);
 
             logger.LogInformation("User logged in");
-            return LocalRedirect(returnUrl);
+            return Redirect(returnUrl);
         }
 
         if (result.RequiresTwoFactor)

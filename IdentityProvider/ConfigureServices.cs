@@ -13,7 +13,7 @@ public static class ConfigureServices
 
         services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
             .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
-        
+
         // services.AddControllers().AddNewtonsoftJson(options =>
         //     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
     }
@@ -30,9 +30,10 @@ public static class ConfigureServices
             app.UseHsts();
         }
 
-        using (var scope = app.Services.CreateScope())
+        using (IServiceScope scope = app.Services.CreateScope())
         {
-            var initializer = scope.ServiceProvider.GetRequiredService<IdentityProviderContextInitializer>();
+            IdentityProviderContextInitializer initializer =
+                scope.ServiceProvider.GetRequiredService<IdentityProviderContextInitializer>();
             await initializer.InitializeAsync();
             await initializer.SeedAsync();
         }
@@ -40,9 +41,8 @@ public static class ConfigureServices
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}")
+            .RequireAuthorization();
 
         app.UseRouting();
 

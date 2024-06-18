@@ -30,4 +30,8 @@
       <ProjectReference Include="..\Shared.Swashbuckle\Shared.Swashbuckle.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\assets\fonts\" />
+    </ItemGroup>
+
 </Project>
