@@ -1,14 +1,13 @@
 @{
-  if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+  if (ViewData.TryGetValue("ParentLayout", out object? parentLayout) && parentLayout != null)
   {
     Layout = parentLayout.ToString();
   }
 }
 
-<h1>Manage your account</h1>
+<h1>Quản lý tài khoản</h1>
 
 <div>
-  <h2>Change your account settings</h2>
   <hr/>
   <div class="row">
     <div class="col-md-3">

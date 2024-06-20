@@ -3,7 +3,6 @@ using Shared.UtconnectIdentity.Models;
 
 namespace IdentityProvider.Domain.Models;
 
-// Add profile data for application users by adding properties to the IdentityProviderUser class
 public sealed class User : IdentityUser<Guid>, IUser
 {
     public User()
@@ -13,7 +12,7 @@ public sealed class User : IdentityUser<Guid>, IUser
     public User(string userName, string name) : base(userName)
     {
         Name = name;
-        Id = new Guid();
+        Id = Guid.NewGuid();
     }
 
     public string Name { get; set; } = default!;

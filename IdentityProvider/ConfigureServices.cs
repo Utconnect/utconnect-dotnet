@@ -1,4 +1,6 @@
 using IdentityProvider.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
 using Shared.Presentation.Filters;
 
 namespace IdentityProvider;
@@ -12,6 +14,9 @@ public static class ConfigureServices
         services.AddHttpContextAccessor();
 
         services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
+            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
+                opts => { opts.ResourcesPath = "Resources"; })
+            .AddDataAnnotationsLocalization()
             .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
 
         // services.AddControllers().AddNewtonsoftJson(options =>
@@ -40,6 +45,8 @@ public static class ConfigureServices
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
         app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}")
             .RequireAuthorization();

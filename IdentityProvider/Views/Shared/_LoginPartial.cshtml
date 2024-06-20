@@ -1,28 +1,19 @@
 @using IdentityProvider.Domain.Models
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Localization
 @inject UserManager<User> UserManager
+@inject IStringLocalizer<I18NResource> Localizer
 
 <calcite-menu slot="content-end">
   @if (User.Identity is { IsAuthenticated: true })
   {
     <calcite-menu-item text="Xin chào @UserManager.GetUserName(User)">
-      <calcite-menu-item slot="submenu-item" text="Đổi mật khẩu" href="@Url.Page("/Account/Login", new { Area = "Identity" })"></calcite-menu-item>
-      <calcite-menu-item slot="submenu-item" text="Đăng xuất"></calcite-menu-item>
+      <calcite-menu-item slot="submenu-item" text="@Localizer["ChangePassword"]" href="@Url.Page("/Account/Manage/Index", new { Area = "Identity" })"></calcite-menu-item>
+      <calcite-menu-item slot="submenu-item" text="@Localizer["Logout"]" href="@Url.Page("/Account/Logout", new { Area = "Identity" })"></calcite-menu-item>
     </calcite-menu-item>
-    @* <li class="nav-item"> *@
-    @*   <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"> *@
-    @*     <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button> *@
-    @*   </form> *@
-    @* </li> *@
   }
   else
   {
-    <calcite-menu-item text="Đăng nhập" href="@Url.Page("/Account/Login", new { Area = "Identity" })"></calcite-menu-item>
-    @* <li class="nav-item"> *@
-    @*   <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a> *@
-    @* </li> *@
-    @* <li class="nav-item"> *@
-    @*   <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a> *@
-    @* </li> *@
+    <calcite-menu-item text="@Localizer["Login"]" href="@Url.Page("/Account/Login", new { Area = "Identity" })"></calcite-menu-item>
   }
 </calcite-menu>

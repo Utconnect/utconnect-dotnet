@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using IdentityProvider.Domain.Models;
+using IdentityProvider.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Shared.UtconnectIdentity.Services;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
@@ -14,7 +16,8 @@ public class LoginModel(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
     IIdentityService identityService,
-    ILogger<LoginModel> logger)
+    ILogger<LoginModel> logger,
+    IStringLocalizer<I18NResource> localizer)
     : PageModel
 {
     [BindProperty]
@@ -36,7 +39,6 @@ public class LoginModel(
         [DataType(DataType.Password)]
         public string? Password { get; init; }
 
-        [Display(Name = "Remember me?")]
         public bool RememberMe { get; init; }
     }
 
@@ -84,14 +86,14 @@ public class LoginModel(
             User? user = await userManager.FindByNameAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt");
+                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
                 return Page();
             }
 
-            (string scheme, ClaimsPrincipal principal, AuthenticationProperties properties) = identityService.GetNewClaims(user);
+            (string scheme, ClaimsPrincipal principal, AuthenticationProperties properties) =
+                identityService.GetNewClaims(user);
             await HttpContext.SignInAsync(scheme, principal, properties);
 
-            logger.LogInformation("User logged in");
             return Redirect(returnUrl);
         }
 
@@ -106,7 +108,7 @@ public class LoginModel(
             return RedirectToPage("./Lockout");
         }
 
-        ModelState.AddModelError(string.Empty, "Invalid login attempt");
+        ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
         return Page();
     }
 }
