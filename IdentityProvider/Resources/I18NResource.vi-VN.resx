@@ -24,9 +24,6 @@
     <data name="EmailControlName" xml:space="preserve">
         <value>Email hoặc tên đăng nhập</value>
     </data>
-    <data name="Password" xml:space="preserve">
-        <value>Mật khẩu</value>
-    </data>
     <data name="RememberMeControllerName" xml:space="preserve">
         <value>Ghi nhớ đăng nhập</value>
     </data>
@@ -48,52 +45,55 @@
     <data name="HomePage" xml:space="preserve">
         <value>Trang chủ</value>
     </data>
+    <data name="TssName" xml:space="preserve">
+        <value>Hệ thống quản lý lịch dạy, dùng cho giảng viên</value>
+    </data>
+    <data name="UpdatePassword" xml:space="preserve">
+        <value>Cập nhật mật khẩu</value>
+    </data>
+    <data name="ChangeEmail" xml:space="preserve">
+        <value>Thay đổi email</value>
+    </data>
+    <data name="ConfirmNewPassword" xml:space="preserve">
+        <value>Xác nhận mật khẩu mới</value>
+    </data>
+    <data name="CurrentPassword" xml:space="preserve">
+        <value>Mật khẩu hiện tại</value>
+    </data>
+    <data name="EnterNewEmail" xml:space="preserve">
+        <value>Nhập email mới</value>
+    </data>
+    <data name="EsmName" xml:space="preserve">
+        <value>Hệ thống quản lý lịch thi, dùng cho giám thị</value>
+    </data>
     <data name="Hello" xml:space="preserve">
         <value>Xin chào</value>
     </data>
     <data name="ManageAccount" xml:space="preserve">
         <value>Quản lý tài khoản</value>
     </data>
-    <data name="Profile" xml:space="preserve">
-        <value>Hồ sơ</value>
-    </data>
-    <data name="PhoneNumber" xml:space="preserve">
-        <value>Số điện thoại</value>
-    </data>
-    <data name="Save" xml:space="preserve">
-        <value>Lưu</value>
-    </data>
     <data name="ManageEmail" xml:space="preserve">
         <value>Quản lý email</value>
-    </data>
-    <data name="SendVerificationEmail" xml:space="preserve">
-        <value>Gửi email xác nhận</value>
-    </data>
-    <data name="EnterNewEmail" xml:space="preserve">
-        <value>Nhập email mới</value>
     </data>
     <data name="NewEmail" xml:space="preserve">
         <value>Email mới</value>
     </data>
-    <data name="ChangeEmail" xml:space="preserve">
-        <value>Thay đổi email</value>
-    </data>
-    <data name="CurrentPassword" xml:space="preserve">
-        <value>Mật khẩu hiện tại</value>
-    </data>
     <data name="NewPassword" xml:space="preserve">
         <value>Mật khẩu mới</value>
     </data>
-    <data name="ConfirmNewPassword" xml:space="preserve">
-        <value>Xác nhận mật khẩu mới</value>
+    <data name="Password" xml:space="preserve">
+        <value>Mật khẩu</value>
     </data>
-    <data name="UpdatePassword" xml:space="preserve">
-        <value>Cập nhật mật khẩu</value>
+    <data name="PhoneNumber" xml:space="preserve">
+        <value>Số điện thoại</value>
     </data>
-    <data name="EsmName" xml:space="preserve">
-        <value>Hệ thống quản lý lịch thi cho cán bộ coi thi</value>
+    <data name="Profile" xml:space="preserve">
+        <value>Hồ sơ</value>
     </data>
-    <data name="TssName" xml:space="preserve">
-        <value>Hệ thống quản lý lịch giảng dạy cho giảng viên</value>
+    <data name="Save" xml:space="preserve">
+        <value>Lưu</value>
+    </data>
+    <data name="SendVerificationEmail" xml:space="preserve">
+        <value>Gửi email xác thực</value>
     </data>
 </root>

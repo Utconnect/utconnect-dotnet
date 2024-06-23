@@ -123,7 +123,7 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hệ thống quản lý lịch thi cho cán bộ coi thi.
+        ///   Looks up a localized string similar to Hệ thống quản lý lịch thi, dùng cho giám thị.
         /// </summary>
         internal static string EsmName {
             get {
@@ -267,7 +267,7 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gửi email xác nhận.
+        ///   Looks up a localized string similar to Gửi email xác thực.
         /// </summary>
         internal static string SendVerificationEmail {
             get {
@@ -276,7 +276,7 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hệ thống quản lý lịch giảng dạy cho giảng viên.
+        ///   Looks up a localized string similar to Hệ thống quản lý lịch dạy, dùng cho giảng viên.
         /// </summary>
         internal static string TssName {
             get {
