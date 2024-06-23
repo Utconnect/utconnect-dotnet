@@ -1,8 +1,17 @@
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@inject IStringLocalizer<I18NResource> Localizer
+@inject IOptions<TssSetting> TssSetting
+@inject IOptions<EsmSetting> EsmSetting
+
 @{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = Localizer["HomePage"];
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  <h1 class="display-4">@Localizer["AppName"]</h1>
+  <calcite-tile-group scale="l" layout="horizontal" class="w-50 mt-3">
+    <calcite-tile heading="TSS" alignment="start" icon="rangefinder" description="@Localizer["TssName"]" href="@TssSetting.Value.Url"></calcite-tile>
+    <calcite-tile heading="ESM" alignment="start" icon="knowledge-graph-dashboard" description="@Localizer["EsmName"]" href="@EsmSetting.Value.Url"></calcite-tile>
+  </calcite-tile-group>
 </div>

@@ -37,28 +37,26 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\I18nResource.en-US.resx">
+      <EmbeddedResource Update="Resources\I18NResource.en-US.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>i18n.en-US.Designer.cs</LastGenOutput>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <LastGenOutput>I18NResource.en-US.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\I18nResource.vi-VN.resx">
+      <EmbeddedResource Update="Resources\I18NResource.vi-VN.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>i18n.vi-VN.Designer.cs</LastGenOutput>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <LastGenOutput>I18NResource.vi-VN.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\I18nResource.en-US.Designer.cs">
+      <Compile Update="Resources\I18NResource.en-US.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>I18nResource.en-US.resx</DependentUpon>
+        <DependentUpon>I18NResource.en-US.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\I18nResource.vi-VN.Designer.cs">
+      <Compile Update="Resources\I18NResource.vi-VN.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>I18nResource.vi-VN.resx</DependentUpon>
+        <DependentUpon>I18NResource.vi-VN.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

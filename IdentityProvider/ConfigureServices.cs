@@ -1,4 +1,5 @@
 using IdentityProvider.Infrastructure.Persistence;
+using IdentityProvider.Models;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using Shared.Presentation.Filters;
@@ -7,7 +8,7 @@ namespace IdentityProvider;
 
 public static class ConfigureServices
 {
-    public static void AddPresentationServices(this IServiceCollection services)
+    public static void AddPresentationServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews();
         // services.AddUtconnectSwashbuckle();
@@ -19,8 +20,8 @@ public static class ConfigureServices
             .AddDataAnnotationsLocalization()
             .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
 
-        // services.AddControllers().AddNewtonsoftJson(options =>
-        //     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+        services.Configure<TssSetting>(configuration.GetSection("TssSetting"));
+        services.Configure<EsmSetting>(configuration.GetSection("EsmSetting"));
     }
 
     public static async Task Configure(this WebApplication app)

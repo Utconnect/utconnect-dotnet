@@ -2,11 +2,11 @@
 @using IdentityProvider
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
+@inject IStringLocalizer<I18NResource> Localizer
 @model LoginModel
-@inject IStringLocalizer<I18NResource> localizer
 
 @{
-  ViewData["Title"] = localizer["Login"];
+  ViewData["Title"] = Localizer["Login"];
 }
 
 <div style="display: flex; justify-content: center" class="mt-3">
@@ -16,32 +16,32 @@
         <h2>@ViewData["Title"]</h2>
         <hr/>
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-        <div class="mb-3">
+        <div>
           <calcite-label>
-            @localizer["EmailControlName"].Value
+            @Localizer["EmailControlName"]
             <calcite-input name="Input.Email" scale="l" autocomplete="username" placeholder="name@example.com"></calcite-input>
           </calcite-label>
           <span asp-validation-for="Input!.Email" class="text-danger"></span>
         </div>
-        <div class="mb-3">
+        <div>
           <calcite-label>
-            @localizer["PasswordControlName"]
+            @Localizer["Password"]
             <calcite-input name="Input.Password" scale="l" autocomplete="current-password" placeholder="password" type="password"></calcite-input>
           </calcite-label>
           <span asp-validation-for="Input!.Password" class="text-danger"></span>
         </div>
-        <div class="checkbox mb-3">
+        <div>
           <calcite-label layout="inline">
             <calcite-checkbox name="Input.RememberMe" scale="l"></calcite-checkbox>
-            @localizer["RememberMeControllerName"]
+            @Localizer["RememberMeControllerName"]
           </calcite-label>
         </div>
         <div>
-          <calcite-button kind="brand" scale="l" type="submit" width="full">@localizer["Login"]</calcite-button>
+          <calcite-button kind="brand" scale="l" type="submit" width="full">@Localizer["Login"]</calcite-button>
         </div>
         <div>
           <p>
-            <a id="forgot-password" asp-page="./ForgotPassword">@localizer["ForgotPassword"]</a>
+            <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["ForgotPassword"]</a>
           </p>
         </div>
       </form>

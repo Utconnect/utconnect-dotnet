@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>@ViewData["Title"] - Utconnect</title>
+  <title>@ViewData["Title"] - @Localizer["AppName"]</title>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
   <script type="module" src="https://js.arcgis.com/calcite-components/2.9.0/calcite.esm.js" integrity="sha384-dzeYJWBt4WjebhFiK/tWUzSkIn5pP9iI1MtAbnaVJ5+5EqA8oPmXfkF2DNlyfTld" crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
     <calcite-navigation slot="header">
       <calcite-navigation-logo slot="logo" heading="Utconnect" thumbnail="/assets/images/logo.png"></calcite-navigation-logo>
       <calcite-menu slot="content-start">
-        <calcite-menu-item text="Trang chủ" href="@Url.Action("Index", "Home")"></calcite-menu-item>
+        <calcite-menu-item text="@Localizer["HomePage"]" href="@Url.Action("Index", "Home")"></calcite-menu-item>
       </calcite-menu>
 
       <partial name="_LoginPartial"/>

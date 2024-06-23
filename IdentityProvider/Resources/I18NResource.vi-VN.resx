@@ -19,81 +19,81 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Login" xml:space="preserve">
-        <value>Login</value>
+        <value>Đăng nhập</value>
     </data>
     <data name="EmailControlName" xml:space="preserve">
-        <value>Email</value>
+        <value>Email hoặc tên đăng nhập</value>
     </data>
     <data name="Password" xml:space="preserve">
-        <value>Password</value>
+        <value>Mật khẩu</value>
     </data>
     <data name="RememberMeControllerName" xml:space="preserve">
-        <value>Remember me?</value>
+        <value>Ghi nhớ đăng nhập</value>
     </data>
     <data name="ForgotPassword" xml:space="preserve">
-        <value>Forgot your password?</value>
+        <value>Quên mật khẩu?</value>
     </data>
     <data name="InvalidLoginAttempt" xml:space="preserve">
-        <value>Invalid login attempt</value>
+        <value>Thông tin đăng nhập không hợp lệ</value>
     </data>
     <data name="AppName" xml:space="preserve">
-        <value>Utconnect</value>
+        <value>UTC Kết nối</value>
     </data>
     <data name="ChangePassword" xml:space="preserve">
-        <value>Change password</value>
+        <value>Đổi mật khẩu</value>
     </data>
     <data name="Logout" xml:space="preserve">
-        <value>Logout</value>
+        <value>Đăng xuất</value>
     </data>
     <data name="HomePage" xml:space="preserve">
-        <value>Home</value>
+        <value>Trang chủ</value>
     </data>
     <data name="Hello" xml:space="preserve">
-        <value>Hello</value>
+        <value>Xin chào</value>
     </data>
     <data name="ManageAccount" xml:space="preserve">
-        <value>Manage Account</value>
+        <value>Quản lý tài khoản</value>
     </data>
     <data name="Profile" xml:space="preserve">
-        <value>Profile</value>
+        <value>Hồ sơ</value>
     </data>
     <data name="PhoneNumber" xml:space="preserve">
-        <value>Phone number</value>
+        <value>Số điện thoại</value>
     </data>
     <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Lưu</value>
     </data>
     <data name="ManageEmail" xml:space="preserve">
-        <value>Manage Email</value>
+        <value>Quản lý email</value>
     </data>
     <data name="SendVerificationEmail" xml:space="preserve">
-        <value>Send verification email</value>
+        <value>Gửi email xác nhận</value>
     </data>
     <data name="EnterNewEmail" xml:space="preserve">
-        <value>Please enter new email</value>
+        <value>Nhập email mới</value>
     </data>
     <data name="NewEmail" xml:space="preserve">
-        <value>New email</value>
+        <value>Email mới</value>
     </data>
     <data name="ChangeEmail" xml:space="preserve">
-        <value>Change email</value>
+        <value>Thay đổi email</value>
     </data>
     <data name="CurrentPassword" xml:space="preserve">
-        <value>Current password</value>
+        <value>Mật khẩu hiện tại</value>
     </data>
     <data name="NewPassword" xml:space="preserve">
-        <value>New password</value>
+        <value>Mật khẩu mới</value>
     </data>
     <data name="ConfirmNewPassword" xml:space="preserve">
-        <value>Confirm new password</value>
+        <value>Xác nhận mật khẩu mới</value>
     </data>
     <data name="UpdatePassword" xml:space="preserve">
-        <value>Update password</value>
+        <value>Cập nhật mật khẩu</value>
     </data>
     <data name="EsmName" xml:space="preserve">
-        <value>Examination scheduling management, used by invigilators</value>
+        <value>Hệ thống quản lý lịch thi cho cán bộ coi thi</value>
     </data>
     <data name="TssName" xml:space="preserve">
-        <value>Teaching scheduling system, used by teachers</value>
+        <value>Hệ thống quản lý lịch giảng dạy cho giảng viên</value>
     </data>
 </root>

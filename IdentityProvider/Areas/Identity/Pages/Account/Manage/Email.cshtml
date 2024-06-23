@@ -1,41 +1,53 @@
 @page
+@using IdentityProvider
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<I18NResource> Localizer
 @model EmailModel
 @{
-  ViewData["Title"] = "Manage Email";
+  ViewData["Title"] = Localizer["ManageEmail"];
   ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage"/>
-<div class="row">
+<div>
   <div class="col-md-6">
     <form id="email-form" method="post">
       <div asp-validation-summary="All" class="text-danger" role="alert"></div>
       @if (Model.IsEmailConfirmed == true)
       {
-        <div class="form-floating mb-3 input-group">
-          <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled/>
-          <div class="input-group-append">
-            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
-          </div>
-          <label asp-for="Email" class="form-label"></label>
+        <div>
+          <calcite-label>
+            Email
+            <calcite-input name="Email" scale="l" value="@Model.Email" type="email" suffix-text="✓" disabled></calcite-input>
+          </calcite-label>
         </div>
       }
       else
       {
-        <div class="form-floating mb-3">
-          <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled/>
-          <label asp-for="Email" class="form-label"></label>
-          <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+        <div class="mb-2">
+          <calcite-label>
+            Email
+            <calcite-input name="Email" scale="l" value="@Model.Email" disabled></calcite-input>
+          </calcite-label>
+          <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link p-0">
+            @Localizer["SendVerificationEmail"]
+          </button>
         </div>
       }
-      <div class="form-floating mb-3">
-        <input asp-for="Input!.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email."/>
-        <label asp-for="Input!.NewEmail" class="form-label"></label>
+      <div>
+        <calcite-label>
+          @Localizer["NewEmail"]
+          <calcite-input name="Input.NewEmail" scale="l" placeholder="@Localizer["EnterNewEmail"]" autocomplete="email" required></calcite-input>
+        </calcite-label>
         <span asp-validation-for="Input!.NewEmail" class="text-danger"></span>
       </div>
-      <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
+      <calcite-button scale="l" width="full" type="submit" form="change-email">
+        @Localizer["ChangeEmail"]
+      </calcite-button>
     </form>
+    <form id="change-email" action="/Identity/Account/Manage/Email?handler=ChangeEmail" method="post"></form>
   </div>
 </div>
 

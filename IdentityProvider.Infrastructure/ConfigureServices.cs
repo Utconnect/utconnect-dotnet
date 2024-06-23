@@ -61,6 +61,11 @@ public static class ConfigureServices
             options.DefaultRequestCulture = new RequestCulture("vi-VN");
             options.SupportedCultures = supportedCultures;
             options.SupportedUICultures = supportedCultures;
+            options.RequestCultureProviders = new List<IRequestCultureProvider>
+            {
+                new QueryStringRequestCultureProvider(),
+                new CookieRequestCultureProvider()
+            };
         });
 
         services.AddRazorPages();
