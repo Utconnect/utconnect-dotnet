@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Presentation", "Shar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Domain", "IdentityProvider.Domain\IdentityProvider.Domain.csproj", "{E90B1048-E84E-413E-87F1-476ACA7F8823}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{41EC9A14-126E-4989-8880-5B4CE46FAB13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Presentation", "Gateway.Presentation\Gateway.Presentation.csproj", "{737522E6-5D20-442C-B45A-DB2298E7C4F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,7 @@ Global
 		{D8765C37-7EAA-41A1-A797-D32EC691E424} = {65A44FEE-B844-411B-A335-9296825682D4}
 		{E49D2128-61C0-4D34-9734-D668668EABD0} = {0EBE1F96-F6A9-4BEC-AFF5-EE6B7B4B3DEE}
 		{E90B1048-E84E-413E-87F1-476ACA7F8823} = {65A44FEE-B844-411B-A335-9296825682D4}
+		{737522E6-5D20-442C-B45A-DB2298E7C4F8} = {41EC9A14-126E-4989-8880-5B4CE46FAB13}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -100,5 +105,9 @@ Global
 		{E90B1048-E84E-413E-87F1-476ACA7F8823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E90B1048-E84E-413E-87F1-476ACA7F8823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E90B1048-E84E-413E-87F1-476ACA7F8823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737522E6-5D20-442C-B45A-DB2298E7C4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737522E6-5D20-442C-B45A-DB2298E7C4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737522E6-5D20-442C-B45A-DB2298E7C4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737522E6-5D20-442C-B45A-DB2298E7C4F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
