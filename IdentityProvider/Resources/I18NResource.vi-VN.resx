@@ -96,4 +96,7 @@
     <data name="SendVerificationEmail" xml:space="preserve">
         <value>Gửi email xác thực</value>
     </data>
+    <data name="ClickHereToLogout" xml:space="preserve">
+        <value>Nhấn vào đây để Đăng xuất</value>
+    </data>
 </root>

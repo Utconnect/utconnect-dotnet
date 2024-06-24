@@ -87,6 +87,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here to Logout.
+        /// </summary>
+        internal static string ClickHereToLogout {
+            get {
+                return ResourceManager.GetString("ClickHereToLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm new password.
         /// </summary>
         internal static string ConfirmNewPassword {

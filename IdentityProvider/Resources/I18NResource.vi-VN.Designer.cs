@@ -87,6 +87,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhấn vào đây để Đăng xuất.
+        /// </summary>
+        internal static string ClickHereToLogout {
+            get {
+                return ResourceManager.GetString("ClickHereToLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xác nhận mật khẩu mới.
         /// </summary>
         internal static string ConfirmNewPassword {

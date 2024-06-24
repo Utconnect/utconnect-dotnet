@@ -13,7 +13,7 @@ public class HttpResponseExceptionFilter(IHostEnvironment hostEnvironment) : IEx
 {
     public void OnException(ExceptionContext context)
     {
-        var exception = context.Exception;
+        Exception exception = context.Exception;
         HttpException exceptionToHandle;
 
         switch (exception)
@@ -34,7 +34,7 @@ public class HttpResponseExceptionFilter(IHostEnvironment hostEnvironment) : IEx
             default:
             {
                 List<Error> errorResponse = [new Error(HttpStatusCode.InternalServerError, exception.Message)];
-                var message = hostEnvironment.IsEnvironment(Environments.Development)
+                string message = hostEnvironment.IsEnvironment(Environments.Development)
                     ? exception.Message
                     : "Server error";
                 exceptionToHandle =

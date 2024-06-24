@@ -7,7 +7,7 @@ public static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseUtconnectSwagger(this IApplicationBuilder app)
     {
-        var info = SwashbuckleHelper.GetInfo();
+        SwashbuckleInfo info = SwashbuckleHelper.GetInfo();
 
         return app.UseSwagger()
             .UseSwaggerUI(options =>

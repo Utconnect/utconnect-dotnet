@@ -3,15 +3,16 @@ using IdentityProvider.Models;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using Shared.Presentation.Filters;
+using Shared.Swashbuckle;
 
 namespace IdentityProvider;
 
 public static class ConfigureServices
 {
-    public static void AddPresentationServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddProviderServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews();
-        // services.AddUtconnectSwashbuckle();
+        services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
 
         services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
@@ -28,7 +29,7 @@ public static class ConfigureServices
     {
         if (app.Environment.IsDevelopment())
         {
-            // app.UseUtconnectSwagger();
+            app.UseUtconnectSwagger();
         }
         else
         {
