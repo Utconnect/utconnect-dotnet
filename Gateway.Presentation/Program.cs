@@ -1,15 +1,12 @@
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
-// builder.Services.AddAuthorizationBuilder()
-//     .AddPolicy("customPolicy", policy =>
-//         policy.RequireAuthenticatedUser());
+
+builder.Services.AddOcelot();
 
 WebApplication app = builder.Build();
 
-// app.UseAuthentication();
-// app.UseAuthorization();
-
-app.MapReverseProxy();
+app.UseOcelot().Wait();
 
 app.Run();
