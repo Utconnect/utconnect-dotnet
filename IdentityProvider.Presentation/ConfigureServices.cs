@@ -9,7 +9,7 @@ public static class ConfigureServices
 {
     public static void AddPresentationServices(this IServiceCollection services)
     {
-        services.AddSingleton<IAuthorizationMiddlewareResultHandler, UtconnectAuthorizationMiddlewareResultHandler>();
+        // services.AddSingleton<IAuthorizationMiddlewareResultHandler, UtconnectAuthorizationMiddlewareResultHandler>();
     }
 
     public static void ConfigurePresentation(this WebApplication app)

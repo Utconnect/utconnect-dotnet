@@ -34,10 +34,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\assets\fonts\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Update="Resources\I18NResource.en-US.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>I18NResource.en-US.Designer.cs</LastGenOutput>
