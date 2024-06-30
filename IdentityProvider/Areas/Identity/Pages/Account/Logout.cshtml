@@ -1,8 +1,8 @@
 @page
-@using IdentityProvider
+@inject IStringLocalizer<I18NResource> Localizer
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<I18NResource> Localizer
+@using Shared.Application.Localization
 @model LogoutModel
 
 @{

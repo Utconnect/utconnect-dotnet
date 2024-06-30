@@ -1,6 +1,7 @@
 @using IdentityProvider.Domain.Models
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.Extensions.Localization
+@using Shared.Application.Localization
 @inject UserManager<User> UserManager
 @inject IStringLocalizer<I18NResource> Localizer
 
@@ -8,12 +9,12 @@
   @if (User.Identity is { IsAuthenticated: true })
   {
     <calcite-menu-item text="@Localizer["Hello"] @UserManager.GetUserName(User)">
-      <calcite-menu-item slot="submenu-item" text="@Localizer["ManageAccount"]" href="@Url.Page("/Account/Manage/Index", new { Area = "Identity" })"></calcite-menu-item>
-      <calcite-menu-item slot="submenu-item" text="@Localizer["Logout"]" href="@Url.Page("/Account/Logout", new { Area = "Identity" })"></calcite-menu-item>
+      <calcite-menu-item slot="submenu-item" text="@Localizer["ManageAccount"]" href="/auth/manage"></calcite-menu-item>
+      <calcite-menu-item slot="submenu-item" text="@Localizer["Logout"]" href="/auth/logout"></calcite-menu-item>
     </calcite-menu-item>
   }
   else
   {
-    <calcite-menu-item text="@Localizer["Login"]" href="@Url.Page("/Account/Login", new { Area = "Identity" })"></calcite-menu-item>
+    <calcite-menu-item text="@Localizer["Login"]" href="/auth/login"></calcite-menu-item>
   }
 </calcite-menu>

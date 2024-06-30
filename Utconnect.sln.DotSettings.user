@@ -3,6 +3,7 @@
   &lt;Assembly Path="C:\Users\An\.nuget\packages\unchase.swashbuckle.aspnetcore.extensions\2.7.1\lib\netstandard2.0\Unchase.Swashbuckle.AspNetCore.Extensions.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Auth_002FIdentityProvider_002FResources_002FI18NResource/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Sso_002FSso_002EPresentation_002FResources_002FI18NResource/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/ShowOnlyErrors/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/ShowOnlyStringResources/@EntryValue">False</s:Boolean></wpf:ResourceDictionary>

@@ -1,8 +1,8 @@
 @page
-@using IdentityProvider
+@inject IStringLocalizer<I18NResource> Localizer
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<I18NResource> Localizer
+@using Shared.Application.Localization
 @model EmailModel
 @{
   ViewData["Title"] = Localizer["ManageEmail"];
@@ -47,7 +47,7 @@
         @Localizer["ChangeEmail"]
       </calcite-button>
     </form>
-    <form id="change-email" action="/Identity/Account/Manage/Email?handler=ChangeEmail" method="post"></form>
+    <form id="change-email" action="/auth/Manage/Email?handler=ChangeEmail" method="post"></form>
   </div>
 </div>
 

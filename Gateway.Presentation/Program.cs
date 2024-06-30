@@ -12,12 +12,26 @@ builder.Configuration
     .AddJsonFile("ocelot.json")
     .AddEnvironmentVariables();
 
-builder.Services.AddAuthentication()
-    .AddJwtBearer("TestKey", opt =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
-        opt.Authority = "https://localhost:6001";
-        opt.Audience = "SampleApiService";
-        opt.RequireHttpsMetadata = false;
+        // Cookie settings
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromHours(6);
+
+        options.LoginPath = "/auth/login";
+        options.AccessDeniedPath = "/accessDenied";
+        options.SlidingExpiration = true;
+    })
+    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+    {
+        // Cookie settings
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromHours(6);
+
+        options.LoginPath = "/auth/login";
+        options.AccessDeniedPath = "/accessDenied";
+        options.SlidingExpiration = true;
     });
 
 
@@ -25,14 +39,16 @@ builder.Services.AddOcelot();
 
 WebApplication app = builder.Build();
 
-OcelotPipelineConfiguration configuration = new OcelotPipelineConfiguration
+OcelotPipelineConfiguration configuration = new()
 {
-    PreAuthenticationMiddleware = async (context, next) =>
+    PreAuthenticationMiddleware = async (_, next) =>
     {
+        Console.WriteLine("PreAuth");
         await next.Invoke();
     },
-    AuthenticationMiddleware = async (context, next) =>
+    AuthenticationMiddleware = async (_, next) =>
     {
+        Console.WriteLine("Auth");
         await next.Invoke();
     } 
 };

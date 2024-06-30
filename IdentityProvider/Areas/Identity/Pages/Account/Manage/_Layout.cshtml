@@ -1,6 +1,6 @@
-@using IdentityProvider
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
+@using Shared.Application.Localization
 @inject IStringLocalizer<I18NResource> Localizer
 @{
   if (ViewData.TryGetValue("ParentLayout", out object? parentLayout) && parentLayout != null)

@@ -1,7 +1,7 @@
 using IdentityProvider.Infrastructure.Persistence;
 using IdentityProvider.Models;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
+using Shared.Application.Localization;
 using Shared.Presentation.Filters;
 using Shared.Swashbuckle;
 
@@ -15,10 +15,7 @@ public static class ConfigureServices
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
 
-        services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
-            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-                opts => { opts.ResourcesPath = "Resources"; })
-            .AddDataAnnotationsLocalization()
+        LocalizationExtensions.AddUtconnectMvcLocalization(services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); }))
             .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
 
         services.Configure<TssSetting>(configuration.GetSection("TssSetting"));
@@ -50,8 +47,7 @@ public static class ConfigureServices
 
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
-        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}")
-            .RequireAuthorization();
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.UseRouting();
 

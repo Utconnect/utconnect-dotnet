@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
+      <ProjectReference Include="..\Shared.Application.Localization\Shared.Application.Localization.csproj" />
       <ProjectReference Include="..\Shared.Infrastructure.Db\Shared.Infrastructure.Db.csproj" />
     </ItemGroup>
 

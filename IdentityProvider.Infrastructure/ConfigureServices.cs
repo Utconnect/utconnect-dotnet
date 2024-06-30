@@ -1,14 +1,12 @@
-using System.Globalization;
 using IdentityProvider.Domain.Models;
 using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Shared.Application.Localization;
 using Shared.Infrastructure.Db.Interceptors;
 using Shared.Infrastructure.Db.Services;
 using Shared.UtconnectIdentity.Services;
@@ -49,24 +47,7 @@ public static class ConfigureServices
 
         services.TryAddScoped<SignInManager<User>>();
 
-        services.AddLocalization(options => options.ResourcesPath = "Resources");
-        services.Configure<RequestLocalizationOptions>(options =>
-        {
-            CultureInfo[] supportedCultures =
-            [
-                new CultureInfo("en-US"), 
-                new CultureInfo("vi-VN")
-            ];
-
-            options.DefaultRequestCulture = new RequestCulture("vi-VN");
-            options.SupportedCultures = supportedCultures;
-            options.SupportedUICultures = supportedCultures;
-            options.RequestCultureProviders = new List<IRequestCultureProvider>
-            {
-                new QueryStringRequestCultureProvider(),
-                new CookieRequestCultureProvider()
-            };
-        });
+        services.AddUtconnectLocalization();
 
         services.AddRazorPages();
 

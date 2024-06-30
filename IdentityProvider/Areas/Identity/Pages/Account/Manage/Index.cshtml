@@ -1,7 +1,8 @@
 @page
-@using IdentityProvider
-@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<I18NResource> Localizer
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@using Shared.Application.Localization
 @model IndexModel
 @{
   ViewData["Title"] = Localizer["Profile"];
