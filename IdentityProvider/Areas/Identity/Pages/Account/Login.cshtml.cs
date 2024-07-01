@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using Shared.Application.Localization;
 using Shared.UtconnectIdentity.Services;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 

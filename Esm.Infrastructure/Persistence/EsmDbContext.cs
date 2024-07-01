@@ -1,10 +1,9 @@
 using System.Reflection;
 using Esm.Domain.Entities;
-using Esm.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Shared.Infrastructure.Db.Interceptors;
 
-namespace ESM.Infrastructure.Persistence;
+namespace Esm.Infrastructure.Persistence;
 
 public class EsmDbContext(
     DbContextOptions<EsmDbContext> options,

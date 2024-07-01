@@ -1,8 +1,6 @@
 using System.Text;
 using Esm.Infrastructure.Persistence;
-using ESM.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,20 +28,6 @@ public static class ConfigureServices
 
         services.AddScoped<EsmDbContextInitializer>();
 
-        services.AddIdentityCore<ApplicationUser>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.User.RequireUniqueEmail = false;
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-            })
-           .AddRoles<ApplicationRole>()
-           .AddEntityFrameworkStores<EsmDbContext>()
-           .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
-
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
         
@@ -58,7 +42,7 @@ public static class ConfigureServices
                     ValidateIssuerSigningKey = true,
                     ValidAudience = configuration["Jwt:Audience"],
                     ValidIssuer = configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
                 };
             });
     }
