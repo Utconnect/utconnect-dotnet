@@ -1,0 +1,6 @@
+@Esm.Presentation_HostAddress = http://localhost:5137
+
+GET {{Esm.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
