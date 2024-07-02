@@ -1,12 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using IdentityProvider.Configurations;
 using IdentityProvider.Domain.Models;
+using IdentityProvider.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
@@ -14,8 +17,10 @@ namespace IdentityProvider.Areas.Identity.Pages.Account;
 public class LoginModel(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
-    ILogger<LoginModel> logger,
-    IStringLocalizer<I18NResource> localizer)
+    IStringLocalizer<I18NResource> localizer,
+    IOptions<HomeConfig> homeConfig,
+    ILogger<LoginModel> logger
+)
     : PageModel
 {
     [BindProperty]
@@ -42,7 +47,7 @@ public class LoginModel(
 
     public async Task<IActionResult> OnGetAsync(string? returnUrl = null)
     {
-        returnUrl ??= Url.Content("~/");
+        returnUrl ??= homeConfig.Value.Url;
 
         if (User.Identity is { IsAuthenticated: true })
         {

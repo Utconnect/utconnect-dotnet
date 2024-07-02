@@ -11,59 +11,7 @@
         }
       ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKeys": ["Cookies", "Identity.Application"],
-        "AllowedScopes": []
-      }
-    },
-    {
-      "UpstreamPathTemplate": "/auth/login",
-      "DownstreamPathTemplate": "/Identity/Account/login",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/res/{catchAll}",
-      "DownstreamPathTemplate": "/res/{catchAll}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/auth/{catchAll}",
-      "DownstreamPathTemplate": "/Identity/Account/{catchAll}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKeys": ["Cookies", "Identity.Application"],
-        "AllowedScopes": []
-      }
-    },
-    {
-      "UpstreamPathTemplate": "/{catchAll}",
-      "DownstreamPathTemplate": "/{catchAll}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001  
-        }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKeys": ["Cookies", "Identity.Application"],
+        "AuthenticationProviderKeys": ["Cookies"],
         "AllowedScopes": []
       }
     }

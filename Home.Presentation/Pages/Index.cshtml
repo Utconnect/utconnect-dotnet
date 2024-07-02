@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@using Home.Presentation.Configurations
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@inject IStringLocalizer<I18NResource> Localizer
+@inject IOptions<EsmConfig> EsmConfig
+@inject IOptions<TssConfig> TssConfig
+
+@{
+  ViewData["Title"] = Localizer["HomePage"];
+}
+
+<div class="text-center">
+  <h1 class="display-4">@Localizer["AppName"]</h1>
+  <calcite-tile-group scale="l" layout="horizontal" class="w-50 mt-3">
+    <calcite-tile heading="TSS" alignment="start" icon="rangefinder" description="@Localizer["TssName"]" href="@TssConfig.Value.Url"></calcite-tile>
+    <calcite-tile heading="ESM" alignment="start" icon="knowledge-graph-dashboard" description="@Localizer["EsmName"]" href="@EsmConfig.Value.Url"></calcite-tile>
+  </calcite-tile-group>
+</div>

@@ -1,8 +1,7 @@
+using IdentityProvider.Configurations;
 using IdentityProvider.Infrastructure.Persistence;
 using IdentityProvider.Models;
 using Microsoft.Extensions.Options;
-using Shared.Application.Localization;
-using Shared.Presentation.Filters;
 using Shared.Swashbuckle;
 
 namespace IdentityProvider;
@@ -15,12 +14,7 @@ public static class ConfigureServices
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
 
-        services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
-            .AddUtconnectMvcLocalization()
-            .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
-
-        services.Configure<TssSetting>(configuration.GetSection("TssSetting"));
-        services.Configure<EsmSetting>(configuration.GetSection("EsmSetting"));
+        services.Configure<HomeConfig>(configuration.GetSection("HomeConfig"));
     }
 
     public static async Task Configure(this WebApplication app)
@@ -47,8 +41,6 @@ public static class ConfigureServices
         app.UseStaticFiles();
 
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
-
-        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.UseRouting();
 

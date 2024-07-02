@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Shared.Application.Localization;
@@ -28,13 +27,5 @@ public static class LocalizationExtensions
                 new CookieRequestCultureProvider()
             };
         });
-    }
-
-    public static IMvcBuilder AddUtconnectMvcLocalization(this IMvcBuilder services)
-    {
-        return services
-            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-                opts => { opts.ResourcesPath = "Resources"; })
-            .AddDataAnnotationsLocalization();
     }
 }
