@@ -15,7 +15,8 @@ public static class ConfigureServices
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
 
-        LocalizationExtensions.AddUtconnectMvcLocalization(services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); }))
+        services.AddMvc(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
+            .AddUtconnectMvcLocalization()
             .ConfigureApiBehaviorOptions(options => { options.SuppressModelStateInvalidFilter = true; });
 
         services.Configure<TssSetting>(configuration.GetSection("TssSetting"));

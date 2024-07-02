@@ -30,7 +30,7 @@ public static class ConfigureServices
 
         services.AddScoped<IdentityProviderContextInitializer>();
 
-        services.AddIdentityCore<User>(options =>
+        services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = false;
@@ -41,9 +41,7 @@ public static class ConfigureServices
                 options.Password.RequireLowercase = false;
             })
             .AddRoles<Role>()
-            .AddEntityFrameworkStores<IdentityProviderContext>()
-            .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
-            .AddDefaultUI();
+            .AddEntityFrameworkStores<IdentityProviderContext>();
 
         services.TryAddScoped<SignInManager<User>>();
 
@@ -64,26 +62,15 @@ public static class ConfigureServices
             options.User.RequireUniqueEmail = false;
         });
 
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+        services.AddAuthentication(options =>
             {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromHours(6);
-
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie(IdentityConstants.ApplicationScheme, options =>
+            .AddCookie(options =>
             {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromHours(6);
-
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
+                options.LoginPath = "/Login";
             });
 
         services.AddTransient<IDateTime, DateTimeService>();

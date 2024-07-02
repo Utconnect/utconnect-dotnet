@@ -38,6 +38,8 @@ public static class ConfigureServices
 
         app.UseAuthorization();
 
+        app.MapRazorPages();
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Exchange}/{action=Index}/{id?}");

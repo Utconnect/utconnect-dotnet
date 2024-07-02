@@ -2,12 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using IdentityProvider.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using Shared.Application.Localization;
-using Shared.UtconnectIdentity.Services;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
@@ -15,7 +14,6 @@ namespace IdentityProvider.Areas.Identity.Pages.Account;
 public class LoginModel(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
-    IIdentityService identityService,
     ILogger<LoginModel> logger,
     IStringLocalizer<I18NResource> localizer)
     : PageModel
@@ -90,9 +88,18 @@ public class LoginModel(
                 return Page();
             }
 
-            (string scheme, ClaimsPrincipal principal, AuthenticationProperties properties) =
-                identityService.GetNewClaims(user);
-            await HttpContext.SignInAsync(scheme, principal, properties);
+            var claims = new List<Claim>
+            {
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.Name)
+            };
+
+            var identities = new List<ClaimsIdentity>
+            {
+                new(claims, CookieAuthenticationDefaults.AuthenticationScheme)
+            };
+            ClaimsPrincipal principal = new(identities);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             return Redirect(returnUrl);
         }
