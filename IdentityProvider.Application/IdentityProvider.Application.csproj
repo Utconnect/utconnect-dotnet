@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
+      <PackageReference Include="RestSharp" Version="111.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Oidc.Domain\Oidc.Domain.csproj" />
+      <ProjectReference Include="..\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
+    </ItemGroup>
+
+</Project>

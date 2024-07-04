@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using IdentityProvider.Configurations;
+using IdentityProvider.Application.Services.Abstract;
 using IdentityProvider.Domain.Models;
-using IdentityProvider.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Oidc.Domain.Models;
+using Shared.Application.Configuration;
+using Shared.Http.Uri;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
@@ -17,11 +19,11 @@ namespace IdentityProvider.Areas.Identity.Pages.Account;
 public class LoginModel(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
+    IOidcService oidcService,
     IStringLocalizer<I18NResource> localizer,
     IOptions<HomeConfig> homeConfig,
     ILogger<LoginModel> logger
-)
-    : PageModel
+) : PageModel
 {
     [BindProperty]
     public InputModel? Input { get; set; }
@@ -69,9 +71,9 @@ public class LoginModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null, CancellationToken cancellationToken = default)
     {
-        returnUrl ??= Url.Content("~/");
+        returnUrl ??= homeConfig.Value.Url;
 
         ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -104,9 +106,22 @@ public class LoginModel(
                 new(claims, CookieAuthenticationDefaults.AuthenticationScheme)
             };
             ClaimsPrincipal principal = new(identities);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return Redirect(returnUrl);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            ExchangeTokenResponse? token = await oidcService.Exchange(cancellationToken);
+
+            if (token == null)
+            {
+                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+                return Page();
+            }
+
+            Uri returnUrlWithToken = new Uri(returnUrl).AddParameter("access_token", token.AccessToken)
+                .AddParameter("token_type", token.TokenType)
+                .AddParameter("expires_in", token.ExpiresIn.ToString())
+                .AddParameter("refresh_token", token.RefreshToken);
+
+            return Redirect(returnUrlWithToken.ToString());
         }
 
         if (result.RequiresTwoFactor)

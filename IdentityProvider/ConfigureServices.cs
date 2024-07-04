@@ -1,7 +1,6 @@
-using IdentityProvider.Configurations;
 using IdentityProvider.Infrastructure.Persistence;
-using IdentityProvider.Models;
 using Microsoft.Extensions.Options;
+using Shared.Application.Configuration;
 using Shared.Swashbuckle;
 
 namespace IdentityProvider;
@@ -15,6 +14,7 @@ public static class ConfigureServices
         services.AddHttpContextAccessor();
 
         services.Configure<HomeConfig>(configuration.GetSection("HomeConfig"));
+        services.Configure<OidcConfig>(configuration.GetSection("OidcConfig"));
     }
 
     public static async Task Configure(this WebApplication app)

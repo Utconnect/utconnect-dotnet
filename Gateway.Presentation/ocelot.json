@@ -1,8 +1,8 @@
 ﻿{
   "Routes": [
     {
-      "UpstreamPathTemplate": "/",
-      "DownstreamPathTemplate": "/",
+      "UpstreamPathTemplate": "/{catchAll}",
+      "DownstreamPathTemplate": "/{catchAll}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {

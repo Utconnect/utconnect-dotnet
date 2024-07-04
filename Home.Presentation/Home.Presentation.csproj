@@ -47,6 +47,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
+      <ProjectReference Include="..\Oidc.Domain\Oidc.Domain.csproj" />
+      <ProjectReference Include="..\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\Shared.Application.Localization\Shared.Application.Localization.csproj" />
     </ItemGroup>
 

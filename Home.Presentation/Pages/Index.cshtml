@@ -1,14 +1,22 @@
 ﻿@page
-@model IndexModel
-@using Home.Presentation.Configurations
+@using global::Shared.Application.Configuration
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
+@using Oidc.Domain.Models
+@model IndexModel
 @inject IStringLocalizer<I18NResource> Localizer
 @inject IOptions<EsmConfig> EsmConfig
 @inject IOptions<TssConfig> TssConfig
 
 @{
   ViewData["Title"] = Localizer["HomePage"];
+  ExchangeTokenResponse? exchangeTokenResponse = Model.ExchangeTokenResponse;
+  if (exchangeTokenResponse != null)
+  {
+    // await LocalStorage.SetAsync("accessToken", exchangeTokenResponse.AccessToken);
+    // await LocalStorage.SetAsync("refreshToken", exchangeTokenResponse.RefreshToken);
+  }
 }
 
 <div class="text-center">

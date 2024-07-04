@@ -16,17 +16,30 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
         OpenIddictRequest request = HttpContext.GetOpenIddictServerRequest() ??
             throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
+        AuthenticateResult authResult =
+            await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+
+        ClaimsPrincipal? claimsPrincipal = authResult.Principal;
+        if (claimsPrincipal == null)
+        {
+            throw new InvalidOperationException("The claims principal cannot be retrieved.");
+        }
+
+        string? userId = claimsPrincipal.GetClaim(OpenIddictConstants.Claims.Subject);
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Forbid(
+                authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
+                properties: new AuthenticationProperties(new Dictionary<string, string?>
+                {
+                    [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidGrant,
+                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
+                        "Cannot find user from the token."
+                }));
+        }
+
         if (request.IsRefreshTokenGrantType())
         {
-            AuthenticateResult authResult =
-                await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-            ClaimsPrincipal? claimsPrincipal = authResult.Principal;
-
-            if (claimsPrincipal == null)
-            {
-                throw new InvalidOperationException("The claims principal cannot be retrieved.");
-            }
-
             return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
@@ -64,6 +77,7 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
 
         identity.SetClaim(OpenIddictConstants.Claims.Subject, clientId);
         identity.SetScopes(request.GetScopes());
+
         var principal = new ClaimsPrincipal(identity);
         // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
         return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
