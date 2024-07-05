@@ -1,16 +1,25 @@
 ﻿using IdentityProvider.Application.Services.Abstract;
+using IdentityProvider.Domain.Models;
 using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
 using RestSharp;
+using RestSharp.Authenticators;
 using Shared.Application.Configuration;
+using Shared.Authentication.Models;
+using Shared.Authentication.Services;
 
 namespace IdentityProvider.Application.Services.Implementations;
 
-public class OidcService(IOptions<OidcConfig> oidcConfig) : IOidcService
+public class OidcService(IJwtService jwtService, IOptions<OidcConfig> oidcConfig) : IOidcService
 {
-    public async Task<ExchangeTokenResponse?> Exchange(CancellationToken cancellationToken)
+    public async Task<ExchangeTokenResponse?> Exchange(User user, CancellationToken cancellationToken)
     {
-        RestClientOptions options = new(oidcConfig.Value.Url);
+        GeneratedToken jwtToken = jwtService.CreateToken(user);
+        JwtAuthenticator authenticator = new(jwtToken.Token);
+        RestClientOptions options = new(oidcConfig.Value.Url)
+        {
+            Authenticator = authenticator
+        };
         RestClient client = new(options);
 
         RestRequest request = new("/token");

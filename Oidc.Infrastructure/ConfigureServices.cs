@@ -1,8 +1,9 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Oidc.Infrastructure.Persistence;
 
 namespace Oidc.Infrastructure;
@@ -12,7 +13,7 @@ public static class ConfigureServices
     public static void AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<OidcDbContext>(options =>
-        {   
+        {
             string? connectionString = configuration.GetConnectionString("OidcDbContextConnection");
             options.UseNpgsql(connectionString);
 
@@ -50,12 +51,19 @@ public static class ConfigureServices
                 options.LoginPath = "/login";
                 options.SlidingExpiration = true;
             })
-            .AddCookie(IdentityConstants.ApplicationScheme, options =>
+            .AddJwtBearer(options =>
             {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(1);
-                options.LoginPath = "/login";
-                options.SlidingExpiration = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? string.Empty))
+                };
             });
 
         services.AddHostedService<OidcSeeder>();

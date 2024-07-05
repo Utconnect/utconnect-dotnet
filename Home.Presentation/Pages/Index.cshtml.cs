@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Oidc.Domain.Models;
 
@@ -7,7 +8,7 @@ public class IndexModel(ILogger<IndexModel> logger) : PageModel
 {
     public ExchangeTokenResponse? ExchangeTokenResponse { get; private set; }
 
-    public PageResult OnGet(ExchangeTokenResponse tokenResponse)
+    public ActionResult OnGet(ExchangeTokenResponse tokenResponse)
     {
         if (string.IsNullOrEmpty(tokenResponse.AccessToken) ||
             string.IsNullOrEmpty(tokenResponse.RefreshToken) ||
@@ -17,6 +18,9 @@ public class IndexModel(ILogger<IndexModel> logger) : PageModel
         }
 
         logger.LogInformation("Redirected from login site");
+
+        // TODO: Save token to local storage
+
         ExchangeTokenResponse = tokenResponse;
 
         return Page();

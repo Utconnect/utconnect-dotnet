@@ -1,6 +1,4 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -44,35 +42,6 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
         return new ClaimIdentity(DefaultTenant, user);
     }
 
-    public (string AuthenticationScheme, ClaimsPrincipal, AuthenticationProperties authProperties) GetNewClaims(
-        IUser user)
-    {
-        DateTimeOffset now = DateTimeOffset.UtcNow;
-        DateTimeOffset expiration = now.AddHours(6);
-
-        List<Claim> claims =
-        [
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
-            new Claim(ClaimTypes.GivenName, user.Name),
-            new Claim(ClaimTypes.Role, "sysadmin"),
-            new Claim("nbf", now.ToUnixTimeSeconds().ToString()),
-            new Claim(ClaimTypes.Expiration, expiration.ToUnixTimeSeconds().ToString())
-        ];
-
-        ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        AuthenticationProperties authProperties = new()
-        {
-            ExpiresUtc = expiration,
-            IssuedUtc = now
-        };
-
-        return (
-            CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(claimsIdentity),
-            authProperties);
-    }
-
     private static ClaimUser MapCurrentUser(IEnumerable<Claim> claims)
     {
         List<Claim> claimsList = claims.ToList();
@@ -82,7 +51,7 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
         }
 
         string identifier = claimsList.Find(x => x.Type == ClaimTypes.NameIdentifier)?.Value
-                            ?? Guid.Empty.ToString();
+            ?? Guid.Empty.ToString();
         string userName = claimsList.Find(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
         string name = claimsList.Find(x => x.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
 
@@ -92,7 +61,7 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
             : JsonConvert.DeserializeObject<List<int>>(permission.Value) ?? [];
 
         DateTime loginDate = (claimsList.Find(x => x.Type == "nbf")?.Value ?? string.Empty).ToUnixDateTime()
-                             ?? throw new InvalidClaimUnixDateTimeException();
+            ?? throw new InvalidClaimUnixDateTimeException();
         DateTime expirationDate =
             (claimsList.Find(x => x.Type == ClaimTypes.Expiration)?.Value ?? string.Empty).ToUnixDateTime()
             ?? throw new InvalidClaimUnixDateTimeException();

@@ -1,6 +1,7 @@
 using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.Extensions.Options;
 using Shared.Application.Configuration;
+using Shared.Authentication;
 using Shared.Swashbuckle;
 
 namespace IdentityProvider;
@@ -15,6 +16,8 @@ public static class ConfigureServices
 
         services.Configure<HomeConfig>(configuration.GetSection("HomeConfig"));
         services.Configure<OidcConfig>(configuration.GetSection("OidcConfig"));
+
+        services.AddDefaultJwtService("OidcConfig:Jwt");
     }
 
     public static async Task Configure(this WebApplication app)

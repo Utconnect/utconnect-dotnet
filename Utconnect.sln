@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Domain", "Oidc.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Http", "Shared.Http\Shared.Http.csproj", "{B06D20C2-F2DD-4297-AF44-0FC1FB035556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Authentication", "Shared.Authentication\Shared.Authentication.csproj", "{B36DA831-6A53-4735-BC6A-704EFA0870EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,7 @@ Global
 		{683BBC9E-09AC-4850-8D3B-85C3E6771A44} = {65A44FEE-B844-411B-A335-9296825682D4}
 		{A3526A62-E759-4C55-866D-372AB2CF4CAC} = {124983F4-CE8E-46AB-BE6D-A425D2022AF7}
 		{B06D20C2-F2DD-4297-AF44-0FC1FB035556} = {0EBE1F96-F6A9-4BEC-AFF5-EE6B7B4B3DEE}
+		{B36DA831-6A53-4735-BC6A-704EFA0870EB} = {0EBE1F96-F6A9-4BEC-AFF5-EE6B7B4B3DEE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -192,5 +195,9 @@ Global
 		{B06D20C2-F2DD-4297-AF44-0FC1FB035556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B06D20C2-F2DD-4297-AF44-0FC1FB035556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B06D20C2-F2DD-4297-AF44-0FC1FB035556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B36DA831-6A53-4735-BC6A-704EFA0870EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B36DA831-6A53-4735-BC6A-704EFA0870EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B36DA831-6A53-4735-BC6A-704EFA0870EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B36DA831-6A53-4735-BC6A-704EFA0870EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

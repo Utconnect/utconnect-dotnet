@@ -31,6 +31,7 @@
       <ProjectReference Include="..\IdentityProvider.Infrastructure\IdentityProvider.Infrastructure.csproj" />
       <ProjectReference Include="..\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\Shared.Application.Localization\Shared.Application.Localization.csproj" />
+      <ProjectReference Include="..\Shared.Authentication\Shared.Authentication.csproj" />
       <ProjectReference Include="..\Shared.Http\Shared.Http.csproj" />
       <ProjectReference Include="..\Shared.Presentation\Shared.Presentation.csproj" />
       <ProjectReference Include="..\Shared.Swashbuckle\Shared.Swashbuckle.csproj" />

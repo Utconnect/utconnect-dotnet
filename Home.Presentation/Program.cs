@@ -12,7 +12,6 @@ builder.Services.Configure<TssConfig>(configuration.GetSection("TssConfig"));
 builder.Services.Configure<EsmConfig>(configuration.GetSection("EsmConfig"));
 builder.Services.Configure<IdentityConfig>(configuration.GetSection("IdentityConfig"));
 builder.Services.AddUtconnectLocalization();
-// builder.Services.AddSingleton<ProtectedLocalStorage>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

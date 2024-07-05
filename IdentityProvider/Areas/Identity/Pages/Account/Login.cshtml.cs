@@ -11,7 +11,9 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
 using Shared.Application.Configuration;
+using Shared.Authentication.Extensions;
 using Shared.Http.Uri;
+using Shared.Infrastructure.Db.Services;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
@@ -20,6 +22,7 @@ public class LoginModel(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
     IOidcService oidcService,
+    IDateTime dateTime,
     IStringLocalizer<I18NResource> localizer,
     IOptions<HomeConfig> homeConfig,
     ILogger<LoginModel> logger
@@ -71,7 +74,8 @@ public class LoginModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string? returnUrl = null, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null,
+        CancellationToken cancellationToken = default)
     {
         returnUrl ??= homeConfig.Value.Url;
 
@@ -95,20 +99,14 @@ public class LoginModel(
                 return Page();
             }
 
-            var claims = new List<Claim>
-            {
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Name, user.Name)
-            };
+            IEnumerable<Claim> claims = user.CreateClaims(dateTime.Now);
 
-            var identities = new List<ClaimsIdentity>
-            {
-                new(claims, CookieAuthenticationDefaults.AuthenticationScheme)
-            };
+            List<ClaimsIdentity> identities =
+                [new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)];
             ClaimsPrincipal principal = new(identities);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            ExchangeTokenResponse? token = await oidcService.Exchange(cancellationToken);
+            ExchangeTokenResponse? token = await oidcService.Exchange(user, cancellationToken);
 
             if (token == null)
             {
