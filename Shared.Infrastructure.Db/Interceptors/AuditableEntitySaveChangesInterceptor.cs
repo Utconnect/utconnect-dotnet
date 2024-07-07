@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.Infrastructure.Db.Entities;
-using Shared.Infrastructure.Db.Services;
+using Shared.Services.Abstractions;
 using Shared.UtconnectIdentity.Services;
 
 namespace Shared.Infrastructure.Db.Interceptors;

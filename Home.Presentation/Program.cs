@@ -1,27 +1,16 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Shared.Application.Configuration;
-using Shared.Application.Localization;
+using Home.Application;
+using Home.Presentation;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.Options;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
-IConfigurationSection homeConfig = configuration.GetSection("HomeConfig");
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.Configure<TssConfig>(configuration.GetSection("TssConfig"));
-builder.Services.Configure<EsmConfig>(configuration.GetSection("EsmConfig"));
-builder.Services.Configure<IdentityConfig>(configuration.GetSection("IdentityConfig"));
-builder.Services.AddUtconnectLocalization();
+builder.Services.ConfigureApplicationHomeServices();
+builder.Services.ConfigureHomePresentationServices(configuration);
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.Events.OnRedirectToLogin = context =>
-        {
-            context.HttpContext.Response.Redirect(homeConfig["Url"]!);
-            return Task.CompletedTask;
-        };
-    });
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/home/app/.aspnet/DataProtection-Keys"));
 
 WebApplication app = builder.Build();
 
@@ -35,6 +24,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
 

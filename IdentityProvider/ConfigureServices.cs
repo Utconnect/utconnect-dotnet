@@ -1,6 +1,7 @@
 using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.Extensions.Options;
 using Shared.Application.Configuration;
+using Shared.Application.Configuration.Models;
 using Shared.Authentication;
 using Shared.Swashbuckle;
 
@@ -14,8 +15,8 @@ public static class ConfigureServices
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
 
-        services.Configure<HomeConfig>(configuration.GetSection("HomeConfig"));
-        services.Configure<OidcConfig>(configuration.GetSection("OidcConfig"));
+        services.AddConfiguration<HomeConfig>(configuration);
+        services.AddConfiguration<OidcConfig>(configuration);
 
         services.AddDefaultJwtService("OidcConfig:Jwt");
     }

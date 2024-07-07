@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
-using Shared.Application.Configuration;
+using Shared.Application.Configuration.Models;
 using Shared.Authentication.Extensions;
 using Shared.Http.Uri;
-using Shared.Infrastructure.Db.Services;
+using Shared.Services.Abstractions;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
@@ -52,7 +52,7 @@ public class LoginModel(
 
     public async Task<IActionResult> OnGetAsync(string? returnUrl = null)
     {
-        returnUrl ??= homeConfig.Value.Url;
+        returnUrl ??= homeConfig.Value.ReturnUrl;
 
         if (User.Identity is { IsAuthenticated: true })
         {
@@ -77,7 +77,7 @@ public class LoginModel(
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null,
         CancellationToken cancellationToken = default)
     {
-        returnUrl ??= homeConfig.Value.Url;
+        returnUrl ??= homeConfig.Value.ReturnUrl;
 
         ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -114,7 +114,8 @@ public class LoginModel(
                 return Page();
             }
 
-            Uri returnUrlWithToken = new Uri(returnUrl).AddParameter("access_token", token.AccessToken)
+            Uri returnUrlWithToken = new Uri(returnUrl)
+                .AddParameter("access_token", token.AccessToken)
                 .AddParameter("token_type", token.TokenType)
                 .AddParameter("expires_in", token.ExpiresIn.ToString())
                 .AddParameter("refresh_token", token.RefreshToken);

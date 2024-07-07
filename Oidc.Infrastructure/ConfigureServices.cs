@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Oidc.Infrastructure.Persistence;
+using OpenIddict.Abstractions;
 
 namespace Oidc.Infrastructure;
 
@@ -34,13 +35,18 @@ public static class ConfigureServices
                 options.SetTokenEndpointUris("token");
                 options.SetIntrospectionEndpointUris("token/introspect");
                 options.SetRevocationEndpointUris("token/revoke");
+                options.SetUserinfoEndpointUris("user-info");
                 options.AllowRefreshTokenFlow();
                 //secret registration
                 options.AddDevelopmentEncryptionCertificate()
                     .AddDevelopmentSigningCertificate();
                 options.DisableAccessTokenEncryption();
+                options.RegisterScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Claims.Username);
+
                 //the asp request handlers configuration itself
-                options.UseAspNetCore().EnableTokenEndpointPassthrough();
+                options.UseAspNetCore()
+                    .EnableTokenEndpointPassthrough()
+                    .EnableUserinfoEndpointPassthrough();
             });
 
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,16 +24,6 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>I18NResource.en-US.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\I18NResource.en-US.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>I18NResource.en-US.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\I18NResource.vi-VN.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>I18NResource.vi-VN.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\I18NResource.vi-VN.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
@@ -41,15 +32,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Resources\I18NResource.en-US.resx" />
-      <AdditionalFiles Include="Resources\I18NResource.vi-VN.resx" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\Home.Application\Home.Application.csproj" />
       <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
       <ProjectReference Include="..\Oidc.Domain\Oidc.Domain.csproj" />
       <ProjectReference Include="..\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\Shared.Application.Localization\Shared.Application.Localization.csproj" />
+      <ProjectReference Include="..\Shared.Services\Shared.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

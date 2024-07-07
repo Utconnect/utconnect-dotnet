@@ -1,4 +1,4 @@
-namespace Shared.Infrastructure.Db.Services;
+namespace Shared.Services.Abstractions;
 
 public interface IDateTime
 {

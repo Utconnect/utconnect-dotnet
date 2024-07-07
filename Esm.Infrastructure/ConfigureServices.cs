@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Infrastructure.Db.Interceptors;
-using Shared.Infrastructure.Db.Services;
+using Shared.Services;
 using Shared.UtconnectIdentity.Services;
 
 namespace Esm.Infrastructure;
@@ -28,7 +28,7 @@ public static class ConfigureServices
 
         services.AddScoped<EsmDbContextInitializer>();
 
-        services.AddTransient<IDateTime, DateTimeService>();
+        services.AddDateTime();
         services.AddTransient<IIdentityService, IdentityService>();
         
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

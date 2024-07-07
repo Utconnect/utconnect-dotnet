@@ -61,6 +61,9 @@ public class OidcSeeder(ILogger<OidcSeeder> logger, IServiceProvider serviceProv
                 OpenIddictConstants.Permissions.Endpoints.Revocation,
                 OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
                 OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                OpenIddictConstants.Permissions.Scopes.Email,
+                OpenIddictConstants.Permissions.Scopes.Profile,
+                OpenIddictConstants.Permissions.Prefixes.Scope + OpenIddictConstants.Claims.Username,
                 OpenIddictConstants.Permissions.Prefixes.Scope + "test_scope"
             }
         };

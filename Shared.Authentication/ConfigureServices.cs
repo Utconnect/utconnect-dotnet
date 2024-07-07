@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Authentication.Services;
-using Shared.Infrastructure.Db.Services;
+using Shared.Services.Abstractions;
 
 namespace Shared.Authentication;
 

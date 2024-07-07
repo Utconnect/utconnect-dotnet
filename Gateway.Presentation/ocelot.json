@@ -3,17 +3,13 @@
     {
       "UpstreamPathTemplate": "/{catchAll}",
       "DownstreamPathTemplate": "/{catchAll}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5001
+          "Host": "home",
+          "Port": 80
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKeys": ["Cookies"],
-        "AllowedScopes": []
-      }
+      ]
     }
   ],
   "GlobalConfiguration": {

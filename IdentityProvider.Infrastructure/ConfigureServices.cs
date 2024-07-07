@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Application.Localization;
 using Shared.Infrastructure.Db.Interceptors;
-using Shared.Infrastructure.Db.Services;
+using Shared.Services;
 using Shared.UtconnectIdentity.Services;
 
 namespace IdentityProvider.Infrastructure;
@@ -73,7 +73,6 @@ public static class ConfigureServices
                 options.LoginPath = "/Login";
             });
 
-        services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
     }
 }

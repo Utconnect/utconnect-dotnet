@@ -1,27 +1,23 @@
+using Home.Application.User.Queries.GetUserInfo;
+using Home.Presentation.Constants;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Oidc.Domain.Models;
 
 namespace Home.Presentation.Pages;
 
-public class IndexModel(ILogger<IndexModel> logger) : PageModel
+public class IndexModel(IMediator mediator) : PageModel
 {
-    public ExchangeTokenResponse? ExchangeTokenResponse { get; private set; }
-
-    public ActionResult OnGet(ExchangeTokenResponse tokenResponse)
+    public async Task<ActionResult> OnGet()
     {
-        if (string.IsNullOrEmpty(tokenResponse.AccessToken) ||
-            string.IsNullOrEmpty(tokenResponse.RefreshToken) ||
-            tokenResponse is not { TokenType: "Bearer", ExpiresIn: > 0 })
+        string? accessToken = HttpContext.Request.Cookies[TokenConstants.AccessToken];
+        string? refreshToken = HttpContext.Request.Cookies[TokenConstants.RefreshToken];
+
+        if (!string.IsNullOrEmpty(accessToken))
         {
-            return Page();
+            var result = await mediator.Send(new GetUserInfoQuery(accessToken));
         }
 
-        logger.LogInformation("Redirected from login site");
-
-        // TODO: Save token to local storage
-
-        ExchangeTokenResponse = tokenResponse;
 
         return Page();
     }

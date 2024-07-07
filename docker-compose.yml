@@ -1,11 +1,80 @@
+networks:
+  backend:
+
+volumes:
+  identity_provider_data_db:
+  oidc_data_db:
+
 services:
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: Gateway.Presentation/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_HTTPS_PORT=8080
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - ./DataProtectionKeys:/home/app/.aspnet/DataProtection-Keys
+    networks:
+      - backend
+
+  home:
+    image: ${DOCKER_REGISTRY-}home
+    container_name: home
+    build:
+      context: .
+      dockerfile: Home.Presentation/Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_HTTP_PORT=80
+    networks:
+      - backend
+
   identity_provider:
-    image: identity_provider
+    image: ${DOCKER_REGISTRY-}identity_provider
+    container_name: identity_provider
     build:
       context: .
       dockerfile: IdentityProvider/Dockerfile
     ports:
-      - "5000:80"
+      - "5100:8080"
+    environment:
+      - ASPNETCORE_HTTPS_PORT=8080
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - backend
+    depends_on:
+      identity_provider_db:
+        condition: service_healthy
+
+  oidc:
+    image: ${DOCKER_REGISTRY-}oidc
+    container_name: oidc
+    build:
+      context: .
+      dockerfile: Oidc.Presentation/Dockerfile
+    environment:
+      - ASPNETCORE_HTTPS_PORT=8080
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - backend
+    depends_on:
+      iodc_db:
+        condition: service_healthy
+
   identity_provider_db:
     container_name: identity_provider_db
     image: postgres:16.3
@@ -15,3 +84,31 @@ services:
     environment:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: Identity
+    volumes:
+      - identity_provider_data_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  iodc_db:
+    container_name: iodc_db
+    image: postgres:16.3
+    restart: always
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: Iodc
+    volumes:
+      - oidc_data_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend

@@ -1,4 +1,4 @@
-﻿namespace Shared.Application.Configuration;
+﻿namespace Shared.Application.Configuration.Models;
 
 public interface ISiteConfig
 {

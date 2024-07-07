@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
 using RestSharp;
 using RestSharp.Authenticators;
-using Shared.Application.Configuration;
+using Shared.Application.Configuration.Models;
 using Shared.Authentication.Models;
 using Shared.Authentication.Services;
 
@@ -22,14 +22,14 @@ public class OidcService(IJwtService jwtService, IOptions<OidcConfig> oidcConfig
         };
         RestClient client = new(options);
 
-        RestRequest request = new("/token");
-        request.AddParameter("scope", "test_scope offline_access")
+        RestRequest request = new(oidcConfig.Value.TokenPath);
+        request.AddParameter("scope", "test_scope offline_access username email")
             .AddParameter("grant_type", "client_credentials")
             .AddParameter("client_id", "test_client")
             .AddParameter("client_secret", "test_secret");
 
-        RestResponse<ExchangeTokenResponse> timeline =
+        RestResponse<ExchangeTokenResponse> response =
             await client.ExecutePostAsync<ExchangeTokenResponse>(request, cancellationToken);
-        return timeline.Data;
+        return response.Data;
     }
 }

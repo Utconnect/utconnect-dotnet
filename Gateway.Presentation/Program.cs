@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -34,25 +35,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/home/app/.aspnet/DataProtection-Keys"));
 
 builder.Services.AddOcelot();
 
 WebApplication app = builder.Build();
 
-OcelotPipelineConfiguration configuration = new()
-{
-    PreAuthenticationMiddleware = async (_, next) =>
-    {
-        Console.WriteLine("PreAuth");
-        await next.Invoke();
-    },
-    AuthenticationMiddleware = async (_, next) =>
-    {
-        Console.WriteLine("Auth");
-        await next.Invoke();
-    } 
-};
-
-app.UseOcelot(configuration).Wait();
+app.UseOcelot().Wait();
 
 app.Run();

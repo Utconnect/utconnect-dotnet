@@ -1,9 +1,7 @@
 using System.Net;
-using JetBrains.Annotations;
 
 namespace Shared.Application.Exceptions.Models;
 
-[UsedImplicitly(ImplicitUseTargetFlags.Members)]
 public class Error
 {
     public HttpStatusCode? Code { get; }
