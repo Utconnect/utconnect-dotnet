@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Application.Localization;
 using Shared.Infrastructure.Db.Interceptors;
-using Shared.Services;
 using Shared.UtconnectIdentity.Services;
 
 namespace IdentityProvider.Infrastructure;

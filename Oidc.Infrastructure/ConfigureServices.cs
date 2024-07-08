@@ -47,6 +47,7 @@ public static class ConfigureServices
 
                 //the asp request handlers configuration itself
                 options.UseAspNetCore()
+                    .DisableTransportSecurityRequirement()
                     .EnableTokenEndpointPassthrough()
                     .EnableUserinfoEndpointPassthrough();
             });
