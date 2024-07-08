@@ -1,3 +1,5 @@
+using Oidc.Infrastructure.Persistence;
+
 namespace Oidc.Presentation;
 
 public static class ConfigureServices
@@ -7,9 +9,16 @@ public static class ConfigureServices
         services.AddControllers();
     }
 
-    public static void Configure(this WebApplication app)
+    public static async Task Configure(this WebApplication app)
     {
         app.UseDeveloperExceptionPage();
+
+        using (IServiceScope scope = app.Services.CreateScope())
+        {
+            OidcDbContextInitializer initializer = scope.ServiceProvider.GetRequiredService<OidcDbContextInitializer>();
+            await initializer.InitializeAsync();
+            await initializer.SeedAsync();
+        }
 
         app.UseRouting();
         app.UseCors();

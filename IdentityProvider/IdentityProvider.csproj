@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>6159590e-261f-43f6-9e46-92ebb8e43345</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -59,10 +60,6 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="DataProtectionKeys\" />
     </ItemGroup>
 
 </Project>

@@ -21,6 +21,8 @@ public static class ConfigureServices
             options.UseOpenIddict();
         });
 
+        services.AddScoped<OidcDbContextInitializer>();
+
         services.AddOpenIddict()
             .AddCore(options =>
             {

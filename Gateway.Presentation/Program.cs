@@ -11,6 +11,7 @@ builder.Configuration
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
     .AddJsonFile("ocelot.json")
+    .AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", true, true)
     .AddEnvironmentVariables();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

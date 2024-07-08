@@ -41,7 +41,6 @@ public static class ConfigureServices
             await initializer.SeedAsync();
         }
 
-        app.UseHttpsRedirection();
         app.UseStaticFiles();
 
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

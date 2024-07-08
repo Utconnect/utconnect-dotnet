@@ -2,7 +2,7 @@
 services:
   gateway:
     build:
-      context: "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect"
+      context: "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet"
       dockerfile: "Gateway.Presentation/Dockerfile"
       target: "base"
     command: []
@@ -15,13 +15,13 @@ services:
     image: "gateway:dev"
     ports: []
     volumes:
-    - "C:\\Users\\An\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect\\Gateway.Presentation:/app:rw"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect:/src:rw"
+    - "C:\\Users\\Admin\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet\\Gateway.Presentation:/app:rw"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet:/src:rw"
     working_dir: "/app"
   home:
     build:
-      context: "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect"
+      context: "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet"
       dockerfile: "Home.Presentation/Dockerfile"
       target: "base"
     command: []
@@ -35,13 +35,13 @@ services:
     image: "home:dev"
     ports: []
     volumes:
-    - "C:\\Users\\An\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect\\Home.Presentation:/app:rw"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect:/src:rw"
+    - "C:\\Users\\Admin\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet\\Home.Presentation:/app:rw"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet:/src:rw"
     working_dir: "/app"
   identity_provider:
     build:
-      context: "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect"
+      context: "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet"
       dockerfile: "IdentityProvider/Dockerfile"
       target: "base"
     command: []
@@ -55,13 +55,14 @@ services:
     image: "identity_provider:dev"
     ports: []
     volumes:
-    - "C:\\Users\\An\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect\\IdentityProvider:/app:rw"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect:/src:rw"
+    - "C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\UserSecrets:/home/app/.microsoft/usersecrets"
+    - "C:\\Users\\Admin\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet\\IdentityProvider:/app:rw"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet:/src:rw"
     working_dir: "/app"
   oidc:
     build:
-      context: "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect"
+      context: "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet"
       dockerfile: "Oidc.Presentation/Dockerfile"
       target: "base"
     command: []
@@ -74,7 +75,7 @@ services:
     image: "oidc:dev"
     ports: []
     volumes:
-    - "C:\\Users\\An\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect\\Oidc.Presentation:/app:rw"
-    - "C:\\Users\\An\\Documents\\Projects\\be-dot-net\\Utconnect:/src:rw"
+    - "C:\\Users\\Admin\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet\\Oidc.Presentation:/app:rw"
+    - "C:\\Users\\Admin\\Documents\\projects\\utconnect-dotnet:/src:rw"
     working_dir: "/app"
