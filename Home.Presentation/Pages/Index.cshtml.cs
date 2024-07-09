@@ -18,7 +18,6 @@ public class IndexModel(IMediator mediator) : PageModel
             var result = await mediator.Send(new GetUserInfoQuery(accessToken));
         }
 
-
         return Page();
     }
 }

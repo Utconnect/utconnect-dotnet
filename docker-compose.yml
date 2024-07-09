@@ -49,6 +49,8 @@ services:
   oidc:
     image: oidc
     container_name: oidc
+    ports:
+      - "5101:8080"
     build:
       context: .
       dockerfile: Oidc.Presentation/Dockerfile
