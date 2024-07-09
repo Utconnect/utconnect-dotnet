@@ -7,7 +7,7 @@ volumes:
 
 services:
   gateway:
-    image: gateway
+    image: snowflower1408/utconnect_gateway
     container_name: gateway
     ports:
       - "5000:8080"
@@ -20,7 +20,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   identity_provider:
-    image: identity_provider
+    image: snowflower1408/utconnect_identity_provider
     container_name: identity_provider
     ports:
       - "5100:8080"
@@ -36,7 +36,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   home:
-    image: home
+    image: snowflower1408/utconnect_home
     container_name: home
     build:
       context: .
@@ -47,7 +47,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   oidc:
-    image: oidc
+    image: snowflower1408/utconnect_oidc
     container_name: oidc
     ports:
       - "5101:8080"

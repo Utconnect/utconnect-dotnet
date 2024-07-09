@@ -52,7 +52,7 @@ public class LoginModel(
 
     public async Task<IActionResult> OnGetAsync(string? returnUrl = null)
     {
-        returnUrl ??= homeConfig.Value.ReturnUrl;
+        returnUrl ??= homeConfig.Value.Url + homeConfig.Value.TokenPath;
 
         if (User.Identity is { IsAuthenticated: true })
         {
@@ -77,7 +77,7 @@ public class LoginModel(
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null,
         CancellationToken cancellationToken = default)
     {
-        returnUrl ??= homeConfig.Value.ReturnUrl;
+        returnUrl ??= homeConfig.Value.Url + homeConfig.Value.TokenPath;
 
         ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -99,7 +99,11 @@ public class LoginModel(
                 return Page();
             }
 
-            IEnumerable<Claim> claims = user.CreateClaims(dateTime.Now);
+            Claim[] claims =
+            [
+                ..user.CreateClaims(dateTime.Now), new Claim(ClaimTypes.NameIdentifier,
+                    user.Id.ToString())
+            ];
 
             List<ClaimsIdentity> identities =
                 [new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)];

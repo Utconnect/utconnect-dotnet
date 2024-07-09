@@ -8,12 +8,12 @@ using Shared.Application.Configuration.Models;
 
 namespace Home.Application.User.Queries.GetUserInfo;
 
-public record GetUserInfoQuery(string AccessToken) : IRequest<int?>;
+public record GetUserInfoQuery(string AccessToken) : IRequest<UserInfoResponse?>;
 
 public class GetUserInfoQueryHandler(IOptions<OidcConfig> oidcConfig, ILogger<GetUserInfoQueryHandler> logger)
-    : IRequestHandler<GetUserInfoQuery, int?>
+    : IRequestHandler<GetUserInfoQuery, UserInfoResponse?>
 {
-    public async Task<int?> Handle(GetUserInfoQuery query, CancellationToken cancellationToken)
+    public async Task<UserInfoResponse?> Handle(GetUserInfoQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Getting user information from IdentityProvider");
 
@@ -26,9 +26,9 @@ public class GetUserInfoQueryHandler(IOptions<OidcConfig> oidcConfig, ILogger<Ge
 
         RestRequest request = new(oidcConfig.Value.UserInfoPath);
 
-        RestResponse<ExchangeTokenResponse> response =
-            await client.ExecutePostAsync<ExchangeTokenResponse>(request, cancellationToken);
+        RestResponse<UserInfoResponse> response =
+            await client.ExecuteGetAsync<UserInfoResponse>(request, cancellationToken);
 
-        return 0;
+        return response.Data;
     }
 }

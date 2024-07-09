@@ -1,20 +1,27 @@
-@using System.Security.Claims
 @using global::Shared.Application.Configuration.Models
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
 @inject IStringLocalizer<I18NResource> Localizer
 @inject IOptions<IdentityConfig> IdentityConfig
 
+@{
+  var userName = ViewData["UserName"]?.ToString();
+  IdentityConfig config = IdentityConfig.Value;
+}
+
 <calcite-menu slot="content-end">
-  @if (User.Identity is { IsAuthenticated: true })
+  @if (string.IsNullOrEmpty(userName))
   {
-    <calcite-menu-item text="@Localizer["Hello"] @User.FindFirst(ClaimTypes.Name)?.Value">
-      <calcite-menu-item slot="submenu-item" text="@Localizer["ManageAccount"]" href="/manage"></calcite-menu-item>
-      <calcite-menu-item slot="submenu-item" text="@Localizer["Logout"]" href="/Logout"></calcite-menu-item>
+    <calcite-menu-item text="@Localizer["Login"]" href="@config.Url@config.LoginPath" iconEnd="launch-2">
     </calcite-menu-item>
   }
   else
   {
-    <calcite-menu-item text="@Localizer["Login"]" href="@IdentityConfig.Value.Url/Login" iconEnd="launch-2"></calcite-menu-item>
+    <calcite-menu-item text="@Localizer["Hello"] @userName">
+      <calcite-menu-item slot="submenu-item" text="@Localizer["ManageAccount"]" href="@config.Url@config.ManagePath">
+      </calcite-menu-item>
+      <calcite-menu-item slot="submenu-item" text="@Localizer["Logout"]" href="@config.Url@config.LogoutPath">
+      </calcite-menu-item>
+    </calcite-menu-item>
   }
 </calcite-menu>

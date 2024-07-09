@@ -13,6 +13,7 @@ public static class ConfigureServices
         services.AddRazorPages();
         services.AddConfiguration<TssConfig>(configuration);
         services.AddConfiguration<EsmConfig>(configuration);
+        services.AddConfiguration<OidcConfig>(configuration);
         services.AddConfiguration<IdentityConfig>(configuration);
         services.AddDateTime();
         services.AddUtconnectLocalization();

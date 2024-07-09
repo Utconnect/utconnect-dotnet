@@ -1,5 +1,8 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Shared.Application.Configuration.Models
+@inject IOptions<HomeConfig> homeConfig
 @inject IStringLocalizer<I18NResource> Localizer
 
 <!DOCTYPE html>
@@ -17,10 +20,9 @@
 <body>
   <calcite-shell>
     <calcite-navigation slot="header">
-      <calcite-navigation-logo slot="logo" heading="Utconnect" thumbnail="@Url.Content("~/assets/images/logo.png")"></calcite-navigation-logo>
-      <calcite-menu slot="content-start">
-        <calcite-menu-item text="@Localizer["HomePage"]" href="@Url.Action("Index", "Home")"></calcite-menu-item>
-      </calcite-menu>
+      <calcite-navigation-logo slot="logo" heading="Utconnect" thumbnail="@Url.Content("~/assets/images/logo.png")"
+                               href="@homeConfig.Value.Url">
+      </calcite-navigation-logo>
 
       <partial name="_LoginPartial"/>
     </calcite-navigation>

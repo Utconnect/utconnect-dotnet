@@ -7,7 +7,7 @@ namespace Shared.Authentication.Extensions;
 
 public static class UserExtensions
 {
-    public static IEnumerable<Claim> CreateClaims(this User user, DateTime now) =>
+    public static Claim[] CreateClaims(this User user, DateTime now) =>
     [
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
