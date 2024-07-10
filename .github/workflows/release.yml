@@ -20,11 +20,8 @@ jobs:
           git config --global user.email "snowflower1408@gmail.com"
           git config --global user.name "Release workflow"
 
-      - name: Install standard-version
-        run: npx --yes standard-version
-
       - name: Release new version
-        run: npm run release
+        run: npx --yes standard-version
 
       - name: Push new version
         run: |
