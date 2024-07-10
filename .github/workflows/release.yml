@@ -15,14 +15,16 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Config git
+        run: |
+          git config --global user.email "snowflower1408@gmail.com"
+          git config --global user.name "Release workflow"
+
       - name: Install standard-version
         run: npx --yes standard-version
 
       - name: Release new version
-        run: |
-          git config --global user.email "snowflower1408@gmail.com"
-          git config --global user.name "Release workflow"
-          npm run release
+        run: npm run release
 
       - name: Push new version
         run: |
