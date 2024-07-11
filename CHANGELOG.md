@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.2...v1.0.3) (2024-07-11)
+
+
+### CI/CD
+
+* build each project by dockerfile ([5adf030](https://github.com/Utconnect/utconnect-dotnet/commit/5adf030549ab4ba23c825eb86905a18b7f868b45))
+
 ### [1.0.2](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.1...v1.0.2) (2024-07-10)
 
 
