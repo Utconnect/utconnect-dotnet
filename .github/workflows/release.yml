@@ -4,9 +4,53 @@ on:
   workflow_dispatch:
 
 jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        project:
+          - { name: IdentityProvider, image: identity_provider }
+          - { name: Gateway.Presentation, image: gateway }
+          - { name: Home.Presentation, image: home }
+          - { name: Oidc.Presentation, image: oidc }
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.project.image }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.project.image }}-
+
+      - name: Build and push Docker image
+        id: docker_build
+        run: |
+          IMAGE_NAME=${{ matrix.project.image }}
+          PROJECT_NAME=${{ matrix.project.name }}
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${IMAGE_NAME}
+          docker build -f ./$PROJECT_NAME/Dockerfile -t $IMAGE .
+          docker push $IMAGE
+
   release:
     name: Release
-    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -21,17 +65,6 @@ jobs:
         run: |
           git config --global user.email "snowflower1408@gmail.com"
           git config --global user.name "Release workflow"
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker images
-        run: |
-          docker-compose -f docker-compose.yml build
-          docker-compose -f docker-compose.yml push
 
       - name: Release new version
         run: npx --yes standard-version
