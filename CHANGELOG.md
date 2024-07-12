@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.3...v1.0.4) (2024-07-12)
+
+
+### Bug Fixes
+
+* **home:** add security flags when create cookie ([eec0d02](https://github.com/Utconnect/utconnect-dotnet/commit/eec0d02a7580bfbbf0151ad8e559f7c165d34bfd))
+* **oidc:** cannot retrieve user info ([3c3bf74](https://github.com/Utconnect/utconnect-dotnet/commit/3c3bf747fbf51cada3a18fd07dbf693d85d02fc5))
+* **oidc:** only display development exception page when environment is dev ([64e6e79](https://github.com/Utconnect/utconnect-dotnet/commit/64e6e79dd88152b517fb836f94cb0379e3ba02b5))
+
+
+### CI/CD
+
+* **release:** use latest action ([1fcf7d0](https://github.com/Utconnect/utconnect-dotnet/commit/1fcf7d006541e762f2dbe88571a8894e9caa9612))
+
 ### [1.0.3](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.2...v1.0.3) (2024-07-11)
 
 
