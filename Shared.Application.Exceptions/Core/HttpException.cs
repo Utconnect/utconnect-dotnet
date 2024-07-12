@@ -3,7 +3,6 @@ using Shared.Application.Exceptions.Models;
 
 namespace Shared.Application.Exceptions.Core;
 
-[Serializable]
 public class HttpException(
     HttpStatusCode statusCode,
     IEnumerable<Error> errors,

@@ -3,7 +3,6 @@ using Shared.Application.Exceptions.Models;
 
 namespace Shared.Application.Exceptions.Core;
 
-[Serializable]
 public abstract class InternalServerErrorException(string? message, Exception? innerException = null)
     : InnerException(message, innerException)
 {
