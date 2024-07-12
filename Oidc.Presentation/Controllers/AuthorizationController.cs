@@ -13,7 +13,7 @@ namespace Oidc.Presentation.Controllers;
 
 public class AuthorizationController(IOpenIddictApplicationManager applicationManager) : Controller
 {
-    [HttpPost("~/token")]
+    [HttpPost("token")]
     public async Task<IActionResult> Exchange()
     {
         OpenIddictRequest request = HttpContext.GetOpenIddictServerRequest()
@@ -33,7 +33,7 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
     }
 
     [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
-    [HttpGet("~/user-info"), HttpPost("~/user-info")]
+    [HttpGet("user-info"), HttpPost("user-info")]
     public async Task<IActionResult> Userinfo()
     {
         ClaimsPrincipal? claimsPrincipal =
