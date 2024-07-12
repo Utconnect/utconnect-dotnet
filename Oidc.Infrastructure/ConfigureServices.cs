@@ -31,21 +31,21 @@ public static class ConfigureServices
             })
             .AddServer(options =>
             {
-                //enable client_credentials grant_tupe support on server level
                 options.AllowClientCredentialsFlow();
-                //specify token endpoint uri
-                options.SetTokenEndpointUris("token");
-                options.SetIntrospectionEndpointUris("token/introspect");
-                options.SetRevocationEndpointUris("token/revoke");
-                options.SetUserinfoEndpointUris("user-info");
                 options.AllowRefreshTokenFlow();
-                //secret registration
+
+                options.SetTokenEndpointUris("token");
+                options.SetRevocationEndpointUris("token/revoke");
+                options.SetIntrospectionEndpointUris("token/introspect");
+                options.SetUserinfoEndpointUris("user-info");
+
+                options.RegisterScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Claims.Username);
+                options.SetIssuer(new Uri(configuration["Authority"] ?? string.Empty));
+
                 options.AddDevelopmentEncryptionCertificate()
                     .AddDevelopmentSigningCertificate();
                 options.DisableAccessTokenEncryption();
-                options.RegisterScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Claims.Username);
 
-                //the asp request handlers configuration itself
                 options.UseAspNetCore()
                     .DisableTransportSecurityRequirement()
                     .EnableTokenEndpointPassthrough()
