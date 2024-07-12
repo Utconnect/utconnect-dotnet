@@ -11,7 +11,10 @@ public static class ConfigureServices
 
     public static async Task Configure(this WebApplication app)
     {
-        app.UseDeveloperExceptionPage();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
 
         using (IServiceScope scope = app.Services.CreateScope())
         {
