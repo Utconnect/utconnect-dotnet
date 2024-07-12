@@ -45,7 +45,9 @@ public class TokenModel(IDateTime dateTime, ILogger<TokenModel> logger) : PageMo
     {
         Response.Cookies.Append(TokenConstants.AccessToken, AccessToken, new CookieOptions
         {
-            Expires = dateTime.Now.AddSeconds(ExpiresIn)
+            Expires = dateTime.Now.AddSeconds(ExpiresIn),
+            Secure = true,
+            HttpOnly = true
         });
     }
 }
