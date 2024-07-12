@@ -9,5 +9,5 @@ public abstract class BaseEntity<T>
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public T Id { get; set; } = default!;
 }
