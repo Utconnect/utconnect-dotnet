@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.4...v1.0.5) (2024-07-14)
+
+
+### Bug Fixes
+
+* **shared:** `BaseEntity`'s ID should be typed `T` ([1a68578](https://github.com/Utconnect/utconnect-dotnet/commit/1a68578f2363e293cf7937aa6b2ad76da45b79b9))
+
 ### [1.0.4](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.3...v1.0.4) (2024-07-12)
 
 
