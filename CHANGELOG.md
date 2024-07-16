@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.5...v1.1.0) (2024-07-16)
+
+
+### Features
+
+* use coffer to save jwt tokens ([51e4ae6](https://github.com/Utconnect/utconnect-dotnet/commit/51e4ae63b50cabdeb2de0a087abed3fe1f337285))
+
 ### [1.0.5](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.4...v1.0.5) (2024-07-14)
 
 
