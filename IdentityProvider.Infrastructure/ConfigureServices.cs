@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Npgsql;
 using Shared.Application.Localization;
+using Shared.Authentication.Services;
 using Shared.Infrastructure.Db.Interceptors;
 using Shared.UtconnectIdentity.Services;
 
@@ -14,14 +16,22 @@ namespace IdentityProvider.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static async Task AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
+        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "identity", "DB_PASSWORD");
         services.AddDbContext<IdentityProviderContext>(options =>
         {
-            string? connectionString = configuration.GetConnectionString("IdentityProviderContextConnection");
-            options.UseNpgsql(connectionString);
+            NpgsqlConnectionStringBuilder connection = new()
+            {
+                Host = configuration["ConnectionStringsData:IdentityProviderContextConnection:Host"],
+                Port = int.Parse(configuration["ConnectionStringsData:IdentityProviderContextConnection:Port"]!),
+                Username = configuration["ConnectionStringsData:IdentityProviderContextConnection:Username"],
+                Database = configuration["ConnectionStringsData:IdentityProviderContextConnection:Database"],
+                Password = dbPassword
+            };
+            options.UseNpgsql(connection.ConnectionString);
         });
 
         services.AddScoped<IIdentityProviderContext>(provider =>
@@ -67,10 +77,7 @@ public static class ConfigureServices
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/Login";
-            });
+            .AddCookie(options => { options.LoginPath = "/Login"; });
 
         services.AddTransient<IIdentityService, IdentityService>();
     }

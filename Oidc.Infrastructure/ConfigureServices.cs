@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using Oidc.Infrastructure.Persistence;
 using OpenIddict.Abstractions;
 using Shared.Authentication.Services;
@@ -14,10 +15,18 @@ public static class ConfigureServices
 {
     public static async Task AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "oidc", "DB_PASSWORD");
         services.AddDbContext<OidcDbContext>(options =>
         {
-            string? connectionString = configuration.GetConnectionString("OidcDbContextConnection");
-            options.UseNpgsql(connectionString);
+            NpgsqlConnectionStringBuilder connection = new()
+            {
+                Host = configuration["ConnectionStringsData:OidcDbContextConnection:Host"],
+                Port = int.Parse(configuration["ConnectionStringsData:OidcDbContextConnection:Port"]!),
+                Username = configuration["ConnectionStringsData:OidcDbContextConnection:Username"],
+                Database = configuration["ConnectionStringsData:OidcDbContextConnection:Database"],
+                Password = dbPassword
+            };
+            options.UseNpgsql(connection.ConnectionString);
 
             options.UseOpenIddict();
         });

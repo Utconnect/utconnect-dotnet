@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using Shared.Authentication.Services;
 using Shared.Infrastructure.Db.Interceptors;
 using Shared.Services;
@@ -13,17 +14,23 @@ using Shared.UtconnectIdentity.Services;
 namespace Esm.Infrastructure;
 
 public static class ConfigureServices
-{   
-    public static async Task AddInfrastructureServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
+{
+    public static async Task AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
+        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "esm", "DB_PASSWORD");
         services.AddDbContext<EsmDbContext>(options =>
         {
-            string? connectionString = configuration.GetConnectionString("EsmDbContextConnection");
-            options.UseNpgsql(connectionString);
+            NpgsqlConnectionStringBuilder connection = new()
+            {
+                Host = configuration["ConnectionStringsData:EsmDbContextConnection:Host"],
+                Port = int.Parse(configuration["ConnectionStringsData:EsmDbContextConnection:Port"]!),
+                Username = configuration["ConnectionStringsData:EsmDbContextConnection:Username"],
+                Database = configuration["ConnectionStringsData:EsmDbContextConnection:Database"],
+                Password = dbPassword
+            };
+            options.UseNpgsql(connection.ConnectionString);
         });
 
         services.AddScoped<IEsmDbContext>(provider => provider.GetRequiredService<EsmDbContext>());
@@ -34,7 +41,6 @@ public static class ConfigureServices
         services.AddTransient<IIdentityService, IdentityService>();
 
         string jwtKey = await CofferService.GetKey(configuration["Coffer"], "esm", "JWT_KEY");
-
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
