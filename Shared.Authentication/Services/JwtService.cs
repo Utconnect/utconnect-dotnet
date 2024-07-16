@@ -10,7 +10,7 @@ using Shared.Services.Abstractions;
 
 namespace Shared.Authentication.Services;
 
-public class JwtService(IConfiguration configuration, IDateTime dateTime) : IJwtService
+public class JwtService(IConfiguration configuration, IDateTime dateTime, string jwtKey) : IJwtService
 {
     public GeneratedToken CreateToken(User user)
     {
@@ -29,13 +29,14 @@ public class JwtService(IConfiguration configuration, IDateTime dateTime) : IJwt
         };
     }
 
-    private JwtSecurityToken CreateJwtToken(IEnumerable<Claim> claims,
+    private JwtSecurityToken CreateJwtToken(
+        IEnumerable<Claim> claims,
         SigningCredentials credentials,
         DateTime expiration) =>
         new(configuration["Issuer"], configuration["Audience"], claims, expires: expiration,
             signingCredentials: credentials);
 
     private SigningCredentials CreateSigningCredentials() => new(
-        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Key"] ?? string.Empty)),
+        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
         SecurityAlgorithms.HmacSha256);
 }

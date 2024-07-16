@@ -2,14 +2,15 @@ using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.Extensions.Options;
 using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
-using Shared.Authentication;
+using Shared.Authentication.Services;
+using Shared.Services.Abstractions;
 using Shared.Swashbuckle;
 
 namespace IdentityProvider;
 
 public static class ConfigureServices
 {
-    public static void AddProviderServices(this IServiceCollection services, IConfiguration configuration)
+    public static async Task AddProviderServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews();
         services.AddUtconnectSwashbuckle();
@@ -18,7 +19,13 @@ public static class ConfigureServices
         services.AddConfiguration<HomeConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);
 
-        services.AddDefaultJwtService("OidcConfig:Jwt");
+        string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
+        IConfigurationSection jwtConfig = configuration.GetSection("OidcConfig:Jwt");
+        services.AddTransient<IJwtService>(serviceProvider =>
+        {
+            IDateTime dateTime = serviceProvider.GetService<IDateTime>()!;
+            return new JwtService(jwtConfig, dateTime, jwtKey);
+        });
     }
 
     public static async Task Configure(this WebApplication app)

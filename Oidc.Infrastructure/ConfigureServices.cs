@@ -6,12 +6,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Oidc.Infrastructure.Persistence;
 using OpenIddict.Abstractions;
+using Shared.Authentication.Services;
 
 namespace Oidc.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static void AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static async Task AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<OidcDbContext>(options =>
         {
@@ -52,6 +53,8 @@ public static class ConfigureServices
                     .EnableUserinfoEndpointPassthrough();
             });
 
+        string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
+
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
@@ -70,8 +73,7 @@ public static class ConfigureServices
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey =
-                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? string.Empty))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
                 };
             });
 

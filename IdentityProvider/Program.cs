@@ -7,7 +7,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddInfrastructureServices(configuration);
-builder.Services.AddProviderServices(configuration);
+await builder.Services.AddProviderServices(configuration);
 builder.Services.AddIdentityProviderApplicationServices();
 
 builder.Services.AddDataProtection()
