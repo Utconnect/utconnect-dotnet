@@ -61,7 +61,7 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
         var scopeClaims = new Dictionary<string, string>
         {
             { OpenIddictConstants.Permissions.Scopes.Email, OpenIddictConstants.Claims.Email },
-            { OpenIddictConstants.Claims.Username, OpenIddictConstants.Claims.Username },
+            { OpenIddictConstants.Claims.Username, OpenIddictConstants.Claims.Username }
         };
 
         foreach ((string scope, string claim) in scopeClaims)

@@ -2,7 +2,7 @@
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
 @using Shared.Application.Configuration.Models
-@inject IOptions<HomeConfig> homeConfig
+@inject IOptions<HomeConfig> HomeConfig
 @inject IStringLocalizer<I18NResource> Localizer
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
   <calcite-shell>
     <calcite-navigation slot="header">
       <calcite-navigation-logo slot="logo" heading="Utconnect" thumbnail="@Url.Content("~/assets/images/logo.png")"
-                               href="@homeConfig.Value.Url">
+                               href="@HomeConfig.Value.Url">
       </calcite-navigation-logo>
 
       <partial name="_LoginPartial"/>
