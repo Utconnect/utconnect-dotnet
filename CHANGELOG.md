@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.0...v1.1.1) (2024-07-17)
+
+
+### Improvements
+
+* use coffer to save database password ([f9e26ef](https://github.com/Utconnect/utconnect-dotnet/commit/f9e26efe9e28fced409159004abeb8454a2adb1e))
+
 ## [1.1.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.0.5...v1.1.0) (2024-07-16)
 
 
