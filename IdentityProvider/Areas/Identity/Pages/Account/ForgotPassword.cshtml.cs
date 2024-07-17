@@ -30,7 +30,7 @@ public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender ema
             return Page();
         }
 
-        var user = await userManager.FindByEmailAsync(Input.Email);
+        User? user = await userManager.FindByEmailAsync(Input.Email);
         if (user == null || !await userManager.IsEmailConfirmedAsync(user))
         {
             // Don't reveal that the user does not exist or is not confirmed
@@ -39,9 +39,9 @@ public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender ema
 
         // For more information on how to enable account confirmation and password reset please
         // visit https://go.microsoft.com/fwlink/?LinkID=532713
-        var code = await userManager.GeneratePasswordResetTokenAsync(user);
+        string code = await userManager.GeneratePasswordResetTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var callbackUrl = Url.Page(
+        string? callbackUrl = Url.Page(
             "/Account/ResetPassword",
             pageHandler: null,
             values: new { area = "Identity", code },

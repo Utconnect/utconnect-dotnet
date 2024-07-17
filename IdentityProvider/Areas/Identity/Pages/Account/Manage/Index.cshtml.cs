@@ -68,7 +68,7 @@ public class IndexModel(
         string? phoneNumber = await userManager.GetPhoneNumberAsync(user);
         if (Input.PhoneNumber != phoneNumber)
         {
-            var setPhoneResult = await userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            IdentityResult setPhoneResult = await userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
                 StatusMessage = "Unexpected error when trying to set phone number.";

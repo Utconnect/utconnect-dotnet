@@ -55,20 +55,20 @@ public class ResetPasswordModel(UserManager<User> userManager) : PageModel
             return Page();
         }
 
-        var user = await userManager.FindByEmailAsync(Input.Email!);
+        User? user = await userManager.FindByEmailAsync(Input.Email!);
         if (user == null)
         {
             // Don't reveal that the user does not exist
             return RedirectToPage("./ResetPasswordConfirmation");
         }
 
-        var result = await userManager.ResetPasswordAsync(user, Input.Code!, Input.Password!);
+        IdentityResult result = await userManager.ResetPasswordAsync(user, Input.Code!, Input.Password!);
         if (result.Succeeded)
         {
             return RedirectToPage("./ResetPasswordConfirmation");
         }
 
-        foreach (var error in result.Errors)
+        foreach (IdentityError error in result.Errors)
         {
             ModelState.AddModelError(string.Empty, error.Description);
         }

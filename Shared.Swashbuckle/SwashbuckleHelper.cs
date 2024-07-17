@@ -6,13 +6,13 @@ public static class SwashbuckleHelper
 {
     public static SwashbuckleInfo GetInfo()
     {
-        var configuration = new ConfigurationBuilder()
+        IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var title = configuration.GetValue<string>("SwaggerSettings:Title") ?? "My API";
-        var version = configuration.GetValue<string>("SwaggerSettings:Version") ?? "v1";
+        string title = configuration.GetValue<string>("SwaggerSettings:Title") ?? "My API";
+        string version = configuration.GetValue<string>("SwaggerSettings:Version") ?? "v1";
 
         return new SwashbuckleInfo(title, version);
     }

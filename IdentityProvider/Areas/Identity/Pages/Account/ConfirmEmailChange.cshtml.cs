@@ -22,14 +22,14 @@ public class ConfirmEmailChangeModel(
             return RedirectToPage("/Index");
         }
 
-        var user = await userManager.FindByIdAsync(userId);
+        User? user = await userManager.FindByIdAsync(userId);
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{userId}'.");
         }
 
         code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-        var result = await userManager.ChangeEmailAsync(user, email, code);
+        IdentityResult result = await userManager.ChangeEmailAsync(user, email, code);
         if (!result.Succeeded)
         {
             StatusMessage = "Error changing email.";
@@ -38,7 +38,7 @@ public class ConfirmEmailChangeModel(
 
         // In our UI email and username are one and the same, so when we update the email
         // we need to update the username.
-        var setUserNameResult = await userManager.SetUserNameAsync(user, email);
+        IdentityResult setUserNameResult = await userManager.SetUserNameAsync(user, email);
         if (!setUserNameResult.Succeeded)
         {
             StatusMessage = "Error changing user name.";

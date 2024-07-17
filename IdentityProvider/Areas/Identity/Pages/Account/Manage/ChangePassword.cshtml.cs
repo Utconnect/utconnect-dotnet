@@ -40,13 +40,13 @@ public class ChangePasswordModel(
 
     public async Task<IActionResult> OnGetAsync()
     {
-        var user = await userManager.GetUserAsync(User);
+        User? user = await userManager.GetUserAsync(User);
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
         }
 
-        var hasPassword = await userManager.HasPasswordAsync(user);
+        bool hasPassword = await userManager.HasPasswordAsync(user);
         if (!hasPassword)
         {
             return RedirectToPage("./SetPassword");
@@ -62,16 +62,16 @@ public class ChangePasswordModel(
             return Page();
         }
 
-        var user = await userManager.GetUserAsync(User);
+        User? user = await userManager.GetUserAsync(User);
         if (user == null)
         {
             return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
         }
 
-        var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+        IdentityResult changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
         if (!changePasswordResult.Succeeded)
         {
-            foreach (var error in changePasswordResult.Errors)
+            foreach (IdentityError error in changePasswordResult.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }

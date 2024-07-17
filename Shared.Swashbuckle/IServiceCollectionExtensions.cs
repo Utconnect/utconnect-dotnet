@@ -9,7 +9,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddUtconnectSwashbuckle(this IServiceCollection services)
     {
-        var info = SwashbuckleHelper.GetInfo();
+        SwashbuckleInfo info = SwashbuckleHelper.GetInfo();
 
         return services.AddSwaggerGen(options =>
         {

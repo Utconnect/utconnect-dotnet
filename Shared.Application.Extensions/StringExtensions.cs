@@ -4,7 +4,7 @@ public static class StringExtensions
 {
     public static DateTime? ToUnixDateTime(this string unixDate)
     {
-        if (!long.TryParse(unixDate, out var longDate))
+        if (!long.TryParse(unixDate, out long longDate))
         {
             return null;
         }
