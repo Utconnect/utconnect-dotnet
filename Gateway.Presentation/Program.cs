@@ -45,4 +45,4 @@ WebApplication app = builder.Build();
 
 app.UseOcelot().Wait();
 
-app.Run();
+await app.RunAsync();

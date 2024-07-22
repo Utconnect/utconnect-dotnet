@@ -13,4 +13,5 @@ builder.Services.AddDataProtection()
 WebApplication app = builder.Build();
 
 await app.Configure();
-app.Run();
+
+await app.RunAsync();

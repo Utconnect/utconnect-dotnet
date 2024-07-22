@@ -20,4 +20,4 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 
-app.Run();
+await app.RunAsync();
