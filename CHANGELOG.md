@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.1...v1.1.2) (2024-07-22)
+
+
+### CI/CD
+
+* update sonar version when release ([0158805](https://github.com/Utconnect/utconnect-dotnet/commit/015880579f60222aae43a7c78c63bf63cbaeab42))
+
 ### [1.1.1](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.0...v1.1.1) (2024-07-17)
 
 
