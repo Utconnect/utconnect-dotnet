@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -67,7 +67,7 @@ jobs:
           git config --global user.name "Release workflow"
 
       - name: Release new version
-        run: npx --yes standard-version
+        run: npx --yes standard-version -a
 
       - name: Push new version
         run: |
