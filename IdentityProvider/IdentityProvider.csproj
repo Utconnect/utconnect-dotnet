@@ -10,7 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="Localization.AspNetCore.TagHelpers" Version="0.6.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.7" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
         <PrivateAssets>all</PrivateAssets>
