@@ -11,6 +11,7 @@ using OpenIddict.Server.AspNetCore;
 
 namespace Oidc.Presentation.Controllers;
 
+[Route("connect")]
 public class AuthorizationController(IOpenIddictApplicationManager applicationManager) : Controller
 {
     [HttpPost("token")]

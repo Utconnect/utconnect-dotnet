@@ -44,10 +44,10 @@ public static class ConfigureServices
                 options.AllowClientCredentialsFlow();
                 options.AllowRefreshTokenFlow();
 
-                options.SetTokenEndpointUris("token");
-                options.SetRevocationEndpointUris("token/revoke");
-                options.SetIntrospectionEndpointUris("token/introspect");
-                options.SetUserinfoEndpointUris("user-info");
+                options.SetTokenEndpointUris("connect/token");
+                options.SetRevocationEndpointUris("connect/token/revoke");
+                options.SetIntrospectionEndpointUris("connect/token/introspect");
+                options.SetUserinfoEndpointUris("connect/user-info");
 
                 options.RegisterScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Claims.Username);
                 options.SetIssuer(new Uri(configuration["Authority"] ?? string.Empty));
