@@ -20,7 +20,8 @@
         <div>
           <calcite-label>
             Email
-            <calcite-input name="Email" scale="l" value="@Model.Email" type="email" suffix-text="✓" disabled></calcite-input>
+            <calcite-input name="Email" scale="l" value="@Model.Email" type="email" suffix-text="✓" disabled>
+            </calcite-input>
           </calcite-label>
         </div>
       }
@@ -39,7 +40,9 @@
       <div>
         <calcite-label>
           @Localizer["NewEmail"]
-          <calcite-input name="Input.NewEmail" scale="l" placeholder="@Localizer["EnterNewEmail"]" autocomplete="email" required></calcite-input>
+          <calcite-input name="Input.NewEmail" type="email" scale="l" placeholder="@Localizer["EnterNewEmail"]"
+                         autocomplete="email" required>
+          </calcite-input>
         </calcite-label>
         <span asp-validation-for="Input!.NewEmail" class="text-danger"></span>
       </div>
