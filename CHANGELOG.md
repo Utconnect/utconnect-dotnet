@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.2...v1.1.3) (2024-07-25)
+
+
+### Bug Fixes
+
+* **identity:** dom elements should use the `autocomplete` attribute correctly ([0dd03a1](https://github.com/Utconnect/utconnect-dotnet/commit/0dd03a130bdbc28d5551d7b0b1a529cc6f3b7b33))
+* **oidc:** specify the `RouteAttribute` ([10abb89](https://github.com/Utconnect/utconnect-dotnet/commit/10abb89913ff75e990c0460f2ca8cb3ac44e3f92))
+
+
+### Improvements
+
+* use `await RunAsync` instead of `Run` ([37d83b1](https://github.com/Utconnect/utconnect-dotnet/commit/37d83b104d0cab66d62ce3f81b2f9c12b7318522))
+
 ### [1.1.2](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.1...v1.1.2) (2024-07-22)
 
 
