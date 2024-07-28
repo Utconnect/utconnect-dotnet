@@ -56,7 +56,22 @@ public class LoginModel(
 
         if (User.Identity is { IsAuthenticated: true })
         {
-            return Redirect(returnUrl);
+            User? user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+                return Page();
+            }
+
+            ExchangeTokenResponse? token = await oidcService.Exchange(user, new CancellationToken());
+
+            if (token != null)
+            {
+                return GetReturnUrlWithToken(returnUrl, token);
+            }
+
+            ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+            return Page();
         }
 
         if (!string.IsNullOrEmpty(ErrorMessage))
@@ -74,7 +89,8 @@ public class LoginModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string? returnUrl = null,
+    public async Task<IActionResult> OnPostAsync(
+        string? returnUrl = null,
         CancellationToken cancellationToken = default)
     {
         returnUrl ??= homeConfig.Value.Url + homeConfig.Value.TokenPath;
@@ -101,8 +117,8 @@ public class LoginModel(
 
             Claim[] claims =
             [
-                ..user.CreateClaims(dateTime.Now), new Claim(ClaimTypes.NameIdentifier,
-                    user.Id.ToString())
+                ..user.CreateClaims(dateTime.Now),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             ];
 
             List<ClaimsIdentity> identities =
@@ -112,19 +128,13 @@ public class LoginModel(
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             ExchangeTokenResponse? token = await oidcService.Exchange(user, cancellationToken);
 
-            if (token == null)
+            if (token != null)
             {
-                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
-                return Page();
+                return GetReturnUrlWithToken(returnUrl, token);
             }
 
-            Uri returnUrlWithToken = new Uri(returnUrl)
-                .AddParameter("access_token", token.AccessToken)
-                .AddParameter("token_type", token.TokenType)
-                .AddParameter("expires_in", token.ExpiresIn.ToString())
-                .AddParameter("refresh_token", token.RefreshToken);
-
-            return Redirect(returnUrlWithToken.ToString());
+            ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+            return Page();
         }
 
         if (result.RequiresTwoFactor)
@@ -140,5 +150,16 @@ public class LoginModel(
 
         ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
         return Page();
+    }
+
+    private RedirectResult GetReturnUrlWithToken(string returnUrl, ExchangeTokenResponse token)
+    {
+        Uri returnUrlWithToken = new Uri(returnUrl)
+            .AddParameter("access_token", token.AccessToken)
+            .AddParameter("token_type", token.TokenType)
+            .AddParameter("expires_in", token.ExpiresIn.ToString())
+            .AddParameter("refresh_token", token.RefreshToken);
+
+        return Redirect(returnUrlWithToken.ToString());
     }
 }
