@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.3...v1.2.0) (2024-07-28)
+
+
+### Features
+
+* **identity/login:** get access token automatically when user is logged in ([8ad8a22](https://github.com/Utconnect/utconnect-dotnet/commit/8ad8a222bf3a14b3bba12b27d2a04e07dc33c2f0))
+
 ### [1.1.3](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.2...v1.1.3) (2024-07-25)
 
 
