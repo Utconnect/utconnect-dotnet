@@ -285,6 +285,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System error! Please try later.
+        /// </summary>
+        internal static string SystemErrorTryLater {
+            get {
+                return ResourceManager.GetString("SystemErrorTryLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Teaching scheduling system, used by teachers.
         /// </summary>
         internal static string TssName {

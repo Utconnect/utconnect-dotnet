@@ -6,8 +6,8 @@ public static class ManageNavPages
 {
     public static readonly List<ManageNavPageItem> Items = [
         new ManageNavPageItem("Profile", "", "file-user"),
-        new ManageNavPageItem("Email", Email, "email-address"),
-        new ManageNavPageItem("Password", ChangePassword, "lock")
+        new ManageNavPageItem("Email", "email", "email-address"),
+        new ManageNavPageItem("Password", "change-password", "lock")
     ];
     
     public static string Index => "Index";

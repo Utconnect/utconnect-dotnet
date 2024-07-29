@@ -285,6 +285,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lỗi hệ thống! Vui lòng thử lại sau.
+        /// </summary>
+        internal static string SystemErrorTryLater {
+            get {
+                return ResourceManager.GetString("SystemErrorTryLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hệ thống quản lý lịch dạy, dùng cho giảng viên.
         /// </summary>
         internal static string TssName {

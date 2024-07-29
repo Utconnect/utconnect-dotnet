@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
 using Shared.Authentication.Services;
+using Shared.Infrastructure.Email;
 using Shared.Services.Abstractions;
 using Shared.Swashbuckle;
 
@@ -15,6 +16,7 @@ public static class ConfigureServices
         services.AddControllersWithViews();
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
+        services.AddEmailService();
 
         services.AddConfiguration<HomeConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);

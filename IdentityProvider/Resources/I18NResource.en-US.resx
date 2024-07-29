@@ -99,4 +99,7 @@
     <data name="ClickHereToLogout" xml:space="preserve">
         <value>Click here to Logout</value>
     </data>
+    <data name="SystemErrorTryLater" xml:space="preserve">
+        <value>System error! Please try later</value>
+    </data>
 </root>

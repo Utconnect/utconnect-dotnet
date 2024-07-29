@@ -99,4 +99,7 @@
     <data name="ClickHereToLogout" xml:space="preserve">
         <value>Nhấn vào đây để Đăng xuất</value>
     </data>
+    <data name="SystemErrorTryLater" xml:space="preserve">
+        <value>Lỗi hệ thống! Vui lòng thử lại sau</value>
+    </data>
 </root>

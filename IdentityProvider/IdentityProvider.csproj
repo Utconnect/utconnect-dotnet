@@ -28,6 +28,7 @@
       <ProjectReference Include="..\Shared.Application.Localization\Shared.Application.Localization.csproj" />
       <ProjectReference Include="..\Shared.Authentication\Shared.Authentication.csproj" />
       <ProjectReference Include="..\Shared.Http\Shared.Http.csproj" />
+      <ProjectReference Include="..\Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj" />
       <ProjectReference Include="..\Shared.Presentation\Shared.Presentation.csproj" />
       <ProjectReference Include="..\Shared.Swashbuckle\Shared.Swashbuckle.csproj" />
     </ItemGroup>

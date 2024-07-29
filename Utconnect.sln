@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Application", "Home.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.MediatR", "Shared.Application.MediatR\Shared.Application.MediatR.csproj", "{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure.Email", "Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj", "{4780CE14-C5B2-4887-8044-A48D96C33701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,7 @@ Global
 		{C02823F5-B77B-4BBB-A675-0AA6DF0E6EDA} = {124983F4-CE8E-46AB-BE6D-A425D2022AF7}
 		{77A7298D-BB08-463D-B9D6-1B95E7B1A920} = {2BB1F401-32E0-4A68-B86B-A165E2954C24}
 		{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6} = {0B4C2991-61C7-4089-9F17-AEFCF7F9D898}
+		{4780CE14-C5B2-4887-8044-A48D96C33701} = {A893F441-D8E5-4AF1-ADEA-56C5FBC521BD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -227,5 +230,9 @@ Global
 		{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4780CE14-C5B2-4887-8044-A48D96C33701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4780CE14-C5B2-4887-8044-A48D96C33701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4780CE14-C5B2-4887-8044-A48D96C33701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4780CE14-C5B2-4887-8044-A48D96C33701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
