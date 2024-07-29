@@ -3,14 +3,20 @@ using System.Text;
 using System.Text.Encodings.Web;
 using IdentityProvider.Domain.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
+using Shared.Infrastructure.Email.Services.Abstract;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
 
-public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+public class ForgotPasswordModel(
+    UserManager<User> userManager,
+    IEmailService emailService,
+    IStringLocalizer<I18NResource> localizer,
+    ILogger<LoginModel> logger
+)
     : PageModel
 {
     [BindProperty]
@@ -23,7 +29,7 @@ public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender ema
         public string? Email { get; init; }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         if (!ModelState.IsValid || Input?.Email == null)
         {
@@ -34,11 +40,10 @@ public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender ema
         if (user == null || !await userManager.IsEmailConfirmedAsync(user))
         {
             // Don't reveal that the user does not exist or is not confirmed
+            logger.LogInformation("Email is not found or not confirmed");
             return RedirectToPage("./ForgotPasswordConfirmation");
         }
 
-        // For more information on how to enable account confirmation and password reset please
-        // visit https://go.microsoft.com/fwlink/?LinkID=532713
         string code = await userManager.GeneratePasswordResetTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
         string? callbackUrl = Url.Page(
@@ -52,11 +57,15 @@ public class ForgotPasswordModel(UserManager<User> userManager, IEmailSender ema
             return Page();
         }
 
-        await emailSender.SendEmailAsync(
-            Input.Email,
-            "Reset Password",
-            $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+        if (await emailService.SendResetPassword(Input.Email, HtmlEncoder.Default.Encode(callbackUrl),
+            cancellationToken))
+        {
+            logger.LogInformation("Email reset password is sent");
+            return RedirectToPage("./ForgotPasswordConfirmation");
+        }
 
-        return RedirectToPage("./ForgotPasswordConfirmation");
+        logger.LogInformation("Cannot send email reset password");
+        ModelState.AddModelError(string.Empty, localizer["SystemErrorTryLater"]);
+        return Page();
     }
 }

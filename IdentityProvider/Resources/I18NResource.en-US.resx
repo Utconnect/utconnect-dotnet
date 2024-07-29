@@ -99,4 +99,22 @@
     <data name="ClickHereToLogout" xml:space="preserve">
         <value>Click here to Logout</value>
     </data>
+    <data name="SystemErrorTryLater" xml:space="preserve">
+        <value>System error! Please try later</value>
+    </data>
+    <data name="ForgotPasswordConfirmation" xml:space="preserve">
+        <value>Forgot password confirmation</value>
+    </data>
+    <data name="ForgotPasswordConfirmationMessage" xml:space="preserve">
+        <value>The reset password email has been sent to your email. Please check out and follow instruction</value>
+    </data>
+    <data name="EnterYourEmail" xml:space="preserve">
+        <value>Enter your email</value>
+    </data>
+    <data name="ResetPassword" xml:space="preserve">
+        <value>Reset password</value>
+    </data>
+    <data name="ConfirmResetPassword" xml:space="preserve">
+        <value>Confirm reset password</value>
+    </data>
 </root>

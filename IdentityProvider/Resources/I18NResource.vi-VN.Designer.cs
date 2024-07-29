@@ -105,6 +105,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xác nhận đặt lại mật khẩu.
+        /// </summary>
+        internal static string ConfirmResetPassword {
+            get {
+                return ResourceManager.GetString("ConfirmResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mật khẩu hiện tại.
         /// </summary>
         internal static string CurrentPassword {
@@ -132,6 +141,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhập email của bạn.
+        /// </summary>
+        internal static string EnterYourEmail {
+            get {
+                return ResourceManager.GetString("EnterYourEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hệ thống quản lý lịch thi, dùng cho giám thị.
         /// </summary>
         internal static string EsmName {
@@ -146,6 +164,24 @@ namespace IdentityProvider.Resources {
         internal static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác nhận quên mật khẩu.
+        /// </summary>
+        internal static string ForgotPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email đặt lại mật khẩu đã được gửi tới email của bạn. Hãy kiểm tra hòm thư và làm theo hướng dẫn.
+        /// </summary>
+        internal static string ForgotPasswordConfirmationMessage {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmationMessage", resourceCulture);
             }
         }
         
@@ -267,6 +303,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đặt lại mật khẩu.
+        /// </summary>
+        internal static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lưu.
         /// </summary>
         internal static string Save {
@@ -281,6 +326,15 @@ namespace IdentityProvider.Resources {
         internal static string SendVerificationEmail {
             get {
                 return ResourceManager.GetString("SendVerificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lỗi hệ thống! Vui lòng thử lại sau.
+        /// </summary>
+        internal static string SystemErrorTryLater {
+            get {
+                return ResourceManager.GetString("SystemErrorTryLater", resourceCulture);
             }
         }
         

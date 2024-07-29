@@ -105,6 +105,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm reset password.
+        /// </summary>
+        internal static string ConfirmResetPassword {
+            get {
+                return ResourceManager.GetString("ConfirmResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current password.
         /// </summary>
         internal static string CurrentPassword {
@@ -132,6 +141,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your email.
+        /// </summary>
+        internal static string EnterYourEmail {
+            get {
+                return ResourceManager.GetString("EnterYourEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Examination scheduling management, used by invigilators.
         /// </summary>
         internal static string EsmName {
@@ -146,6 +164,24 @@ namespace IdentityProvider.Resources {
         internal static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot password confirmation.
+        /// </summary>
+        internal static string ForgotPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reset password email has been sent to your email. Please check out and follow instruction.
+        /// </summary>
+        internal static string ForgotPasswordConfirmationMessage {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmationMessage", resourceCulture);
             }
         }
         
@@ -267,6 +303,15 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset password.
+        /// </summary>
+        internal static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
@@ -281,6 +326,15 @@ namespace IdentityProvider.Resources {
         internal static string SendVerificationEmail {
             get {
                 return ResourceManager.GetString("SendVerificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System error! Please try later.
+        /// </summary>
+        internal static string SystemErrorTryLater {
+            get {
+                return ResourceManager.GetString("SystemErrorTryLater", resourceCulture);
             }
         }
         

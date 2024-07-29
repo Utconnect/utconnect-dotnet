@@ -99,4 +99,22 @@
     <data name="ClickHereToLogout" xml:space="preserve">
         <value>Nhấn vào đây để Đăng xuất</value>
     </data>
+    <data name="SystemErrorTryLater" xml:space="preserve">
+        <value>Lỗi hệ thống! Vui lòng thử lại sau</value>
+    </data>
+    <data name="ForgotPasswordConfirmation" xml:space="preserve">
+        <value>Xác nhận quên mật khẩu</value>
+    </data>
+    <data name="ForgotPasswordConfirmationMessage" xml:space="preserve">
+        <value>Email đặt lại mật khẩu đã được gửi tới email của bạn. Hãy kiểm tra hòm thư và làm theo hướng dẫn</value>
+    </data>
+    <data name="EnterYourEmail" xml:space="preserve">
+        <value>Nhập email của bạn</value>
+    </data>
+    <data name="ResetPassword" xml:space="preserve">
+        <value>Đặt lại mật khẩu</value>
+    </data>
+    <data name="ConfirmResetPassword" xml:space="preserve">
+        <value>Xác nhận đặt lại mật khẩu</value>
+    </data>
 </root>

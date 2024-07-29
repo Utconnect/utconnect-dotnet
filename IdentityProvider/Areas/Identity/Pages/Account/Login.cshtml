@@ -1,8 +1,8 @@
-@page "/Login"
-@inject IStringLocalizer<I18NResource> Localizer
+@page "/login"
 @using IdentityProvider
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
+@inject IStringLocalizer<I18NResource> Localizer
 @model LoginModel
 
 @{
@@ -26,8 +26,8 @@
   <calcite-shell>
     <calcite-panel>
       <main role="main" class="pb-3">
-        <div style="display: flex; justify-content: center" class="mt-3">
-          <div style="width: 50%">
+        <div class="d-flex justify-content-center mt-3">
+          <div class="w-50">
             <section>
               <form id="account" method="post">
                 <h2>@ViewData["Title"]</h2>
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                   <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["ForgotPassword"]</a>
+                    <a asp-page="./ForgotPassword">@Localizer["ForgotPassword"]</a>
                   </p>
                 </div>
               </form>
