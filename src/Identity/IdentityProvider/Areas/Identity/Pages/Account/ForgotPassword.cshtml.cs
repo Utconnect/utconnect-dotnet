@@ -15,6 +15,7 @@ public class ForgotPasswordModel(
     UserManager<User> userManager,
     IEmailService emailService,
     IStringLocalizer<I18NResource> localizer,
+    RedirectService redirectService,
     ILogger<LoginModel> logger
 )
     : PageModel
@@ -27,6 +28,11 @@ public class ForgotPasswordModel(
         [Required]
         [EmailAddress]
         public string? Email { get; init; }
+    }
+
+    public IActionResult OnGet()
+    {
+        return redirectService.GetResultForPublicOnlyPage(User, Redirect, Page);
     }
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)

@@ -28,6 +28,8 @@ public static class ConfigureServices
             IDateTime dateTime = serviceProvider.GetService<IDateTime>()!;
             return new JwtService(jwtConfig, dateTime, jwtKey);
         });
+
+        services.AddTransient<RedirectService>();
     }
 
     public static async Task Configure(this WebApplication app)

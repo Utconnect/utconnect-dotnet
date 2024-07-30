@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
+using Shared.Application.Configuration.Models;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
 
-public class ResetPasswordModel(UserManager<User> userManager) : PageModel
+public class ResetPasswordModel(UserManager<User> userManager, IOptions<HomeConfig> homeConfig) : PageModel
 {
     [BindProperty]
     public InputModel? Input { get; set; }
@@ -36,6 +38,11 @@ public class ResetPasswordModel(UserManager<User> userManager) : PageModel
 
     public IActionResult OnGet(string? code = null)
     {
+        if (User.Identity is { IsAuthenticated: true })
+        {
+            return Redirect(homeConfig.Value.Url);
+        }
+
         if (code == null)
         {
             return BadRequest("A code must be supplied for password reset.");

@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;
 
 [AllowAnonymous]
-public class ForgotPasswordConfirmation : PageModel
+public class ForgotPasswordConfirmation(RedirectService redirectService) : PageModel
 {
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        // Ignore
+        return redirectService.GetResultForPublicOnlyPage(User, Redirect, Page);
     }
 }
