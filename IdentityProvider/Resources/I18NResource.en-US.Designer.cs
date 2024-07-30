@@ -312,6 +312,24 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset password confirmation.
+        /// </summary>
+        internal static string ResetPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("ResetPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been reset. Please &lt;a href=&quot;{0}&quot;&gt;click here to log in&lt;/a&gt;..
+        /// </summary>
+        internal static string ResetPasswordConfirmationMessage {
+            get {
+                return ResourceManager.GetString("ResetPasswordConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {

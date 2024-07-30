@@ -117,4 +117,10 @@
     <data name="ConfirmResetPassword" xml:space="preserve">
         <value>Confirm reset password</value>
     </data>
+    <data name="ResetPasswordConfirmation" xml:space="preserve">
+        <value>Reset password confirmation</value>
+    </data>
+    <data name="ResetPasswordConfirmationMessage" xml:space="preserve">
+        <value>Your password has been reset. Please &lt;a href="{0}"&gt;click here to log in&lt;/a&gt;.</value>
+    </data>
 </root>

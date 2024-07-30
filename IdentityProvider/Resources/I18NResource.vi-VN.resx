@@ -117,4 +117,10 @@
     <data name="ConfirmResetPassword" xml:space="preserve">
         <value>Xác nhận đặt lại mật khẩu</value>
     </data>
+    <data name="ResetPasswordConfirmation" xml:space="preserve">
+        <value>Xác nhận đặt lại mật khẩu</value>
+    </data>
+    <data name="ResetPasswordConfirmationMessage" xml:space="preserve">
+        <value>Mật khẩu của bạn đã được đặt lại. Vui lòng &lt;a href="{0}"&gt;nhấn vào đây để đăng nhập&lt;/a&gt;.</value>
+    </data>
 </root>

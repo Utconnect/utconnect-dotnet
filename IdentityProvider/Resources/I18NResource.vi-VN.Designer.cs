@@ -312,6 +312,24 @@ namespace IdentityProvider.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xác nhận đặt lại mật khẩu.
+        /// </summary>
+        internal static string ResetPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("ResetPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu của bạn đã được đặt lại. Vui lòng &lt;a href=&quot;{0}&quot;&gt;nhấn vào đây để đăng nhập&lt;/a&gt;..
+        /// </summary>
+        internal static string ResetPasswordConfirmationMessage {
+            get {
+                return ResourceManager.GetString("ResetPasswordConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lưu.
         /// </summary>
         internal static string Save {
