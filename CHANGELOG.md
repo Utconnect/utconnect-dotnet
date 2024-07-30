@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.2.0...v1.3.0) (2024-07-30)
+
+
+### Features
+
+* **identity:** forgot password ([1d61271](https://github.com/Utconnect/utconnect-dotnet/commit/1d61271e39cbd40376662b4c83072c775575feb9))
+* **identity:** redirect to home page if logged-in user try to access public-only pages ([b4ff2b3](https://github.com/Utconnect/utconnect-dotnet/commit/b4ff2b33b6fad58f1035849766a0e9bde85e2966))
+* **identity:** reset password ([df6f294](https://github.com/Utconnect/utconnect-dotnet/commit/df6f2948a7521016919d2cd3385fc8918c07587e))
+
 ## [1.2.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.1.3...v1.2.0) (2024-07-28)
 
 
