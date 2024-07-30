@@ -6,7 +6,7 @@ services:
       - "5000:8080"
     build:
       context: .
-      dockerfile: Gateway.Presentation/Dockerfile
+      dockerfile: src/Gateway/Gateway.Presentation/Dockerfile
     networks:
       - backend
     environment:
@@ -19,7 +19,7 @@ services:
       - "5100:8080"
     build:
       context: .
-      dockerfile: IdentityProvider/Dockerfile
+      dockerfile: src/Identity/IdentityProvider/Dockerfile
     depends_on:
       identity_provider_db:
         condition: service_healthy
@@ -34,7 +34,7 @@ services:
     container_name: home
     build:
       context: .
-      dockerfile: Home.Presentation/Dockerfile
+      dockerfile: src/Home/Home.Presentation/Dockerfile
     networks:
       - backend
     environment:
@@ -47,7 +47,7 @@ services:
       - "5101:8080"
     build:
       context: .
-      dockerfile: Oidc.Presentation/Dockerfile
+      dockerfile: src/Oidc/Oidc.Presentation/Dockerfile
     depends_on:
       oidc_db:
         condition: service_healthy

@@ -1,0 +1,59 @@
+@page "/manage/email"
+@inject IStringLocalizer<I18NResource> Localizer
+@using IdentityProvider
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@model EmailModel
+@{
+  ViewData["Title"] = Localizer["ManageEmail"];
+  ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage"/>
+<div>
+  <div class="col-md-6">
+    <form id="email-form" method="post">
+      <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+      @if (Model.IsEmailConfirmed == true)
+      {
+        <div>
+          <calcite-label>
+            Email
+            <calcite-input name="Email" scale="l" value="@Model.Email" type="email" suffix-text="✓" disabled>
+            </calcite-input>
+          </calcite-label>
+        </div>
+      }
+      else
+      {
+        <div class="mb-2">
+          <calcite-label>
+            Email
+            <calcite-input name="Email" scale="l" value="@Model.Email" disabled></calcite-input>
+          </calcite-label>
+          <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link p-0">
+            @Localizer["SendVerificationEmail"]
+          </button>
+        </div>
+      }
+      <div>
+        <calcite-label>
+          @Localizer["NewEmail"]
+          <calcite-input name="Input.NewEmail" type="email" scale="l" placeholder="@Localizer["EnterNewEmail"]"
+                         autocomplete="email" required>
+          </calcite-input>
+        </calcite-label>
+        <span asp-validation-for="Input!.NewEmail" class="text-danger"></span>
+      </div>
+      <calcite-button scale="l" width="full" type="submit" form="change-email">
+        @Localizer["ChangeEmail"]
+      </calcite-button>
+    </form>
+    <form id="change-email" action="/auth/manage/Email?handler=ChangeEmail" method="post"></form>
+  </div>
+</div>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial"/>
+}

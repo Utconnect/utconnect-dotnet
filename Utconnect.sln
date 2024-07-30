@@ -2,83 +2,82 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{65A44FEE-B844-411B-A335-9296825682D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider", "IdentityProvider\IdentityProvider.csproj", "{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider", "src\Identity\IdentityProvider\IdentityProvider.csproj", "{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92351B50-355F-4063-9927-6B9BBE97C9E0}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Infrastructure", "IdentityProvider.Infrastructure\IdentityProvider.Infrastructure.csproj", "{735505EF-AE6B-4F87-89DF-3EBD5C5AB07F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Infrastructure", "src\Identity\IdentityProvider.Infrastructure\IdentityProvider.Infrastructure.csproj", "{735505EF-AE6B-4F87-89DF-3EBD5C5AB07F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0EBE1F96-F6A9-4BEC-AFF5-EE6B7B4B3DEE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared.Infrastructure", "Shared.Infrastructure", "{A893F441-D8E5-4AF1-ADEA-56C5FBC521BD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared.Infrastructure", "src\Shared\Shared.Infrastructure", "{A893F441-D8E5-4AF1-ADEA-56C5FBC521BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure.Db", "Shared.Infrastructure.Db\Shared.Infrastructure.Db.csproj", "{F16BFC0C-31C8-43BF-9958-E515F9842D27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure.Db", "src\Shared\Shared.Infrastructure.Db\Shared.Infrastructure.Db.csproj", "{F16BFC0C-31C8-43BF-9958-E515F9842D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.UtconnectIdentity", "Shared.UtconnectIdentity\Shared.UtconnectIdentity.csproj", "{7B709644-D557-47FA-BB56-0C4EFF5DCEFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.UtconnectIdentity", "src\Shared\Shared.UtconnectIdentity\Shared.UtconnectIdentity.csproj", "{7B709644-D557-47FA-BB56-0C4EFF5DCEFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Logging", "Shared.Logging\Shared.Logging.csproj", "{F06CF13A-B657-4745-ACB7-9833DADB39AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Logging", "src\Shared\Shared.Logging\Shared.Logging.csproj", "{F06CF13A-B657-4745-ACB7-9833DADB39AF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared.Application", "Shared.Application", "{0B4C2991-61C7-4089-9F17-AEFCF7F9D898}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared.Application", "src\Shared\Shared.Application", "{0B4C2991-61C7-4089-9F17-AEFCF7F9D898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Extensions", "Shared.Application.Extensions\Shared.Application.Extensions.csproj", "{40A01CA2-8D70-4EE8-B4B2-C30BFB3BD29F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Extensions", "src\Shared\Shared.Application.Extensions\Shared.Application.Extensions.csproj", "{40A01CA2-8D70-4EE8-B4B2-C30BFB3BD29F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Exceptions", "Shared.Application.Exceptions\Shared.Application.Exceptions.csproj", "{66E44767-86CF-4239-8B91-97006BFED959}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Exceptions", "src\Shared\Shared.Application.Exceptions\Shared.Application.Exceptions.csproj", "{66E44767-86CF-4239-8B91-97006BFED959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Swashbuckle", "Shared.Swashbuckle\Shared.Swashbuckle.csproj", "{237190EC-6BCD-434F-B78D-A8F8262E8A3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Swashbuckle", "src\Shared\Shared.Swashbuckle\Shared.Swashbuckle.csproj", "{237190EC-6BCD-434F-B78D-A8F8262E8A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Presentation", "Shared.Presentation\Shared.Presentation.csproj", "{E49D2128-61C0-4D34-9734-D668668EABD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Presentation", "src\Shared\Shared.Presentation\Shared.Presentation.csproj", "{E49D2128-61C0-4D34-9734-D668668EABD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Domain", "IdentityProvider.Domain\IdentityProvider.Domain.csproj", "{E90B1048-E84E-413E-87F1-476ACA7F8823}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Domain", "src\Identity\IdentityProvider.Domain\IdentityProvider.Domain.csproj", "{E90B1048-E84E-413E-87F1-476ACA7F8823}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{41EC9A14-126E-4989-8880-5B4CE46FAB13}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "src\Gateway", "{41EC9A14-126E-4989-8880-5B4CE46FAB13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Presentation", "Gateway.Presentation\Gateway.Presentation.csproj", "{737522E6-5D20-442C-B45A-DB2298E7C4F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Presentation", "src\Gateway\Gateway.Presentation\Gateway.Presentation.csproj", "{737522E6-5D20-442C-B45A-DB2298E7C4F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Esm", "Esm", "{22015F34-2832-4360-90CF-7F9AA4592FDA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Esm", "src\Esm", "{22015F34-2832-4360-90CF-7F9AA4592FDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Domain", "Esm.Domain\Esm.Domain.csproj", "{09909B00-F301-47C1-A41B-24449C449AFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Domain", "src\Esm\Esm.Domain\Esm.Domain.csproj", "{09909B00-F301-47C1-A41B-24449C449AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Infrastructure", "Esm.Infrastructure\Esm.Infrastructure.csproj", "{1B029358-3E67-4D53-8507-1D099F057BA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Infrastructure", "src\Esm\Esm.Infrastructure\Esm.Infrastructure.csproj", "{1B029358-3E67-4D53-8507-1D099F057BA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Domain", "Shared.Domain\Shared.Domain.csproj", "{B8177584-DE10-437A-ACE5-F5925A2CF0EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Domain", "src\Shared\Shared.Domain\Shared.Domain.csproj", "{B8177584-DE10-437A-ACE5-F5925A2CF0EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Presentation", "Esm.Presentation\Esm.Presentation.csproj", "{CADD6A73-76F5-4075-A896-F854CED99E47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esm.Presentation", "src\Esm\Esm.Presentation\Esm.Presentation.csproj", "{CADD6A73-76F5-4075-A896-F854CED99E47}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Oidc", "Oidc", "{124983F4-CE8E-46AB-BE6D-A425D2022AF7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Oidc", "src\Oidc", "{124983F4-CE8E-46AB-BE6D-A425D2022AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Presentation", "Oidc.Presentation\Oidc.Presentation.csproj", "{EF9AAD72-0410-44D4-BA42-79D5D7D57C8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Presentation", "src\Oidc\Oidc.Presentation\Oidc.Presentation.csproj", "{EF9AAD72-0410-44D4-BA42-79D5D7D57C8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Infrastructure", "Oidc.Infrastructure\Oidc.Infrastructure.csproj", "{02BE477B-ABAE-4F0D-9450-0811D99605DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Infrastructure", "src\Oidc\Oidc.Infrastructure\Oidc.Infrastructure.csproj", "{02BE477B-ABAE-4F0D-9450-0811D99605DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Localization", "Shared.Application.Localization\Shared.Application.Localization.csproj", "{B443D3D5-B210-4A0E-8E59-AE77539D495A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Localization", "src\Shared\Shared.Application.Localization\Shared.Application.Localization.csproj", "{B443D3D5-B210-4A0E-8E59-AE77539D495A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Home", "Home", "{2BB1F401-32E0-4A68-B86B-A165E2954C24}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Home", "src\Home", "{2BB1F401-32E0-4A68-B86B-A165E2954C24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Presentation", "Home.Presentation\Home.Presentation.csproj", "{55B59BE9-C7FD-4C08-8EC8-4E744923EE40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Presentation", "src\Home\Home.Presentation\Home.Presentation.csproj", "{55B59BE9-C7FD-4C08-8EC8-4E744923EE40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Configuration", "Shared.Application.Configuration\Shared.Application.Configuration.csproj", "{9244ACE7-8BE5-426D-A25F-171906157EAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Configuration", "src\Shared\Shared.Application.Configuration\Shared.Application.Configuration.csproj", "{9244ACE7-8BE5-426D-A25F-171906157EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Application", "IdentityProvider.Application\IdentityProvider.Application.csproj", "{683BBC9E-09AC-4850-8D3B-85C3E6771A44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityProvider.Application", "src\Identity\IdentityProvider.Application\IdentityProvider.Application.csproj", "{683BBC9E-09AC-4850-8D3B-85C3E6771A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Domain", "Oidc.Domain\Oidc.Domain.csproj", "{A3526A62-E759-4C55-866D-372AB2CF4CAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Domain", "src\Oidc\Oidc.Domain\Oidc.Domain.csproj", "{A3526A62-E759-4C55-866D-372AB2CF4CAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Http", "Shared.Http\Shared.Http.csproj", "{B06D20C2-F2DD-4297-AF44-0FC1FB035556}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Http", "src\Shared\Shared.Http\Shared.Http.csproj", "{B06D20C2-F2DD-4297-AF44-0FC1FB035556}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Authentication", "Shared.Authentication\Shared.Authentication.csproj", "{B36DA831-6A53-4735-BC6A-704EFA0870EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Authentication", "src\Shared\Shared.Authentication\Shared.Authentication.csproj", "{B36DA831-6A53-4735-BC6A-704EFA0870EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Services", "Shared.Services\Shared.Services.csproj", "{D845AE47-6089-4D53-B0AB-2191B5E7483D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Services", "src\Shared\Shared.Services\Shared.Services.csproj", "{D845AE47-6089-4D53-B0AB-2191B5E7483D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Application", "Oidc.Application\Oidc.Application.csproj", "{C02823F5-B77B-4BBB-A675-0AA6DF0E6EDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oidc.Application", "src\Oidc\Oidc.Application\Oidc.Application.csproj", "{C02823F5-B77B-4BBB-A675-0AA6DF0E6EDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Application", "Home.Application\Home.Application.csproj", "{77A7298D-BB08-463D-B9D6-1B95E7B1A920}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Application", "src\Home\Home.Application\Home.Application.csproj", "{77A7298D-BB08-463D-B9D6-1B95E7B1A920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.MediatR", "Shared.Application.MediatR\Shared.Application.MediatR.csproj", "{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.MediatR", "src\Shared\Shared.Application.MediatR\Shared.Application.MediatR.csproj", "{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure.Email", "Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj", "{4780CE14-C5B2-4887-8044-A48D96C33701}"
-EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure.Email", "src\Shared\Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj", "{4780CE14-C5B2-4887-8044-A48D96C33701}"
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +115,7 @@ Global
 		{77A7298D-BB08-463D-B9D6-1B95E7B1A920} = {2BB1F401-32E0-4A68-B86B-A165E2954C24}
 		{6FF02ADD-66D8-4607-88FE-4B1AEBD8C4E6} = {0B4C2991-61C7-4089-9F17-AEFCF7F9D898}
 		{4780CE14-C5B2-4887-8044-A48D96C33701} = {A893F441-D8E5-4AF1-ADEA-56C5FBC521BD}
+		{C18E1CB6-D7D8-4BA1-A11D-A3DE284F10B1} = {0EBE1F96-F6A9-4BEC-AFF5-EE6B7B4B3DEE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6BC36141-3CCE-4F12-A7DE-B1294BA39CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -234,5 +234,9 @@ Global
 		{4780CE14-C5B2-4887-8044-A48D96C33701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4780CE14-C5B2-4887-8044-A48D96C33701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4780CE14-C5B2-4887-8044-A48D96C33701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C18E1CB6-D7D8-4BA1-A11D-A3DE284F10B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C18E1CB6-D7D8-4BA1-A11D-A3DE284F10B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C18E1CB6-D7D8-4BA1-A11D-A3DE284F10B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C18E1CB6-D7D8-4BA1-A11D-A3DE284F10B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

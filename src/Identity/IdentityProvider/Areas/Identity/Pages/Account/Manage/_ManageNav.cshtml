@@ -1,0 +1,16 @@
+@using IdentityProvider
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<I18NResource> Localizer
+
+<calcite-shell-panel slot="panel-start">
+  <calcite-panel>
+    <calcite-menu layout="vertical">
+      @foreach (ManageNavPages.ManageNavPageItem item in ManageNavPages.Items)
+      {
+        <calcite-menu-item icon-start="@item.Icon" text="@Localizer[item.Name]" active="@ManageNavPages.IsActivePageNav(ViewContext, item.Url)"
+                           href="/manage/@item.Url">
+        </calcite-menu-item>
+      }
+    </calcite-menu>
+  </calcite-panel>
+</calcite-shell-panel>

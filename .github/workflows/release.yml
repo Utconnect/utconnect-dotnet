@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         project:
-          - { name: IdentityProvider, image: identity_provider }
-          - { name: Gateway.Presentation, image: gateway }
-          - { name: Home.Presentation, image: home }
-          - { name: Oidc.Presentation, image: oidc }
+          - { name: Identity/IdentityProvider, image: identity_provider }
+          - { name: Gateway/Gateway.Presentation, image: gateway }
+          - { name: Home/Home.Presentation, image: home }
+          - { name: Oidc/Oidc.Presentation, image: oidc }
 
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
           IMAGE_NAME=${{ matrix.project.image }}
           PROJECT_NAME=${{ matrix.project.name }}
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${IMAGE_NAME}
-          docker build -f ./$PROJECT_NAME/Dockerfile -t $IMAGE .
+          docker build -f ./src/$PROJECT_NAME/Dockerfile -t $IMAGE .
           docker push $IMAGE
 
   release:

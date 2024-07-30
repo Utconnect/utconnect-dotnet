@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+      <PackageReference Include="RestSharp" Version="111.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
+      <ProjectReference Include="..\..\Oidc\Oidc.Domain\Oidc.Domain.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Authentication\Shared.Authentication.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Services\Shared.Services.csproj" />
+    </ItemGroup>
+
+</Project>
