@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Elsa" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.Api.Client" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.CSharp" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.EntityFrameworkCore" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.EntityFrameworkCore.PostgreSql" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.Identity" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.Workflows.Api" Version="3.2.0-rc3" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.Authentication\Shared.Authentication.csproj" />
+      <ProjectReference Include="..\Jarvis.Domain\Jarvis.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

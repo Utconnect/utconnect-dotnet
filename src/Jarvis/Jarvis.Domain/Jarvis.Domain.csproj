@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Elsa.Http" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.Workflows.Core" Version="3.2.0-rc3" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Elsa.Http">
+        <HintPath>C:\Users\Admin\.nuget\packages\elsa.http\3.1.3\lib\net8.0\Elsa.Http.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Presentation\Shared.Presentation.csproj" />
+    </ItemGroup>
+
+</Project>

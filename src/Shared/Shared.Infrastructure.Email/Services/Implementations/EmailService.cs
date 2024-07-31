@@ -6,14 +6,22 @@ using Shared.Infrastructure.Email.Services.Abstract;
 
 namespace Shared.Infrastructure.Email.Services.Implementations;
 
-public class EmailService(IOptions<EmailConfig> emailConfig) : IEmailService
+internal class EmailService(IOptions<EmailConfig> emailConfig) : IEmailService
 {
     private const string ResetPassword = "RESET_PASSWORD";
+    private const string CreateTeacher = "CREATE_TEACHER";
 
     public async Task<bool> SendResetPassword(string email, string callbackUrl, CancellationToken cancellationToken)
     {
-        return await SendAsync(email, ResetPassword, new Dictionary<string, string> { { "callbackUrl", callbackUrl } },
-            cancellationToken);
+        Dictionary<string, string> placeholders = new() { { "callbackUrl", callbackUrl } };
+        return await SendAsync(email, ResetPassword, placeholders, cancellationToken);
+    }
+
+    public async Task<bool> SendCreateTeacher(string email, string name, string userName,
+        CancellationToken cancellationToken)
+    {
+        Dictionary<string, string> placeholders = new() { { "name", name }, { "userName", userName } };
+        return await SendAsync(email, CreateTeacher, placeholders, cancellationToken);
     }
 
     private async Task<bool> SendAsync(

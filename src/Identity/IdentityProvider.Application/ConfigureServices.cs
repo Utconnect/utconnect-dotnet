@@ -10,7 +10,6 @@ public static class ConfigureServices
 {
     public static void AddIdentityApplicationServices(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         ValidatorOptions.Global.LanguageManager.Enabled = false;
         services.AddUtconnectMediatR(Assembly.GetExecutingAssembly());
         services.AddHelpers();
