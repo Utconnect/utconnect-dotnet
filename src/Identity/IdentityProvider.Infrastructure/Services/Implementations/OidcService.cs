@@ -1,5 +1,5 @@
-﻿using IdentityProvider.Application.Services.Abstract;
-using IdentityProvider.Domain.Models;
+﻿using IdentityProvider.Domain.Models;
+using IdentityProvider.Infrastructure.Services.Abstract;
 using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
 using RestSharp;
@@ -8,7 +8,7 @@ using Shared.Application.Configuration.Models;
 using Shared.Authentication.Models;
 using Shared.Authentication.Services;
 
-namespace IdentityProvider.Application.Services.Implementations;
+namespace IdentityProvider.Infrastructure.Services.Implementations;
 
 public class OidcService(IJwtService jwtService, IOptions<OidcConfig> oidcConfig) : IOidcService
 {

@@ -9,9 +9,12 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+      <PackageReference Include="RestSharp" Version="111.4.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Oidc\Oidc.Domain\Oidc.Domain.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Application.Localization\Shared.Application.Localization.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Authentication\Shared.Authentication.csproj" />

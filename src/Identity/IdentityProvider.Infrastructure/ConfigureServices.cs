@@ -1,5 +1,7 @@
 using IdentityProvider.Domain.Models;
 using IdentityProvider.Infrastructure.Persistence;
+using IdentityProvider.Infrastructure.Services.Abstract;
+using IdentityProvider.Infrastructure.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -80,5 +82,6 @@ public static class ConfigureServices
             .AddCookie(options => { options.LoginPath = "/Login"; });
 
         services.AddTransient<IIdentityService, IdentityService>();
+        services.AddTransient<IOidcService, OidcService>();
     }
 }
