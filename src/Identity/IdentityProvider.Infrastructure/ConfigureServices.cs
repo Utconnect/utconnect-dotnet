@@ -18,7 +18,7 @@ namespace IdentityProvider.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static async Task AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static async Task AddIdentityInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 

@@ -1,5 +1,4 @@
 using System.Net;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
@@ -24,13 +23,6 @@ public class HttpResponseExceptionFilter(IHostEnvironment hostEnvironment) : IEx
             case InnerException innerException:
                 exceptionToHandle = innerException.WrapException();
                 break;
-            case ValidationException validationException:
-            {
-                IEnumerable<Error> errorResponse = validationException.Errors
-                    .Select(e => new Error(e.PropertyName, e.ErrorMessage));
-                exceptionToHandle = new HttpException(HttpStatusCode.BadRequest, errorResponse);
-                break;
-            }
             default:
             {
                 List<Error> errorResponse = [new Error(HttpStatusCode.InternalServerError, exception.Message)];

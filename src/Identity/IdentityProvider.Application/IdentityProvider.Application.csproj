@@ -7,7 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.Application.MediatR\Shared.Application.MediatR.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Helper\Shared.Helper.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Presentation\Shared.Presentation.csproj" />
+      <ProjectReference Include="..\IdentityProvider.Domain\IdentityProvider.Domain.csproj" />
     </ItemGroup>
 
 </Project>

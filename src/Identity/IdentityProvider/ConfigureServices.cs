@@ -4,6 +4,8 @@ using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
 using Shared.Authentication.Services;
 using Shared.Infrastructure.Email;
+using Shared.Presentation.Filters;
+using Shared.Services;
 using Shared.Services.Abstractions;
 using Shared.Swashbuckle;
 
@@ -11,7 +13,7 @@ namespace IdentityProvider;
 
 public static class ConfigureServices
 {
-    public static async Task AddProviderServices(this IServiceCollection services, IConfiguration configuration)
+    public static async Task AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews();
         services.AddUtconnectSwashbuckle();
@@ -20,6 +22,7 @@ public static class ConfigureServices
 
         services.AddConfiguration<HomeConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);
+        services.AddDateTime();
 
         string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
         IConfigurationSection jwtConfig = configuration.GetSection("OidcConfig:Jwt");
@@ -30,6 +33,8 @@ public static class ConfigureServices
         });
 
         services.AddTransient<RedirectService>();
+        services.AddScoped<HttpResponseExceptionFilter>();
+        services.AddHealthChecks();
     }
 
     public static async Task Configure(this WebApplication app)
@@ -57,6 +62,8 @@ public static class ConfigureServices
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
         app.UseRouting();
+        app.MapControllers();
+        app.MapHealthChecks("/api/health");
 
         app.UseAuthentication();
         app.UseAuthorization();

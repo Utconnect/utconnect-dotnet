@@ -72,7 +72,7 @@ public class IdentityProviderContextInitializer(
             return true;
         }
 
-        int errorIdx = 0;
+        var errorIdx = 0;
         foreach (IdentityError error in result.Errors)
         {
             logger.LogError(

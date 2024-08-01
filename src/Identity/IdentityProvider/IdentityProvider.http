@@ -1,0 +1,10 @@
+@Identity.Presentation_HostAddress = http://localhost:5100
+
+POST {{Identity.Presentation_HostAddress}}/api/user
+Accept: application/json
+
+{
+  "name": "John Joan Doe"
+}
+
+###

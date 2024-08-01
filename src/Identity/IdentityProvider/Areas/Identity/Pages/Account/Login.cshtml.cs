@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using IdentityProvider.Application.Services.Abstract;
 using IdentityProvider.Domain.Models;
+using IdentityProvider.Infrastructure.Services.Abstract;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -133,6 +133,7 @@ public class LoginModel(
                 return GetReturnUrlWithToken(returnUrl, token);
             }
 
+            logger.LogError("Cannot get token");
             ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
             return Page();
         }

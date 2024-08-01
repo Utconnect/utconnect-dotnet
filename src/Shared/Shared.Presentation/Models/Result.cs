@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+using FluentValidation.Results;
 using Shared.Application.Exceptions.Models;
 
 namespace Shared.Presentation.Models;
@@ -9,7 +9,7 @@ public class Result<T>
     public bool Success { get; set; }
     public IEnumerable<Error>? Errors { get; set; }
 
-    public static Result<T> Get(T data)
+    public static Result<T> Succeed(T data)
     {
         return new Result<T>
         {
@@ -18,15 +18,45 @@ public class Result<T>
         };
     }
 
-    public static Result<bool> Failure(IEnumerable<IdentityError> errors)
+    public static Result<bool> Failure(Error error)
     {
         return new Result<bool>
         {
             Success = false,
             Data = false,
-            Errors = errors.Select(e => new Error(e.Code, e.Description))
+            Errors = new List<Error> { error }
         };
     }
 }
 
-public abstract class Result : Result<bool>;
+public class Result : Result<bool>
+{
+    public static Result Succeed()
+    {
+        return new Result
+        {
+            Success = true,
+            Data = true
+        };
+    }
+
+    public new static Result Failure(Error error)
+    {
+        return new Result
+        {
+            Success = false,
+            Data = false,
+            Errors = new List<Error> { error }
+        };
+    }
+
+    public static Result FromFluentValidationFailures(List<ValidationFailure> failures)
+    {
+        return new Result
+        {
+            Success = false,
+            Data = false,
+            Errors = failures.Select(f => new Error(f.PropertyName, f.ErrorMessage))
+        };
+    }
+}
