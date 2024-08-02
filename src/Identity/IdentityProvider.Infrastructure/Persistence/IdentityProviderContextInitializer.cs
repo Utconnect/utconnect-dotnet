@@ -11,6 +11,9 @@ public class IdentityProviderContextInitializer(
     UserManager<User> userManager,
     RoleManager<Role> roleManager)
 {
+    private const string RoleAdmin = "SystemAdmin";
+    private const string RoleTeacher = "Teacher";
+
     public async Task InitializeAsync()
     {
         try
@@ -27,7 +30,8 @@ public class IdentityProviderContextInitializer(
     {
         try
         {
-            await TryPrePopulateAsync();
+            await TryPrePopulateAdminAsync();
+            await TryPrePopulateTeacherAsync();
         }
         catch (Exception ex)
         {
@@ -35,33 +39,35 @@ public class IdentityProviderContextInitializer(
         }
     }
 
-    private async Task TryPrePopulateAsync()
+    #region PrePopulateAdmin
+
+    private async Task TryPrePopulateAdminAsync()
     {
         if (await userManager.Users.AnyAsync())
         {
             return;
         }
 
-        Role systemAdminRole = new("SystemAdmin");
-        bool addRoleSuccess = await TryAddRole(systemAdminRole);
+        Role systemAdminRole = new(RoleAdmin);
+        bool addRoleSuccess = await TryAddAdminRole(systemAdminRole);
         if (!addRoleSuccess)
         {
             return;
         }
 
         User systemAdminUser = new("sysadmin", "System Admin");
-        bool addUserSuccess = await TryAddUser(systemAdminUser);
+        bool addUserSuccess = await TryAddAdminUser(systemAdminUser);
         if (!addUserSuccess)
         {
             return;
         }
 
-        await TryAddUserToRole(systemAdminUser, systemAdminRole);
+        await TryAddAdminUserToRole(systemAdminUser, systemAdminRole);
     }
 
-    private async Task<bool> TryAddRole(Role role)
+    private async Task<bool> TryAddAdminRole(Role role)
     {
-        if (await roleManager.Roles.AnyAsync())
+        if (await roleManager.FindByNameAsync(RoleAdmin) != null)
         {
             return true;
         }
@@ -72,7 +78,7 @@ public class IdentityProviderContextInitializer(
             return true;
         }
 
-        var errorIdx = 0;
+        int errorIdx = 0;
         foreach (IdentityError error in result.Errors)
         {
             logger.LogError(
@@ -86,7 +92,7 @@ public class IdentityProviderContextInitializer(
         return false;
     }
 
-    private async Task<bool> TryAddUser(User systemAdminUser)
+    private async Task<bool> TryAddAdminUser(User systemAdminUser)
     {
         IdentityResult result = await userManager.CreateAsync(systemAdminUser, "sysadmin");
         if (result.Succeeded)
@@ -108,7 +114,7 @@ public class IdentityProviderContextInitializer(
         return false;
     }
 
-    private async Task TryAddUserToRole(User systemAdminUser, Role systemAdminRole)
+    private async Task TryAddAdminUserToRole(User systemAdminUser, Role systemAdminRole)
     {
         IdentityResult result = await userManager.AddToRoleAsync(systemAdminUser, systemAdminRole.Name!);
         if (result.Succeeded)
@@ -127,4 +133,41 @@ public class IdentityProviderContextInitializer(
             errorIdx++;
         }
     }
+
+    #endregion
+
+    #region PrePopulateTeacher
+
+    private async Task TryPrePopulateTeacherAsync()
+    {
+        Role teacherRole = new(RoleTeacher);
+        await TryAddTeacherRole(teacherRole);
+    }
+
+    private async Task TryAddTeacherRole(Role role)
+    {
+        if (await roleManager.FindByNameAsync(RoleTeacher) != null)
+        {
+            return;
+        }
+
+        IdentityResult result = await roleManager.CreateAsync(role);
+        if (result.Succeeded)
+        {
+            return;
+        }
+
+        int errorIdx = 0;
+        foreach (IdentityError error in result.Errors)
+        {
+            logger.LogError(
+                "Pre-populating role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                errorIdx,
+                error.Code,
+                error.Description);
+            errorIdx++;
+        }
+    }
+
+    #endregion
 }
