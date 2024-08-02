@@ -20,7 +20,7 @@ public static class ConfigureServices
         {
             OidcDbContextInitializer initializer = scope.ServiceProvider.GetRequiredService<OidcDbContextInitializer>();
             await initializer.InitializeAsync();
-            await initializer.SeedAsync();
+            await initializer.PrePopulateAsync();
         }
 
         app.UseRouting();

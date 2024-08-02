@@ -12,7 +12,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // Initialise and seed database
+    // Initialise and pre-populate database
     using IServiceScope scope = app.Services.CreateScope();
     EsmDbContextInitializer initializer = scope.ServiceProvider.GetRequiredService<EsmDbContextInitializer>();
     await initializer.InitializeAsync();

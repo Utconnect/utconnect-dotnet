@@ -22,20 +22,20 @@ public class OidcDbContextInitializer(
         }
     }
 
-    public async Task SeedAsync()
+    public async Task PrePopulateAsync()
     {
         try
         {
-            await SeedScopes();
-            await SeedInternalApps();
+            await PrePopulateScopes();
+            await PrePopulateInternalApps();
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An error occurred while seeding the database");
+            logger.LogError(ex, "An error occurred while pre-populating the database");
         }
     }
 
-    private async ValueTask SeedScopes()
+    private async ValueTask PrePopulateScopes()
     {
         OpenIddictScopeDescriptor scopeDescriptor = new()
         {
@@ -47,17 +47,17 @@ public class OidcDbContextInitializer(
 
         if (scopeInstance == null)
         {
-            logger.LogInformation("Creating seed scope");
+            logger.LogInformation("Creating pre-populating scope");
             await scopeManager.CreateAsync(scopeDescriptor);
         }
         else
         {
-            logger.LogInformation("Updating seed scope");
+            logger.LogInformation("Updating pre-populating scope");
             await scopeManager.UpdateAsync(scopeInstance, scopeDescriptor);
         }
     }
 
-    private async ValueTask SeedInternalApps()
+    private async ValueTask PrePopulateInternalApps()
     {
         OpenIddictApplicationDescriptor appDescriptor = new()
         {
@@ -82,12 +82,12 @@ public class OidcDbContextInitializer(
 
         if (client == null)
         {
-            logger.LogInformation("Creating seed app");
+            logger.LogInformation("Creating pre-populating app");
             await applicationManager.CreateAsync(appDescriptor);
         }
         else
         {
-            logger.LogInformation("Updating seed app");
+            logger.LogInformation("Updating pre-populating app");
             await applicationManager.UpdateAsync(client, appDescriptor);
         }
     }

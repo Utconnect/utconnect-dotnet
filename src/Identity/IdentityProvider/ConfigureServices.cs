@@ -54,7 +54,7 @@ public static class ConfigureServices
             IdentityProviderContextInitializer initializer =
                 scope.ServiceProvider.GetRequiredService<IdentityProviderContextInitializer>();
             await initializer.InitializeAsync();
-            await initializer.SeedAsync();
+            await initializer.PrePopulateAsync();
         }
 
         app.UseStaticFiles();

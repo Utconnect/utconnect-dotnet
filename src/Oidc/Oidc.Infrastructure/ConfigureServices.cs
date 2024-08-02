@@ -86,6 +86,6 @@ public static class ConfigureServices
                 };
             });
 
-        services.AddHostedService<OidcSeeder>();
+        services.AddHostedService<OidcPrePopulate>();
     }
 }

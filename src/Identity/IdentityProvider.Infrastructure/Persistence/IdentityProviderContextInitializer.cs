@@ -23,19 +23,19 @@ public class IdentityProviderContextInitializer(
         }
     }
 
-    public async Task SeedAsync()
+    public async Task PrePopulateAsync()
     {
         try
         {
-            await TrySeedAsync();
+            await TryPrePopulateAsync();
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An error occurred while seeding the database");
+            logger.LogError(ex, "An error occurred while pre-populating the database");
         }
     }
 
-    private async Task TrySeedAsync()
+    private async Task TryPrePopulateAsync()
     {
         if (await userManager.Users.AnyAsync())
         {
@@ -76,7 +76,7 @@ public class IdentityProviderContextInitializer(
         foreach (IdentityError error in result.Errors)
         {
             logger.LogError(
-                "Seeding role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                "Pre-populating role failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
                 errorIdx,
                 error.Code,
                 error.Description);
@@ -98,7 +98,7 @@ public class IdentityProviderContextInitializer(
         foreach (IdentityError error in result.Errors)
         {
             logger.LogError(
-                "Seeding user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                "Pre-populating user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
                 errorIdx,
                 error.Code,
                 error.Description);
