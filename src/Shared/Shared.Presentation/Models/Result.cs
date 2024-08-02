@@ -56,7 +56,7 @@ public class Result : Result<bool>
         {
             Success = false,
             Data = false,
-            Errors = failures.Select(f => new Error(f.PropertyName, f.ErrorMessage))
+            Errors = failures.Select(f => new ValidationError(f.PropertyName, f.ErrorMessage))
         };
     }
 }

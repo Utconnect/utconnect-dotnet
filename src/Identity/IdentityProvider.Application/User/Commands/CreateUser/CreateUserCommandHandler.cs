@@ -45,7 +45,7 @@ internal class CreateUserCommandHandler(
             errorIdx++;
         }
 
-        return Result.Failure(new Error(""));
+        return Result.Failure(new BadRequestError(""));
     }
 
     private string GenerateUserName(string name)

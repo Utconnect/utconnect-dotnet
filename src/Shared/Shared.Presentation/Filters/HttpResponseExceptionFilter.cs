@@ -25,7 +25,7 @@ public class HttpResponseExceptionFilter(IHostEnvironment hostEnvironment) : IEx
                 break;
             default:
             {
-                List<Error> errorResponse = [new Error(HttpStatusCode.InternalServerError, exception.Message)];
+                List<Error> errorResponse = [new InternalServerError(exception.Message)];
                 string message = hostEnvironment.IsEnvironment(Environments.Development)
                     ? exception.Message
                     : "Server error";
