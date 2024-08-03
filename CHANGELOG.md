@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.3.0...v1.4.0) (2024-08-03)
+
+
+### Features
+
+* **identity/user:** add user to roles ([9fb2f2b](https://github.com/Utconnect/utconnect-dotnet/commit/9fb2f2b202dac80c0f2ea322c30a22b3504ba5c7))
+* **identity/user:** returns username and id when create user ([00e9f8e](https://github.com/Utconnect/utconnect-dotnet/commit/00e9f8e41b5a0cd495f3ff58fbed2b80bc2e7d1a))
+* **identity:** create user ([55d3464](https://github.com/Utconnect/utconnect-dotnet/commit/55d34642a609801d9d7a012434792db8079aaa12))
+* **identity:** pre-populate role `teacher` on startup ([f3348a2](https://github.com/Utconnect/utconnect-dotnet/commit/f3348a2cf47bdb79cf92b3a6ffc4a662d28fb871))
+
+
+### Improvements
+
+* use concrete classes of `Error` instead of `Error` ([c911d6e](https://github.com/Utconnect/utconnect-dotnet/commit/c911d6e881d16f83f34908fd22af94850c6ed908))
+
 ## [1.3.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.2.0...v1.3.0) (2024-07-30)
 
 
