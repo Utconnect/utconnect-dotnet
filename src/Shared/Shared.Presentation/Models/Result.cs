@@ -1,11 +1,12 @@
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.Exceptions.Models;
 
 namespace Shared.Presentation.Models;
 
 public class Result<T>
 {
-    public T Data { get; set; } = default!;
+    public T? Data { get; set; }
     public bool Success { get; set; }
     public IEnumerable<Error>? Errors { get; set; }
 
@@ -18,13 +19,33 @@ public class Result<T>
         };
     }
 
-    public static Result<bool> Failure(Error error)
+    public static Result<T> Failure(Error error)
     {
-        return new Result<bool>
+        return new Result<T>
         {
+            Data = default,
             Success = false,
-            Data = false,
             Errors = new List<Error> { error }
+        };
+    }
+
+    public static Result<T> Failure(IEnumerable<Error> errors)
+    {
+        return new Result<T>
+        {
+            Data = default,
+            Success = false,
+            Errors = errors
+        };
+    }
+
+    public static Result<T> FromIdentityErrors(IEnumerable<IdentityError> errors)
+    {
+        return new Result<T>
+        {
+            Data = default,
+            Success = false,
+            Errors = errors.Select(e => new MessageError(e.Description))
         };
     }
 }
@@ -44,8 +65,8 @@ public class Result : Result<bool>
     {
         return new Result
         {
-            Success = false,
             Data = false,
+            Success = false,
             Errors = new List<Error> { error }
         };
     }
@@ -54,9 +75,19 @@ public class Result : Result<bool>
     {
         return new Result
         {
-            Success = false,
             Data = false,
+            Success = false,
             Errors = failures.Select(f => new ValidationError(f.PropertyName, f.ErrorMessage))
+        };
+    }
+
+    public new static Result FromIdentityErrors(IEnumerable<IdentityError> errors)
+    {
+        return new Result
+        {
+            Data = false,
+            Success = false,
+            Errors = errors.Select(e => new MessageError(e.Description))
         };
     }
 }

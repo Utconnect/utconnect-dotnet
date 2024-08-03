@@ -8,6 +8,11 @@ public abstract class Error
     public string Message { get; }
     public string? Property { get; }
 
+    protected Error(string message)
+    {
+        Message = message;
+    }
+
     internal Error(HttpStatusCode code, string message)
     {
         Code = code;

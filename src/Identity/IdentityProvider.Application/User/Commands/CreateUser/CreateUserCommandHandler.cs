@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Shared.Application.Exceptions.Models;
 using Shared.Application.MediatR.Abstract;
 using Shared.Helper;
 using Shared.Presentation.Models;
@@ -14,38 +13,46 @@ internal class CreateUserCommandHandler(
     StringHelper stringHelper,
     IValidator<CreateUserCommand> validator,
     ILogger<CreateUserCommandHandler> logger)
-    : Validatable, IRequestHandler<CreateUserCommand, Result>
+    : Validatable, IRequestHandler<CreateUserCommand, Result<CreateUserCommandResponse>>
 {
-    public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CreateUserCommandResponse>> Handle(
+        CreateUserCommand request,
+        CancellationToken cancellationToken)
     {
         Result validateResult = await ValidateAsync(validator, request, cancellationToken);
         if (!validateResult.Success)
         {
-            return validateResult;
+            return Result<CreateUserCommandResponse>.Failure(validateResult.Errors!);
         }
-        
+
         string name = request.Name;
         string userName = string.IsNullOrEmpty(request.UserName) ? GenerateUserName(request.Name) : request.UserName;
         Domain.Models.User user = new(userName, name);
 
         IdentityResult createResult = await userManager.CreateAsync(user);
-        if (createResult.Succeeded)
+        if (!createResult.Succeeded)
         {
-            return Result.Succeed();
+            int errorIdx = 0;
+            foreach (IdentityError error in createResult.Errors)
+            {
+                logger.LogError(
+                    "Creating user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
+                    errorIdx,
+                    error.Code,
+                    error.Description);
+                errorIdx++;
+            }
+
+            return Result<CreateUserCommandResponse>.FromIdentityErrors(createResult.Errors);
         }
 
-        int errorIdx = 0;
-        foreach (IdentityError error in createResult.Errors)
+        Domain.Models.User createdUser = (await userManager.FindByNameAsync(userName))!;
+        CreateUserCommandResponse responseData = new()
         {
-            logger.LogError(
-                "Creating user failed #{ErrorIdx} ({ErrorCode}): {ErrorDescription}",
-                errorIdx,
-                error.Code,
-                error.Description);
-            errorIdx++;
-        }
-
-        return Result.Failure(new BadRequestError(""));
+            UserName = userName,
+            Id = createdUser.Id
+        };
+        return Result<CreateUserCommandResponse>.Succeed(responseData);
     }
 
     private string GenerateUserName(string name)
