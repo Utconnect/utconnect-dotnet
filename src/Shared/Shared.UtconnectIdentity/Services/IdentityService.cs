@@ -45,7 +45,7 @@ public class IdentityService(IHttpContextAccessor httpContextAccessor, ILogger<I
     private static ClaimUser MapCurrentUser(IEnumerable<Claim> claims)
     {
         List<Claim> claimsList = claims.ToList();
-        if (claims == null || claimsList.Count == 0)
+        if (claimsList.Count == 0)
         {
             throw new NoClaimException();
         }

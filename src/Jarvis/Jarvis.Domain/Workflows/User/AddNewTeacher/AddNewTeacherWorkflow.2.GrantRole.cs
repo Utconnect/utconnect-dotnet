@@ -27,7 +27,7 @@ public partial class AddNewTeacherWorkflow
         };
     }
 
-    private class GrantRoleRequest
+    private sealed class GrantRoleRequest
     {
         public List<string> Roles { get; set; } = [];
     }

@@ -8,6 +8,7 @@ using Elsa.Studio.Extensions;
 using Elsa.Studio.Login.BlazorWasm.Extensions;
 using Elsa.Studio.Login.HttpMessageHandlers;
 using Elsa.Studio.Workflows.Designer.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -29,8 +30,7 @@ builder.Services.AddRemoteBackend(
 builder.Services.AddLoginModule();
 builder.Services.AddDashboardModule();
 builder.Services.AddWorkflowsModule();
-// builder.Services.AddResponseCompression();
-
+builder.Services.AddResponseCompression();
 
 // Build the application.
 WebAssemblyHost app = builder.Build();

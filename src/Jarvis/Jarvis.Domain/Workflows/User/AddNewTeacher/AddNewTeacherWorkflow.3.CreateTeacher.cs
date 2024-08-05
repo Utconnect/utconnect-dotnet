@@ -33,12 +33,12 @@ public partial class AddNewTeacherWorkflow
         };
     }
 
-    private class CreateTeacherRequest
+    private sealed class CreateTeacherRequest
     {
         public Guid UserId { get; set; }
         public string? DepartmentId { get; set; }
         public string? FacultyId { get; set; }
     }
 
-    private class CreateTeacherResponse : Result<Guid>;
+    private sealed class CreateTeacherResponse : Result<Guid>;
 }

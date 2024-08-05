@@ -38,6 +38,8 @@ public class LoginModel(
     [TempData]
     public string? ErrorMessage { get; set; }
 
+    public const string InvalidLoginAttempt = "InvalidLoginAttempt";
+
     public class InputModel
     {
         [Required]
@@ -59,7 +61,7 @@ public class LoginModel(
             User? user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+                ModelState.AddModelError(string.Empty, localizer[InvalidLoginAttempt]);
                 return Page();
             }
 
@@ -70,7 +72,7 @@ public class LoginModel(
                 return GetReturnUrlWithToken(returnUrl, token);
             }
 
-            ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+            ModelState.AddModelError(string.Empty, localizer[InvalidLoginAttempt]);
             return Page();
         }
 
@@ -79,11 +81,7 @@ public class LoginModel(
             ModelState.AddModelError(string.Empty, ErrorMessage);
         }
 
-        // Clear the existing external cookie to ensure a clean login process
-        // await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
         ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
         ReturnUrl = returnUrl;
 
         return Page();
@@ -111,7 +109,7 @@ public class LoginModel(
             User? user = await userManager.FindByNameAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+                ModelState.AddModelError(string.Empty, localizer[InvalidLoginAttempt]);
                 return Page();
             }
 
@@ -134,7 +132,7 @@ public class LoginModel(
             }
 
             logger.LogError("Cannot get token");
-            ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+            ModelState.AddModelError(string.Empty, localizer[InvalidLoginAttempt]);
             return Page();
         }
 
@@ -149,7 +147,7 @@ public class LoginModel(
             return RedirectToPage("./Lockout");
         }
 
-        ModelState.AddModelError(string.Empty, localizer["InvalidLoginAttempt"]);
+        ModelState.AddModelError(string.Empty, localizer[InvalidLoginAttempt]);
         return Page();
     }
 

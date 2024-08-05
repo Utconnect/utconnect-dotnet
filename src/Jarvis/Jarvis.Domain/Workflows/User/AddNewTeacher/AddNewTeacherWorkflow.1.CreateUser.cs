@@ -33,16 +33,16 @@ public partial class AddNewTeacherWorkflow
         };
     }
 
-    private class CreateUserRequest
+    private sealed class CreateUserRequest
     {
         public string Name { get; set; } = default!;
     }
 
-    private class CreateUserResponse : Result<CreateUserResponseData>;
+    private sealed class CreateUserResponse : Result<CreateUserResponseData>;
 
-    private class CreateUserResponseData
+    private sealed class CreateUserResponseData
     {
         public string UserName { get; set; } = default!;
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
     }
 }

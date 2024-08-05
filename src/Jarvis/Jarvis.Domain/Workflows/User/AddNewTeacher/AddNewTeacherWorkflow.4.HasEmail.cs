@@ -22,7 +22,7 @@ public partial class AddNewTeacherWorkflow
     }
 
     [Activity("Email")]
-    private class SendEmailActivity : CodeActivity
+    private sealed class SendEmailActivity : CodeActivity
     {
         public SendEmailActivity()
         {

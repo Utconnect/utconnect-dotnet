@@ -26,8 +26,8 @@ internal class StartAddNewTeacherWorkflowCommandHandler(
         Dictionary<string, object> input = new()
         {
             { "Name", request.Name },
-            { "DepartmentId", request.DepartmentId ?? new Guid() },
-            { "FacultyId", request.FacultyId ?? new Guid() },
+            { "DepartmentId", request.DepartmentId ?? Guid.Empty },
+            { "FacultyId", request.FacultyId ?? Guid.Empty },
             { "Email", request.Email ?? string.Empty }
         };
 

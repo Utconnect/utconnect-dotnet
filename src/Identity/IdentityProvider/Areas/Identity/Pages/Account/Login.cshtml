@@ -36,14 +36,14 @@
                 <div>
                   <calcite-label>
                     @Localizer["EmailControlName"]
-                    <calcite-input name="Input.Email" scale="l" autocomplete="username" placeholder="name@example.com"></calcite-input>
+                    <calcite-input name="Input.Email" scale="l" autocomplete="username" type="text"></calcite-input>
                   </calcite-label>
                   <span asp-validation-for="Input!.Email" class="text-danger"></span>
                 </div>
                 <div>
                   <calcite-label>
                     @Localizer["Password"]
-                    <calcite-input name="Input.Password" scale="l" autocomplete="current-password" placeholder="password" type="password"></calcite-input>
+                    <calcite-input name="Input.Password" scale="l" autocomplete="current-password" type="password"></calcite-input>
                   </calcite-label>
                   <span asp-validation-for="Input!.Password" class="text-danger"></span>
                 </div>

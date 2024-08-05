@@ -13,7 +13,7 @@ public abstract class Error
         Message = message;
     }
 
-    internal Error(HttpStatusCode code, string message)
+    protected Error(HttpStatusCode code, string message)
     {
         Code = code;
         Message = message;
