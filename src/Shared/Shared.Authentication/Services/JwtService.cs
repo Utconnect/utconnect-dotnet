@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Authentication.Extensions;
 using Shared.Authentication.Models;
-using Shared.Services.Abstractions;
+using Utconnect.Common.Services.Abstractions;
 
 namespace Shared.Authentication.Services;
 

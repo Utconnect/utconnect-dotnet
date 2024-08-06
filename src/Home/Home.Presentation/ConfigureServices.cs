@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
 using Shared.Application.Localization;
-using Shared.Services;
+using Utconnect.Common;
+using Utconnect.Common.Configurations;
 
 namespace Home.Presentation;
 
@@ -10,12 +10,12 @@ public static class ConfigureServices
 {
     public static void ConfigureHomePresentationServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCommon();
         services.AddRazorPages();
         services.AddConfiguration<TssConfig>(configuration);
         services.AddConfiguration<EsmConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);
         services.AddConfiguration<IdentityConfig>(configuration);
-        services.AddDateTime();
         services.AddUtconnectLocalization();
 
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

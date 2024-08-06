@@ -6,21 +6,18 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
+ARG UTCONNECT_REGISTRY_USERNAME
+ARG UTCONNECT_REGISTRY_PAT
 WORKDIR /src
+COPY ["nuget.config", "nuget.config"]
 COPY ["src/Home/Home.Presentation/Home.Presentation.csproj", "src/Home/Home.Presentation/"]
 COPY ["src/Home/Home.Application/Home.Application.csproj", "src/Home/Home.Application/"]
 COPY ["src/Oidc/Oidc.Domain/Oidc.Domain.csproj", "src/Oidc/Oidc.Domain/"]
 COPY ["src/Shared/Shared.Application.Configuration/Shared.Application.Configuration.csproj", "src/Shared/Shared.Application.Configuration/"]
 COPY ["src/Shared/Shared.Authentication/Shared.Authentication.csproj", "src/Shared/Shared.Authentication/"]
 COPY ["src/Identity/IdentityProvider.Domain/IdentityProvider.Domain.csproj", "src/Identity/IdentityProvider.Domain/"]
-COPY ["src/Shared/Shared.UtconnectIdentity/Shared.UtconnectIdentity.csproj", "src/Shared/Shared.UtconnectIdentity/"]
-COPY ["src/Shared/Shared.Application.Extensions/Shared.Application.Extensions.csproj", "src/Shared/Shared.Application.Extensions/"]
-COPY ["src/Shared/Shared.Application.Exceptions/Shared.Application.Exceptions.csproj", "src/Shared/Shared.Application.Exceptions/"]
-COPY ["src/Shared/Shared.Logging/Shared.Logging.csproj", "src/Shared/Shared.Logging/"]
-COPY ["src/Shared/Shared.Infrastructure.Db/Shared.Infrastructure.Db.csproj", "src/Shared/Shared.Infrastructure.Db/"]
-COPY ["src/Shared/Shared.Services/Shared.Services.csproj", "src/Shared/Shared.Services/"]
-COPY ["src/Shared/Shared.Application.MediatR/Shared.Application.MediatR.csproj", "src/Shared/Shared.Application.MediatR/"]
 COPY ["src/Shared/Shared.Application.Localization/Shared.Application.Localization.csproj", "src/Shared/Shared.Application.Localization/"]
+RUN dotnet nuget update source utconnect --username $UTCONNECT_REGISTRY_USERNAME --password $UTCONNECT_REGISTRY_PAT --store-password-in-clear-text
 RUN dotnet restore "src/Home/Home.Presentation/Home.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Home/Home.Presentation"

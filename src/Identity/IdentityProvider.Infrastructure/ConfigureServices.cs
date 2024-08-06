@@ -11,8 +11,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
 using Shared.Application.Localization;
 using Shared.Authentication.Services;
-using Shared.Infrastructure.Db.Interceptors;
-using Shared.UtconnectIdentity.Services;
+using Utconnect.Common.Identity;
 
 namespace IdentityProvider.Infrastructure;
 
@@ -20,7 +19,7 @@ public static class ConfigureServices
 {
     public static async Task AddIdentityInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<AuditableEntitySaveChangesInterceptor>();
+        services.AddCommonIdentity();
 
         string dbPassword = await CofferService.GetKey(configuration["Coffer"], "identity", "DB_PASSWORD");
         services.AddDbContext<IdentityProviderContext>(options =>
@@ -81,7 +80,6 @@ public static class ConfigureServices
             })
             .AddCookie(options => { options.LoginPath = "/Login"; });
 
-        services.AddTransient<IIdentityService, IdentityService>();
         services.AddTransient<IOidcService, OidcService>();
     }
 }

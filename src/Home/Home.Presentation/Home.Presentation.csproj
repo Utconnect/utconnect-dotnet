@@ -37,7 +37,6 @@
       <ProjectReference Include="..\..\Oidc\Oidc.Domain\Oidc.Domain.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Application.Localization\Shared.Application.Localization.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Services\Shared.Services.csproj" />
     </ItemGroup>
 
     <ItemGroup>

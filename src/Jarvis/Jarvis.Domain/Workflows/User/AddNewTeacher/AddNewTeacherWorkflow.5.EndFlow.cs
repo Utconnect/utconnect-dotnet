@@ -21,7 +21,7 @@ public partial class AddNewTeacherWorkflow
                 Guid teacherId = ctx.GetVariable<CreateTeacherResponse>(VariableCreateTeacherResponse)!.Data;
                 return new Uri(serverAddress, $"teacher/{teacherId}/finish");
             }),
-            Method = new Input<string>(HttpMethods.Put),
+            Method = new Input<string>(HttpMethods.Put)
         };
     }
 }

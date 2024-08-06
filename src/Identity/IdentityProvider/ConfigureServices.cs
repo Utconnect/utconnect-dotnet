@@ -1,13 +1,14 @@
 using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.Extensions.Options;
-using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
 using Shared.Authentication.Services;
 using Shared.Infrastructure.Email;
-using Shared.Presentation.Filters;
-using Shared.Services;
-using Shared.Services.Abstractions;
 using Shared.Swashbuckle;
+using Utconnect.Common;
+using Utconnect.Common.Configurations;
+using Utconnect.Common.Exceptions.Filters;
+using Utconnect.Common.Helpers;
+using Utconnect.Common.Services.Abstractions;
 
 namespace IdentityProvider;
 
@@ -18,11 +19,13 @@ public static class ConfigureServices
         services.AddControllersWithViews();
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
+
         services.AddEmailService(configuration);
+        services.AddHelpers();
+        services.AddCommon();
 
         services.AddConfiguration<HomeConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);
-        services.AddDateTime();
 
         string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
         IConfigurationSection jwtConfig = configuration.GetSection("OidcConfig:Jwt");

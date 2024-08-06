@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Shared.Presentation.Models;
+using Utconnect.Common.Models;
 
 namespace IdentityProvider.Application.User.Commands.AddUserToRole;
 

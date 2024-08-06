@@ -12,8 +12,8 @@ using Microsoft.Extensions.Options;
 using Oidc.Domain.Models;
 using Shared.Application.Configuration.Models;
 using Shared.Authentication.Extensions;
-using Shared.Http.Uri;
-using Shared.Services.Abstractions;
+using Utconnect.Common.Http.Uri;
+using Utconnect.Common.Services.Abstractions;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityProvider.Areas.Identity.Pages.Account;

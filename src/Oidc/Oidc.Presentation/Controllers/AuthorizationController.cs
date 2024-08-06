@@ -51,7 +51,7 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
                 }));
         }
 
-        var claims = new Dictionary<string, object>(StringComparer.Ordinal)
+        Dictionary<string, object> claims = new(StringComparer.Ordinal)
         {
             [OpenIddictConstants.Claims.Subject] =
                 claimsPrincipal.GetClaim(OpenIddictConstants.Claims.Subject) ?? string.Empty,
@@ -59,7 +59,7 @@ public class AuthorizationController(IOpenIddictApplicationManager applicationMa
                 claimsPrincipal.GetClaim(OpenIddictConstants.Claims.Issuer) ?? string.Empty
         };
 
-        var scopeClaims = new Dictionary<string, string>
+        Dictionary<string, string> scopeClaims = new()
         {
             { OpenIddictConstants.Permissions.Scopes.Email, OpenIddictConstants.Claims.Email },
             { OpenIddictConstants.Claims.Username, OpenIddictConstants.Claims.Username }

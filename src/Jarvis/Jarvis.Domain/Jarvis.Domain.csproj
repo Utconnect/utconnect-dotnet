@@ -20,7 +20,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Presentation\Shared.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

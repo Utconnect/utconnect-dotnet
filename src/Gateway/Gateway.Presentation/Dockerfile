@@ -6,8 +6,12 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
+ARG UTCONNECT_REGISTRY_USERNAME
+ARG UTCONNECT_REGISTRY_PAT
 WORKDIR /src
+COPY ["nuget.config", "nuget.config"]
 COPY ["src/Gateway/Gateway.Presentation/Gateway.Presentation.csproj", "src/Gateway/Gateway.Presentation/"]
+RUN dotnet nuget update source utconnect --username $UTCONNECT_REGISTRY_USERNAME --password $UTCONNECT_REGISTRY_PAT --store-password-in-clear-text
 RUN dotnet restore "src/Gateway/Gateway.Presentation/Gateway.Presentation.csproj"
 COPY . .
 WORKDIR "/src/src/Gateway/Gateway.Presentation"

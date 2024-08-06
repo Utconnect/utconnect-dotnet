@@ -5,7 +5,7 @@
 @inject IOptions<IdentityConfig> IdentityConfig
 
 @{
-  string? userName = ViewData["UserName"]?.ToString();
+  var userName = ViewData["UserName"]?.ToString();
   IdentityConfig config = IdentityConfig.Value;
 }
 

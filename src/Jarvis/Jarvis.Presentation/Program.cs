@@ -1,9 +1,9 @@
 using Elsa.Extensions;
 using Jarvis.Application;
 using Jarvis.Infrastructure;
-using Shared.Application.Configuration;
 using Shared.Application.Configuration.Models;
 using Shared.Infrastructure.Email.Configs;
+using Utconnect.Common.Configurations;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;

@@ -13,7 +13,7 @@ public static class CofferService
             throw new UnableRetrieveJwtException("Coffer URL is empty");
         }
 
-        string requestUrl = $"{cofferUrl}/secret/be/{app}/{secretName}";
+        var requestUrl = $"{cofferUrl}/secret/be/{app}/{secretName}";
         HttpClient client = new();
         HttpResponseMessage response = await client.GetAsync(requestUrl);
 

@@ -117,6 +117,26 @@ services:
     networks:
       - backend
 
+  data_processor_db:
+    container_name: data_processor_db
+    image: postgres:16.3
+    restart: always
+    ports:
+      - "54323:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: DataProcessor
+    volumes:
+      - data_processor_data_db:/var/lib/postgresql/data
+      - ./Docker/Oidc:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
 networks:
   backend:
   coffer_vault-network:
@@ -126,3 +146,4 @@ volumes:
   identity_provider_data_db:
   oidc_data_db:
   jarvis_data_db:
+  data_processor_data_db:

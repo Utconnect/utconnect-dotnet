@@ -1,7 +1,7 @@
 using Home.Presentation.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Shared.Services.Abstractions;
+using Utconnect.Common.Services.Abstractions;
 
 namespace Home.Presentation.Pages;
 

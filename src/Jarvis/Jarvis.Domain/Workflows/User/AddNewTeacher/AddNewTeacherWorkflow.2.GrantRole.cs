@@ -23,7 +23,7 @@ public partial class AddNewTeacherWorkflow
                     $"api/user/{varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data!.Id}/role")),
             Method = new Input<string>(HttpMethods.Patch),
             ContentType = new Input<string?>(MediaTypeNames.Application.Json),
-            Content = new Input<object?>(JsonConvert.SerializeObject(new GrantRoleRequest { Roles = ["Teacher"] })),
+            Content = new Input<object?>(JsonConvert.SerializeObject(new GrantRoleRequest { Roles = ["Teacher"] }))
         };
     }
 

@@ -43,7 +43,9 @@ jobs:
           IMAGE_NAME=${{ matrix.project.image }}
           PROJECT_NAME=${{ matrix.project.name }}
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${IMAGE_NAME}
-          docker build -f ./src/$PROJECT_NAME/Dockerfile -t $IMAGE .
+          UTCONNECT_REGISTRY_USERNAME=${{ github.actor }}
+          UTCONNECT_REGISTRY_PAT=${{ secrets.PACKAGE_REGISTRY_PAT }}
+          docker build --build-arg UTCONNECT_REGISTRY_USERNAME=$UTCONNECT_REGISTRY_USERNAME --build-arg UTCONNECT_REGISTRY_PAT=$UTCONNECT_REGISTRY_PAT -f ./src/$PROJECT_NAME/Dockerfile -t $IMAGE .
           docker push $IMAGE
 
   release:

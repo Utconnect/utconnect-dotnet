@@ -1,4 +1,4 @@
-﻿using Shared.Application.Configuration.Models;
+﻿using Utconnect.Common.Configurations.Models;
 
 namespace Shared.Infrastructure.Email.Configs;
 

@@ -2,7 +2,7 @@
 using IdentityProvider.Application.User.Commands.CreateUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Presentation.Models;
+using Utconnect.Common.Models;
 
 namespace IdentityProvider.Controllers;
 
@@ -17,7 +17,7 @@ public class UserController(ISender mediatr) : Controller
     }
 
     [HttpPatch("{userId:guid}/role")]
-    public async Task<Result> AddUserToRole(Guid userId, [FromBody] CreateUserRequest request)
+    public async Task<Result> AddUserToRole(Guid userId, [FromBody] AddUserToRoleRequest request)
     {
         AddUserToRoleCommand command = new(userId, request.Roles);
         Result result = await mediatr.Send(command);

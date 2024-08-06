@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Shared.Application.Exceptions.Models;
-using Shared.Application.MediatR.Abstract;
-using Shared.Presentation.Models;
+using Utconnect.Common.MediatR.Abstractions;
+using Utconnect.Common.Models;
+using Utconnect.Common.Models.Errors;
 
 namespace IdentityProvider.Application.User.Commands.AddUserToRole;
 

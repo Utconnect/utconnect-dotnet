@@ -2,15 +2,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Shared.Application.MediatR.Abstract;
-using Shared.Helper;
-using Shared.Presentation.Models;
+using Utconnect.Common.Helpers.Abstractions;
+using Utconnect.Common.MediatR.Abstractions;
+using Utconnect.Common.Models;
 
 namespace IdentityProvider.Application.User.Commands.CreateUser;
 
 internal class CreateUserCommandHandler(
     UserManager<Domain.Models.User> userManager,
-    StringHelper stringHelper,
+    IStringHelper stringHelper,
     IValidator<CreateUserCommand> validator,
     ILogger<CreateUserCommandHandler> logger)
     : Validatable, IRequestHandler<CreateUserCommand, Result<CreateUserCommandResponse>>
@@ -32,7 +32,7 @@ internal class CreateUserCommandHandler(
         IdentityResult createResult = await userManager.CreateAsync(user);
         if (!createResult.Succeeded)
         {
-            int errorIdx = 0;
+            var errorIdx = 0;
             foreach (IdentityError error in createResult.Errors)
             {
                 logger.LogError(
@@ -72,7 +72,7 @@ internal class CreateUserCommandHandler(
             return nickname;
         }
 
-        int count = 2;
+        var count = 2;
         string userName;
         do
         {

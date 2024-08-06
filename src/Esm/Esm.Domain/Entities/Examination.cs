@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using ESM.Domain.Enums;
-using Shared.Domain;
+using Utconnect.Common.Infrastructure.Db.Entities;
 
 namespace Esm.Domain.Entities;
 

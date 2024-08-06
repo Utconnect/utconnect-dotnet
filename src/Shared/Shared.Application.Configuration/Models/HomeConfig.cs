@@ -1,4 +1,6 @@
-﻿namespace Shared.Application.Configuration.Models;
+﻿using Utconnect.Common.Configurations.Models;
+
+namespace Shared.Application.Configuration.Models;
 
 public class HomeConfig : ISiteConfig
 {

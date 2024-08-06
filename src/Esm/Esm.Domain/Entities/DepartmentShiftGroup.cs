@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Shared.Domain;
+using Utconnect.Common.Infrastructure.Db.Entities;
 
 namespace Esm.Domain.Entities;
 

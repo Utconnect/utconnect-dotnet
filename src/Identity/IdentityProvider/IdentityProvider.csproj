@@ -18,6 +18,8 @@
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.7" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+      <PackageReference Include="Utconnect.Common.Exceptions" Version="1.1.2" />
+      <PackageReference Include="Utconnect.Common.Http" Version="1.1.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,9 +29,7 @@
       <ProjectReference Include="..\..\Shared\Shared.Application.Configuration\Shared.Application.Configuration.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Application.Localization\Shared.Application.Localization.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Authentication\Shared.Authentication.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Http\Shared.Http.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Infrastructure.Email\Shared.Infrastructure.Email.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Presentation\Shared.Presentation.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Swashbuckle\Shared.Swashbuckle.csproj" />
     </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using IdentityProvider.Domain.Models;
 using Microsoft.IdentityModel.JsonWebTokens;
-using Shared.Application.Extensions;
+using Utconnect.Common.Extensions;
 
 namespace Shared.Authentication.Extensions;
 

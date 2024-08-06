@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Shared.Authentication.Services;
-using Shared.Infrastructure.Db.Interceptors;
-using Shared.Services;
-using Shared.UtconnectIdentity.Services;
+using Utconnect.Common;
+using Utconnect.Common.Identity;
+using Utconnect.Common.Infrastructure.Db.Interceptors;
 
 namespace Esm.Infrastructure;
 
@@ -17,6 +17,8 @@ public static class ConfigureServices
 {
     public static async Task AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCommon();
+        services.AddCommonIdentity();
         services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
         string dbPassword = await CofferService.GetKey(configuration["Coffer"], "esm", "DB_PASSWORD");
@@ -36,9 +38,6 @@ public static class ConfigureServices
         services.AddScoped<IEsmDbContext>(provider => provider.GetRequiredService<EsmDbContext>());
 
         services.AddScoped<EsmDbContextInitializer>();
-
-        services.AddDateTime();
-        services.AddTransient<IIdentityService, IdentityService>();
 
         string jwtKey = await CofferService.GetKey(configuration["Coffer"], "esm", "JWT_KEY");
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

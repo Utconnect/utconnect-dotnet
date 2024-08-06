@@ -11,8 +11,4 @@
       <PackageReference Include="OpenIddict.Abstractions" Version="5.7.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\Shared\Shared.Application.MediatR\Shared.Application.MediatR.csproj" />
-    </ItemGroup>
-
 </Project>

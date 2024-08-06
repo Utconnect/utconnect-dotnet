@@ -1,7 +1,7 @@
 using System.Reflection;
 using Esm.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Shared.Infrastructure.Db.Interceptors;
+using Utconnect.Common.Infrastructure.Db.Interceptors;
 
 namespace Esm.Infrastructure.Persistence;
 

@@ -1,4 +1,5 @@
 ﻿using Shared.Authentication.Configurations;
+using Utconnect.Common.Configurations.Models;
 
 namespace Shared.Application.Configuration.Models;
 

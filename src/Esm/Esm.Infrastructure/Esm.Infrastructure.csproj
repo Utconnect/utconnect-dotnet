@@ -15,8 +15,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Esm.Domain\Esm.Domain.csproj" />
       <ProjectReference Include="..\..\Shared\Shared.Authentication\Shared.Authentication.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Infrastructure.Db\Shared.Infrastructure.Db.csproj" />
-      <ProjectReference Include="..\..\Shared\Shared.Services\Shared.Services.csproj" />
     </ItemGroup>
 
 </Project>

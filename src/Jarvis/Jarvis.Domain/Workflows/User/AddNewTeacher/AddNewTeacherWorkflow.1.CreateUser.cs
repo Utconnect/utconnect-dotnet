@@ -5,7 +5,7 @@ using Elsa.Workflows.Memory;
 using Elsa.Workflows.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Shared.Presentation.Models;
+using Utconnect.Common.Models;
 
 namespace Jarvis.Domain.Workflows.User.AddNewTeacher;
 

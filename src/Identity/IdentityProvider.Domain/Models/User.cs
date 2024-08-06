@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using Shared.UtconnectIdentity.Models;
+using Utconnect.Common.Identity.Models;
 
 namespace IdentityProvider.Domain.Models;
 
