@@ -1,4 +1,4 @@
-﻿using Jarvis.Application.Workflows.StartAddNewTeacherWorkflow;
+﻿using Jarvis.Application.Workflows.StartWorkflow;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Presentation.Models;
@@ -8,8 +8,8 @@ namespace Jarvis.Server.Controllers;
 [Route("[controller]")]
 public class WorkflowController(ISender mediatr) : Controller
 {
-    [HttpPost("user/add-new-teacher")]
-    public async Task<Result<string>> StartAddNewTeacherWorkflow([FromBody] StartAddNewTeacherWorkflowCommand command)
+    [HttpPost("start")]
+    public async Task<Result<string>> StartAddNewTeacherWorkflow([FromBody] StartWorkflowCommand command)
     {
         Result<string> result = await mediatr.Send(command);
         return result;

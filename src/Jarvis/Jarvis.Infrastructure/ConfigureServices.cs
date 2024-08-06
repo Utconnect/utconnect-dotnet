@@ -12,8 +12,7 @@ namespace Jarvis.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static async Task AddJarvisInfrastructureServices(
-        this IServiceCollection services,
+    public static async Task AddJarvisInfrastructureServices(this IServiceCollection services,
         IConfiguration configuration)
     {
         string dbPassword = await CofferService.GetKey(configuration["Coffer"], "jarvis", "DB_PASSWORD");
