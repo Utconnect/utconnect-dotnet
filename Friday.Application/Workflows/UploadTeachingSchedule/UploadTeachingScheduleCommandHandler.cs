@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Friday.Application.Workflows.UploadTeachingSchedule;
 using Jarvis.Common.Enums;
 using Jarvis.Common.Services.Abstract;
 using MediatR;
