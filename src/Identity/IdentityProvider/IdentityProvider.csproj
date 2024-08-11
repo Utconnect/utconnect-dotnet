@@ -18,8 +18,8 @@
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.7" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
-      <PackageReference Include="Utconnect.Common.Exceptions" Version="1.1.2" />
-      <PackageReference Include="Utconnect.Common.Http" Version="1.1.2" />
+      <PackageReference Include="Utconnect.Common.Exceptions" Version="1.1.3" />
+      <PackageReference Include="Utconnect.Common.Http" Version="1.1.3" />
     </ItemGroup>
 
     <ItemGroup>
