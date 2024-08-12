@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.4.0...v1.5.0) (2024-08-12)
+
+
+### Features
+
+* **jarvis:** create teacher workflow ([57608eb](https://github.com/Utconnect/utconnect-dotnet/commit/57608eba1113055de766bb4ef7bb8737b79d77cd))
+* use lib `Utconnect.Common` instead of inner libs ([04d207e](https://github.com/Utconnect/utconnect-dotnet/commit/04d207eea38da7c546ae8f8686ab0bd22e5168c4))
+
 ## [1.4.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.3.0...v1.4.0) (2024-08-03)
 
 
