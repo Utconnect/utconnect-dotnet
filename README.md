@@ -1,7 +1,7 @@
 # Utconnect-dotnet
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Utconnect_utconnect-dotnet&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Utconnect_utconnect-dotnet)
 
-Utconnect-dotnet is a .NET project that includes a set of sub-projects developed for the University of Transport and Communication. Built by many alumni, it serves various functionalities related to identity management, 
+Utconnect-dotnet is a .NET project that includes a set of subprojects developed for the University of Transport and Communication. Built by many alumni, it serves various functionalities related to identity management, 
 authentication, and the examination schedule management. The project is modular, encompassing domain logic, infrastructure, and presentation layers, and supports Docker for containerized deployment.
 
 ## Features
@@ -15,7 +15,6 @@ authentication, and the examination schedule management. The project is modular,
 ## Project Structure
 - `Auth`: Common authentication services and utilities.
 - `Oidc`: OpenID Connect implementation.
-- `Gateway`: Manages API gateway functionalities.
 - `Esm`: Examination schedule management
 - `Home`: Contains the home and landing page components.
 

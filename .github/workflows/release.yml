@@ -12,7 +12,6 @@ jobs:
       matrix:
         project:
           - { name: Identity/IdentityProvider, image: identity_provider }
-          - { name: Gateway/Gateway.Presentation, image: gateway }
           - { name: Home/Home.Presentation, image: home }
           - { name: Oidc/Oidc.Presentation, image: oidc }
 

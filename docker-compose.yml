@@ -1,17 +1,4 @@
 services:
-  gateway:
-    image: snowflower1408/utconnect_gateway
-    container_name: gateway
-    ports:
-      - "5000:8080"
-    build:
-      context: .
-      dockerfile: src/Gateway/Gateway.Presentation/Dockerfile
-    networks:
-      - backend
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-
   identity_provider:
     image: snowflower1408/utconnect_identity_provider
     container_name: identity_provider
