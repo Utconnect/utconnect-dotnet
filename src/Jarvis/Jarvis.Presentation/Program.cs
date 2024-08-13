@@ -8,7 +8,7 @@ using Utconnect.Common.Configurations;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
-await builder.Services.AddJarvisInfrastructureServices(configuration);
+builder.Services.AddJarvisInfrastructureServices(configuration);
 builder.Services.AddJarvisApplicationServices();
 
 builder.Services.AddConfiguration<TeacherConfig>(configuration);

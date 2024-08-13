@@ -4,7 +4,7 @@ using Oidc.Presentation;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-await builder.Services.AddOidcInfrastructureServices(builder.Configuration);
+builder.Services.AddOidcInfrastructureServices(builder.Configuration);
 builder.Services.AddOidcPresentationServices();
 
 builder.Services.AddDataProtection()

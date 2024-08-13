@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.DataProtection;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
-await builder.Services.AddIdentityInfrastructureServices(configuration);
-await builder.Services.AddIdentityServices(configuration);
+builder.Services.AddIdentityInfrastructureServices(configuration);
+builder.Services.AddIdentityServices(configuration);
 builder.Services.AddIdentityApplicationServices();
 
 builder.Services.AddDataProtection()

@@ -7,24 +7,26 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Oidc.Infrastructure.Persistence;
 using OpenIddict.Abstractions;
-using Shared.Authentication.Services;
+using Utconnect.Coffer.Services.Abstract;
+using Utconnect.Common.Models;
 
 namespace Oidc.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static async Task AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "oidc", "DB_PASSWORD");
-        services.AddDbContext<OidcDbContext>(options =>
+        services.AddDbContext<OidcDbContext>((serviceProvider, options) =>
         {
+            ICofferService cofferService = serviceProvider.GetService<ICofferService>()!;
+            Result<string> dbPassword = cofferService.GetKey("oidc", "DB_PASSWORD").GetAwaiter().GetResult();
             NpgsqlConnectionStringBuilder connection = new()
             {
                 Host = configuration["ConnectionStringsData:OidcDbContextConnection:Host"],
                 Port = int.Parse(configuration["ConnectionStringsData:OidcDbContextConnection:Port"]!),
                 Username = configuration["ConnectionStringsData:OidcDbContextConnection:Username"],
                 Database = configuration["ConnectionStringsData:OidcDbContextConnection:Database"],
-                Password = dbPassword
+                Password = dbPassword.Data
             };
             options.UseNpgsql(connection.ConnectionString);
 
@@ -62,7 +64,6 @@ public static class ConfigureServices
                     .EnableUserinfoEndpointPassthrough();
             });
 
-        string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
 
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -74,6 +75,8 @@ public static class ConfigureServices
             })
             .AddJwtBearer(options =>
             {
+                ICofferService cofferService = services.BuildServiceProvider().GetService<ICofferService>()!;
+                Result<string> jwtKey = cofferService.GetKey("oidc", "JWT_KEY").GetAwaiter().GetResult();
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -82,7 +85,7 @@ public static class ConfigureServices
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey.Data ?? string.Empty))
                 };
             });
 

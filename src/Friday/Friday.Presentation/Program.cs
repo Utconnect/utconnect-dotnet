@@ -7,7 +7,7 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-await builder.Services.AddFridayInfrastructureServices(configuration);
+builder.Services.AddFridayInfrastructureServices(configuration);
 builder.Services.AddFridayApplicationServices(configuration);
 
 builder.Services.AddControllers();

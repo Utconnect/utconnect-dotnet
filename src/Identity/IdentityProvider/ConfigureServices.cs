@@ -4,21 +4,25 @@ using Shared.Application.Configuration.Models;
 using Shared.Authentication.Services;
 using Shared.Infrastructure.Email;
 using Shared.Swashbuckle;
+using Utconnect.Coffer;
+using Utconnect.Coffer.Services.Abstract;
 using Utconnect.Common;
 using Utconnect.Common.Configurations;
 using Utconnect.Common.Exceptions.Filters;
 using Utconnect.Common.Helpers;
+using Utconnect.Common.Models;
 using Utconnect.Common.Services.Abstractions;
 
 namespace IdentityProvider;
 
 public static class ConfigureServices
 {
-    public static async Task AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews();
         services.AddUtconnectSwashbuckle();
         services.AddHttpContextAccessor();
+        services.AddCoffer(configuration);
 
         services.AddEmailService(configuration);
         services.AddHelpers();
@@ -27,12 +31,14 @@ public static class ConfigureServices
         services.AddConfiguration<HomeConfig>(configuration);
         services.AddConfiguration<OidcConfig>(configuration);
 
-        string jwtKey = await CofferService.GetKey(configuration["Coffer"], "oidc", "JWT_KEY");
         IConfigurationSection jwtConfig = configuration.GetSection("OidcConfig:Jwt");
         services.AddTransient<IJwtService>(serviceProvider =>
         {
+            ICofferService cofferService = serviceProvider.GetService<ICofferService>()!;
+            Result<string> jwtKey = cofferService.GetKey("oidc", "JWT_KEY").GetAwaiter().GetResult();
             IDateTime dateTime = serviceProvider.GetService<IDateTime>()!;
-            return new JwtService(jwtConfig, dateTime, jwtKey);
+
+            return new JwtService(jwtConfig, dateTime, jwtKey.Data ?? string.Empty);
         });
 
         services.AddTransient<RedirectService>();

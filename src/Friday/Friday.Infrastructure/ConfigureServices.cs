@@ -3,25 +3,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
-using Shared.Authentication.Services;
+using Utconnect.Coffer;
+using Utconnect.Coffer.Services.Abstract;
+using Utconnect.Common.Models;
 
 namespace Friday.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static async Task AddFridayInfrastructureServices(this IServiceCollection services,
-        IConfiguration configuration)
+    public static void AddFridayInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "data_processor", "DB_PASSWORD");
-        services.AddDbContext<FridayDbContext>(options =>
+        services.AddCoffer(configuration);
+        
+        services.AddDbContext<FridayDbContext>((serviceProvider, options) =>
         {
+            ICofferService cofferService = serviceProvider.GetService<ICofferService>()!;
+            Result<string> dbPassword = cofferService.GetKey("data_processor", "DB_PASSWORD").GetAwaiter().GetResult();
             NpgsqlConnectionStringBuilder connection = new()
             {
                 Host = configuration["ConnectionStringsData:FridayDbContextConnection:Host"],
                 Port = int.Parse(configuration["ConnectionStringsData:FridayDbContextConnection:Port"]!),
                 Username = configuration["ConnectionStringsData:FridayDbContextConnection:Username"],
                 Database = configuration["ConnectionStringsData:FridayDbContextConnection:Database"],
-                Password = dbPassword
+                Password = dbPassword.Data
             };
             options.UseNpgsql(connection.ConnectionString);
         });

@@ -10,27 +10,29 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
 using Shared.Application.Localization;
-using Shared.Authentication.Services;
+using Utconnect.Coffer.Services.Abstract;
 using Utconnect.Common.Identity;
+using Utconnect.Common.Models;
 
 namespace IdentityProvider.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static async Task AddIdentityInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddIdentityInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddCommonIdentity();
 
-        string dbPassword = await CofferService.GetKey(configuration["Coffer"], "identity", "DB_PASSWORD");
-        services.AddDbContext<IdentityProviderContext>(options =>
+        services.AddDbContext<IdentityProviderContext>((serviceProvider, options) =>
         {
+            ICofferService cofferService = serviceProvider.GetService<ICofferService>()!;
+            Result<string> dbPassword = cofferService.GetKey("identity", "DB_PASSWORD").GetAwaiter().GetResult();
             NpgsqlConnectionStringBuilder connection = new()
             {
                 Host = configuration["ConnectionStringsData:IdentityProviderContextConnection:Host"],
                 Port = int.Parse(configuration["ConnectionStringsData:IdentityProviderContextConnection:Port"]!),
                 Username = configuration["ConnectionStringsData:IdentityProviderContextConnection:Username"],
                 Database = configuration["ConnectionStringsData:IdentityProviderContextConnection:Database"],
-                Password = dbPassword
+                Password = dbPassword.Data
             };
             options.UseNpgsql(connection.ConnectionString);
         });
