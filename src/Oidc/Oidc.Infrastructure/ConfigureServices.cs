@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Oidc.Infrastructure.Persistence;
 using OpenIddict.Abstractions;
+using Utconnect.Coffer;
 using Utconnect.Coffer.Services.Abstract;
 using Utconnect.Common.Models;
 
@@ -16,6 +17,8 @@ public static class ConfigureServices
 {
     public static void AddOidcInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCoffer(configuration);
+        
         services.AddDbContext<OidcDbContext>((serviceProvider, options) =>
         {
             ICofferService cofferService = serviceProvider.GetService<ICofferService>()!;
