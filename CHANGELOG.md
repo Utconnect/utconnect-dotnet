@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.5.0...v1.6.0) (2024-08-15)
+
+
+### Features
+
+* remove `gateway` ([89c1239](https://github.com/Utconnect/utconnect-dotnet/commit/89c12390b174d03405b4f85b820daacc4d57a729))
+* use `Utconnect.Coffer` instead of inner libs ([d10663a](https://github.com/Utconnect/utconnect-dotnet/commit/d10663af90140850f23cdff764e5015a770f5838))
+
 ## [1.5.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.4.0...v1.5.0) (2024-08-12)
 
 
