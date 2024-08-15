@@ -6,6 +6,7 @@ using Jarvis.Domain.Workflows.User.AddNewTeacher;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+using Utconnect.Coffer;
 using Utconnect.Coffer.Services.Abstract;
 using Utconnect.Common.Models;
 
@@ -15,6 +16,8 @@ public static class ConfigureServices
 {
     public static void AddJarvisInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCoffer(configuration);
+
         services.AddElsa(elsa =>
         {
             ICofferService cofferService = services.BuildServiceProvider().GetService<ICofferService>()!;
