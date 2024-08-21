@@ -1,9 +1,17 @@
 version: 2
+registries:
+  utconnect:
+    type: nuget-feed
+    url: https://nuget.pkg.github.com/utconnect/index.json
+    username: ${{ secrets.DEPENDABOT_REGISTRY_USERNAME }}
+    password: ${{ secrets.DEPENDABOT_REGISTRY_PASSWORD }}
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: "weekly"
+    registries:
+      - utconnect
 
   - package-ecosystem: "github-actions"
     directory: "/"
