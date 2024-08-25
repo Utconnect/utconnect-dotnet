@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/Utconnect/utconnect-dotnet/compare/v1.6.0...v1.6.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **jarvis:** `coffer` should be injected ([e1a89a8](https://github.com/Utconnect/utconnect-dotnet/commit/e1a89a8b7199f436efa5a8443feb29f3d6d458f0))
+* **oidc:** `coffer` should be injected ([1b5aca2](https://github.com/Utconnect/utconnect-dotnet/commit/1b5aca23c5aff5dd009eb0abe0e5d09adfbb7b37))
+
+
+### CI/CD
+
+* dependabot encounters an error performing the update ([7c1a6fe](https://github.com/Utconnect/utconnect-dotnet/commit/7c1a6fe454c61e8c2883e27ed7f8e4c592485cc9))
+* use external network `backend` ([9d0197f](https://github.com/Utconnect/utconnect-dotnet/commit/9d0197f1dbff05714e037032a2b93d7fb8212ab9))
+
 ## [1.6.0](https://github.com/Utconnect/utconnect-dotnet/compare/v1.5.0...v1.6.0) (2024-08-15)
 
 
