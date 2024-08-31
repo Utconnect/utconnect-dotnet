@@ -52,7 +52,7 @@ internal class CreateUserCommandHandler(
             UserName = userName,
             Id = createdUser.Id
         };
-        return Result<CreateUserCommandResponse>.Succeed(responseData);
+        return Result.Succeed(responseData);
     }
 
     private string GenerateUserName(string name)

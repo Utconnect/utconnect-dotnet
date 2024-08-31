@@ -9,9 +9,9 @@
     <ItemGroup>
       <PackageReference Include="MediatR" Version="12.4.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-      <PackageReference Include="Utconnect.Common" Version="1.4.1" />
-      <PackageReference Include="Utconnect.Common.Helpers" Version="1.4.1" />
-      <PackageReference Include="Utconnect.Common.MediatR" Version="1.4.1" />
+      <PackageReference Include="Utconnect.Common" Version="1.5.0" />
+      <PackageReference Include="Utconnect.Common.Helpers" Version="1.5.0" />
+      <PackageReference Include="Utconnect.Common.MediatR" Version="1.5.0" />
       <PackageReference Include="Utconnect.Teacher" Version="1.1.0" />
     </ItemGroup>
 

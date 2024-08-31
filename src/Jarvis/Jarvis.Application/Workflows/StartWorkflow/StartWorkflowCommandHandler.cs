@@ -32,6 +32,6 @@ internal class StartWorkflowCommandHandler(
         WorkflowExecutionResult result =
             await workflowRuntime.StartWorkflowAsync(workflowName, startWorkflowRuntimeParams);
 
-        return Result<string>.Succeed(result.WorkflowInstanceId);
+        return Result.Succeed(result.WorkflowInstanceId);
     }
 }
