@@ -88,10 +88,8 @@ public static class ConfigureServices
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey.Data ?? string.Empty))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey.Data))
                 };
             });
-
-        services.AddHostedService<OidcPrePopulate>();
     }
 }
