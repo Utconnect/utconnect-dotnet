@@ -38,7 +38,7 @@ public static class ConfigureServices
             Result<string> jwtKey = cofferService.GetKey("oidc", "JWT_KEY").GetAwaiter().GetResult();
             IDateTime dateTime = serviceProvider.GetService<IDateTime>()!;
 
-            return new JwtService(jwtConfig, dateTime, jwtKey.Data ?? string.Empty);
+            return new JwtService(jwtConfig, dateTime, jwtKey.Data);
         });
 
         services.AddTransient<RedirectService>();

@@ -2,6 +2,7 @@
 using Elsa.Http;
 using Elsa.Workflows.Memory;
 using Elsa.Workflows.Models;
+using IdentityProvider.Domain.Constants;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -23,7 +24,9 @@ public partial class AddNewTeacherWorkflow
                     $"api/user/{varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data!.Id}/role")),
             Method = new Input<string>(HttpMethods.Patch),
             ContentType = new Input<string?>(MediaTypeNames.Application.Json),
-            Content = new Input<object?>(JsonConvert.SerializeObject(new GrantRoleRequest { Roles = ["Teacher"] }))
+            Content = new Input<object?>(
+                JsonConvert.SerializeObject(new GrantRoleRequest { Roles = [RoleConstant.Teacher] })
+            )
         };
     }
 

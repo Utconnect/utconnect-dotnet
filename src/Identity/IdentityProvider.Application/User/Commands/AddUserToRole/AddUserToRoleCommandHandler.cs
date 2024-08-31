@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using IdentityProvider.Domain.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ internal class AddUserToRoleCommandHandler(
     ILogger<AddUserToRoleCommandHandler> logger)
     : Validatable, IRequestHandler<AddUserToRoleCommand, Result>
 {
-    private readonly List<string> _allowedToGrantRoles = ["Teacher"];
+    private readonly List<string> _allowedToGrantRoles = [RoleConstant.Teacher];
 
     public async Task<Result> Handle(AddUserToRoleCommand request, CancellationToken cancellationToken)
     {

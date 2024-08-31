@@ -1,3 +1,4 @@
+using IdentityProvider.Domain.Constants;
 using IdentityProvider.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,8 @@ public class IdentityProviderContextInitializer(
     UserManager<User> userManager,
     RoleManager<Role> roleManager)
 {
-    private const string RoleAdmin = "SystemAdmin";
-    private const string RoleTeacher = "Teacher";
+    private const string RoleAdmin = RoleConstant.Admin;
+    private const string RoleTeacher = RoleConstant.Teacher;
 
     public async Task InitializeAsync()
     {
