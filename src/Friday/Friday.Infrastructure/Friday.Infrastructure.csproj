@@ -11,7 +11,7 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
       <PackageReference Include="Npgsql" Version="8.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-      <PackageReference Include="Utconnect.Coffer" Version="1.0.0" />
+      <PackageReference Include="Utconnect.Coffer" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>
