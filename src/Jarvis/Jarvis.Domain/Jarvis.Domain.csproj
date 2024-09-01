@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="Elsa.Http" Version="3.2.0-rc3" />
-      <PackageReference Include="Elsa.Workflows.Core" Version="3.2.0-rc3" />
+      <PackageReference Include="Elsa.Workflows.Core" Version="3.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     </ItemGroup>
 
