@@ -1,4 +1,5 @@
-﻿namespace IdentityProvider;
+﻿// ReSharper disable once CheckNamespace
+namespace IdentityProvider;
 
 #pragma warning disable S101
 public interface I18NResource;

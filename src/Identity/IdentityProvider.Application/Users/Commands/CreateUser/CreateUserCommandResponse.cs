@@ -1,4 +1,4 @@
-﻿namespace IdentityProvider.Application.User.Commands.CreateUser;
+﻿namespace IdentityProvider.Application.Users.Commands.CreateUser;
 
 public class CreateUserCommandResponse
 {

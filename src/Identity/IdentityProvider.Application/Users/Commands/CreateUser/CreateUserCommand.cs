@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Utconnect.Common.Models;
 
-namespace IdentityProvider.Application.User.Commands.CreateUser;
+namespace IdentityProvider.Application.Users.Commands.CreateUser;
 
 public class CreateUserCommand : IRequest<Result<CreateUserCommandResponse>>
 {

@@ -61,8 +61,8 @@ public class OidcDbContextInitializer(
     {
         OpenIddictApplicationDescriptor appDescriptor = new()
         {
-            ClientId = "test_client",
-            ClientSecret = "test_secret",
+            ClientId = "utconnect",
+            ClientSecret = Guid.NewGuid().ToString(),
             ClientType = OpenIddictConstants.ClientTypes.Confidential,
             Permissions =
             {

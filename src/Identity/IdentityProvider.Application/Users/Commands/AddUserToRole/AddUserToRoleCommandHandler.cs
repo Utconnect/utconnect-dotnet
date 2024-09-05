@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using IdentityProvider.Domain.Constants;
+using IdentityProvider.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -7,10 +8,10 @@ using Utconnect.Common.MediatR.Abstractions;
 using Utconnect.Common.Models;
 using Utconnect.Common.Models.Errors;
 
-namespace IdentityProvider.Application.User.Commands.AddUserToRole;
+namespace IdentityProvider.Application.Users.Commands.AddUserToRole;
 
 internal class AddUserToRoleCommandHandler(
-    UserManager<Domain.Models.User> userManager,
+    UserManager<User> userManager,
     IValidator<AddUserToRoleCommand> validator,
     ILogger<AddUserToRoleCommandHandler> logger)
     : Validatable, IRequestHandler<AddUserToRoleCommand, Result>
@@ -34,10 +35,10 @@ internal class AddUserToRoleCommandHandler(
             return Result.Failure(new BadRequestError($"Role {notAllowedRole} is not allowed to grant"));
         }
 
-        Domain.Models.User? user = await userManager.FindByIdAsync(userId.ToString());
+        User? user = await userManager.FindByIdAsync(userId.ToString());
         if (user == null)
         {
-            return Result.Failure(new NotFoundError<Domain.Models.User>(userId.ToString()));
+            return Result.Failure(new NotFoundError<User>(userId.ToString()));
         }
 
         IList<string> userRoles = await userManager.GetRolesAsync(user);

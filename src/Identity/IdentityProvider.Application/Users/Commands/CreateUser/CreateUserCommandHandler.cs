@@ -6,7 +6,7 @@ using Utconnect.Common.Helpers.Abstractions;
 using Utconnect.Common.MediatR.Abstractions;
 using Utconnect.Common.Models;
 
-namespace IdentityProvider.Application.User.Commands.CreateUser;
+namespace IdentityProvider.Application.Users.Commands.CreateUser;
 
 internal class CreateUserCommandHandler(
     UserManager<Domain.Models.User> userManager,

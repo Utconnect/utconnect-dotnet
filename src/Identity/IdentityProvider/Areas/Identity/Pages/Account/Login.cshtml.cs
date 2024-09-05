@@ -116,11 +116,10 @@ public class LoginModel(
             Claim[] claims =
             [
                 ..user.CreateClaims(dateTime.Now),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new(ClaimTypes.NameIdentifier, user.Id.ToString())
             ];
 
-            List<ClaimsIdentity> identities =
-                [new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)];
+            List<ClaimsIdentity> identities = [new(claims, CookieAuthenticationDefaults.AuthenticationScheme)];
             ClaimsPrincipal principal = new(identities);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);

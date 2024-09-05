@@ -5,9 +5,9 @@ namespace IdentityProvider.Areas.Identity.Pages.Account.Manage;
 public static class ManageNavPages
 {
     public static readonly List<ManageNavPageItem> Items = [
-        new ManageNavPageItem("Profile", "", "file-user"),
-        new ManageNavPageItem("Email", "email", "email-address"),
-        new ManageNavPageItem("Password", "change-password", "lock")
+        new("Profile", "", "file-user"),
+        new("Email", "email", "email-address"),
+        new("Password", "change-password", "lock")
     ];
     
     public static string Index => "Index";

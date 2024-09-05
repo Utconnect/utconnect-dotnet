@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace IdentityProvider.Application.User.Commands.AddUserToRole;
+namespace IdentityProvider.Application.Users.Commands.AddUserToRole;
 
 public class AddUserToRoleCommandValidator : AbstractValidator<AddUserToRoleCommand>
 {

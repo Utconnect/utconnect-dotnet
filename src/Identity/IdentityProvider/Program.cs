@@ -7,8 +7,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddIdentityInfrastructureServices(configuration);
+builder.Services.AddIdentityApplicationServices(configuration);
 builder.Services.AddIdentityServices(configuration);
-builder.Services.AddIdentityApplicationServices();
 
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("/home/app/.aspnet/DataProtection-Keys"));

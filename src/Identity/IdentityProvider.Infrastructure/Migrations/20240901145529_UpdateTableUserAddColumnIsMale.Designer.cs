@@ -3,6 +3,7 @@ using System;
 using IdentityProvider.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IdentityProvider.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityProviderContext))]
-    partial class IdentityProviderContextModelSnapshot : ModelSnapshot
+    [Migration("20240901145529_UpdateTableUserAddColumnIsMale")]
+    partial class UpdateTableUserAddColumnIsMale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
