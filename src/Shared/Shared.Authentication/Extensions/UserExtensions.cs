@@ -9,10 +9,10 @@ public static class UserExtensions
 {
     public static Claim[] CreateClaims(this User user, DateTime now) =>
     [
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.Name, user.Name),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty)
+        new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
+        new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+        new(JwtRegisteredClaimNames.Name, user.Name),
+        new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty)
     ];
 }

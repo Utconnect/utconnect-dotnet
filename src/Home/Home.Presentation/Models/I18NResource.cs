@@ -1,4 +1,5 @@
-﻿namespace Home.Presentation;
+﻿// ReSharper disable once CheckNamespace
+namespace Home.Presentation;
 
 #pragma warning disable S101
 public interface I18NResource;

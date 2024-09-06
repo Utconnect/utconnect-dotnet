@@ -25,7 +25,7 @@ public partial class AddNewTeacherWorkflow
             ContentType = new Input<string?>(MediaTypeNames.Application.Json),
             Content = new Input<object?>(ctx => new CreateTeacherRequest
             {
-                UserId = varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data!.Id,
+                UserId = varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data.Id,
                 DepartmentId = ctx.GetInput<string>("DepartmentId"),
                 FacultyId = ctx.GetInput<string>("FacultyId")
             }),

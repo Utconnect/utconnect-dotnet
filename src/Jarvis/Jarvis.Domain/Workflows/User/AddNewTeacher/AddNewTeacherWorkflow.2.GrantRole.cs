@@ -21,7 +21,7 @@ public partial class AddNewTeacherWorkflow
             Metadata = { { "displayText", "Add user to role" } },
             Url = new Input<Uri?>(ctx =>
                 new Uri(serverAddress,
-                    $"api/user/{varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data!.Id}/role")),
+                    $"api/user/{varCreateUserResponse.Get<CreateUserResponse>(ctx)!.Data.Id}/role")),
             Method = new Input<string>(HttpMethods.Patch),
             ContentType = new Input<string?>(MediaTypeNames.Application.Json),
             Content = new Input<object?>(

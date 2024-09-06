@@ -16,7 +16,7 @@ public partial class AddNewTeacherWorkflow(
     IOptions<IdentityConfig> identityConfig,
     IOptions<TeacherConfig> teacherConfig) : WorkflowBase
 {
-    public const string DefinitionId = "User_AddNewTeacher";
+    private const string DefinitionId = "User_AddNewTeacher";
 
     protected override void Build(IWorkflowBuilder builder)
     {

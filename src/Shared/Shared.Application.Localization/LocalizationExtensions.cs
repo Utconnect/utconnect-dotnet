@@ -14,8 +14,8 @@ public static class LocalizationExtensions
         {
             CultureInfo[] supportedCultures =
             [
-                new CultureInfo("en-US"), 
-                new CultureInfo("vi-VN")
+                new("en-US"), 
+                new("vi-VN")
             ];
 
             options.DefaultRequestCulture = new RequestCulture("vi-VN");
