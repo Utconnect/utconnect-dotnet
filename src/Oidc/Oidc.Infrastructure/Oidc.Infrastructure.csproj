@@ -9,8 +9,8 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-      <PackageReference Include="OpenIddict.AspNetCore" Version="5.7.0" />
-      <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.7.0" />
+      <PackageReference Include="OpenIddict.AspNetCore" Version="5.8.0" />
+      <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
       <PackageReference Include="Utconnect.Coffer" Version="1.1.0" />
     </ItemGroup>
 
